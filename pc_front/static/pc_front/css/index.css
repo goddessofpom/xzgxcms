@@ -1,0 +1,39 @@
+.banner{
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.cate_list{
+	list-style: none;
+	width: 100%;
+	height: 66px;
+	line-height: 66px;
+	font-size: 18px;
+}
+.cate_list li{
+	float: left;
+	width: auto;
+	width: 10%;
+	text-align: center;
+}
+.imgrow{
+	margin-bottom: 55px;
+	position: relative;
+	transition: all 1s;
+}
+.img_description{
+	font-size: 50px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	top: 35%;
+	margin: auto;
+	right: 0;
+	z-index: 999;
+}
+.imgrow:hover{
+	-webkit-transform:scale(1.2,1.2);
+	-moz-transform:scale(1.2,1.2);
+}

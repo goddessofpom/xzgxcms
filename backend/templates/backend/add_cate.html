@@ -1,0 +1,59 @@
+{% extends 'backend/base.html' %}
+{% block title %}添加分类{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="layui-row">
+<div class="layui-col-md8 layui-col-md-offset2">
+<form class="layui-form" style="margin-top: 30px;" target="_parent" method="POST">
+{% csrf_token %}
+  <div class="layui-form-item">
+  	<label class="layui-form-label">分类名称</label>
+  	<div class="layui-input-block">
+  		<input type="text" name="name" class="layui-input" lay-verify="required" value="{{now_cate.name}}" />
+  	</div>
+  </div>
+
+  <div class="layui-form-item">
+  	<label class="layui-form-label">简介</label>
+  	<div class="layui-input-block">
+  		<textarea name="short_description" class="layui-textarea">{{now_cate.description}}</textarea>
+  	</div>
+  </div>
+  
+
+  <div class="layui-form-item">
+  	<label class="layui-form-label">上级分类</label>
+  	<div class="layui-input-block">
+  		<select name="parent" id="parent">
+  		    <option value="">--------</option>
+  			{% for cate in cates %}
+  			<option value="{{cate.id}}">{{cate.name}}</option>
+  			{% endfor %}
+  		</select>
+  	</div>
+  </div>
+
+  <div class="layui-form-item">
+  	<div class="layui-input-block">
+  		<button class="layui-btn" lay-submit>确定</button>
+  	</div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('form',function(){
+			var form = layui.form;
+			form.render()
+		})
+
+		{% if now_cate %}
+		$("#parent").children("option[value={{now_cate.parent.id}}]").attr("selected","selected")
+		{% endif %}
+	})
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+.title{
+	text-align: center;
+	font-size: 26px;
+	font-weight: bold;
+	margin-top: 200px;
+}
+.loginform{
+	margin-top: 100px;
+}
+.loginform .layui-col-md4{
+	border: 1px solid #ccc;
+	padding: 5%;
+}

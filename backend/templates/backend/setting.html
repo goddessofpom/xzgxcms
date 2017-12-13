@@ -1,0 +1,67 @@
+{% extends 'backend/base.html' %}
+{% block title %}系统设置{% endblock %}
+{% block left %}
+<ul class="layui-nav layui-nav-tree">
+	<li class="layui-nav-item layui-this"><a href="#">管理员管理</a></li>
+	<li class="layui-nav-item"><a href="#">职位管理</a></li>
+	<li class="layui-nav-item"><a href="#">权限管理</a></li>
+</ul>
+{% endblock%}
+
+{% block right %}
+<div class="layui-row">
+	<div class="layui-col-md1 layui-col-md-offset10">
+		<a href="javascript:;" class="layui-btn" id="add_admin">添加管理员</a>
+	</div>
+</div>
+
+{% for u in user_list %}
+<div class="layui-row">
+	<div class="layui-col-md2">
+		{{u.username}}
+	</div>
+</div>
+{% endfor %}
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md3 layui-col-md-offset8"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}  
+            {% if page_obj.has_next %}  
+                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+            <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%}  
+
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('layer',function(){
+			var layer = layui.layer;
+			$("#add_admin").click(function(){
+			layer.open({
+				type:2,
+				content:"{% url 'backend:register' %}",
+				title:'添加管理员',
+				area:['600px','300px']
+			})
+		})
+		})
+		$("#setting").addClass("layui-this")
+	})
+</script>
+{% endblock %}

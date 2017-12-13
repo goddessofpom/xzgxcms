@@ -1,0 +1,18 @@
+.banner{
+	width: 100%;
+	display: block;
+	height: auto;
+}
+.cate_list{
+	list-style: none;
+	font-weight: bold;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	height: 66px;
+	line-height: 66px;
+}
+.cate_list li{
+	float: left;
+	width: 14.1%
+}

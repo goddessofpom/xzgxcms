@@ -1,0 +1,16 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.layui-fluid{
+	padding: 0px;
+}
+.header{
+	height: 60px;
+	line-height: 60px;
+	background-color: #393D49;
+}
+.title{
+	color:white;
+}
+

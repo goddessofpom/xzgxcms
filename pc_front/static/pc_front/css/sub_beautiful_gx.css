@@ -1,0 +1,23 @@
+.banner{
+	width: 100%;
+	display: block;
+	height: auto;
+}
+.article_list{
+	width: 100%;
+}
+.article_list li{
+	float: left;
+	width: 30%;
+	padding: 20px;
+}
+.article_list li img{
+	width: 100%;
+	margin-top: 30px;
+}
+.article_list li div{
+	text-align: center;
+    background-color: #ccc;
+    height: 43px;
+    line-height: 43px;
+}

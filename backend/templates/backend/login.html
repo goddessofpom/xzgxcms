@@ -1,0 +1,49 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block title %}登录{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'backend/css/login.css' %}">
+<div class="layui-row title">
+	<div class="layui-col-md6 layui-col-md-offset3">
+		行走广西后台管理系统
+	</div>
+</div>
+<form class="layui-form" method="post">
+{% csrf_token %}
+<div class="layui-row loginform">
+  <div class="layui-col-md4 layui-col-md-offset4">
+  	<div class="layui-form-item">
+  		<label class="layui-form-label">账号</label>
+  		<div class="layui-input-block">
+  			<input type="text" name="username" class="layui-input" lay-verify="required" />
+  		</div>
+  	</div>
+
+  	<div class="layui-form-item">
+  		<label class="layui-form-label">密码</label>
+  		<div class="layui-input-block">
+  			<input type="password" name="password"  class="layui-input" lay-verify="required" />
+  		</div>
+  	</div>
+
+  	<div class="layui-form-item">
+  		<div class="layui-input-block">
+  			<button class="layui-btn loginbtn" lay-submit>登录</button>
+  			<button class="layui-btn layui-btn-primary" type="reset">重置</button>
+  		</div>
+  	</div>
+  </div>
+</div>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('form',function(){
+			var form = layui.form;
+			form.render();
+		})
+	})
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+.banner{
+	width: 100%;
+	display: block;
+	height: auto;
+}
+.cate_list{
+	list-style: none;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	height: 66px;
+	line-height: 66px;
+}
+
+.cate_list li{
+	float: left;
+	width: 20%;
+}
+.yx_title{
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 30px;
+}
+.article_list{
+	list-style: none;
+	width: 100%;
+}
+.article_list li{
+	float: left;
+	width: 20%;
+	padding: 10px;
+}
+.article_list li img{
+	width: 100%;
+}

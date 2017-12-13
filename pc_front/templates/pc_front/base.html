@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'pc_front/layui/css/layui.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'backend/css/base.css' %}">
+	<script type="text/javascript" src="{% static 'pc_front/js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pc_front/layui/layui.js' %}"></script>
+</head>
+<body>
+<div class="layui-fluid">
+{% block content %}
+{% block header %}
+{% endblock %}
+
+{% block body%}
+{% endblock %}
+
+{% block footer%}
+{% endblock %}
+
+{% endblock %}
+</div>
+</body>
+{% block script %}
+{% endblock %}
+</html>

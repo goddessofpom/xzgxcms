@@ -1,0 +1,111 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '行走广西' %}{% endblock %}
+{% block content %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/index.css' %}">
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/banner.png' %}">
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="cate_list">
+		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
+			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
+			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
+			<li><a href="#">{% trans '寻城记' %}</a></li>
+			<li><a href="#">{% trans '水墨丹青' %}</a></li>
+			<li><a href="#">{% trans '风尚广西' %}</a></li>
+			<li><a href="#">{% trans '影视南国' %}</a></li>
+			<li><a href="#">{% trans '会展策划' %}</a></li>
+			<li><a href="#">{% trans '品酌人生' %}</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/map.png' %}">
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/zmgx.png' %}">
+		<div class="img_description">
+			<div>{% trans '最美广西' %}</div>
+			<div>{% trans '用眼光见证发展' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/zgtx.png' %}">
+		<div class="img_description">
+			<div>{% trans '直观天下' %}</div>
+			<div>{% trans '只为遇到更美好的天地' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/xcj.png' %}">
+		<div class="img_description">
+			<div>{% trans '寻城记' %}</div>
+			<div>{% trans '用图文记录城市瞬间' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/smdq.png' %}">
+		<div class="img_description">
+			<div>{% trans '水墨丹青' %}</div>
+			<div>{% trans '深入浅出 雅俗共赏' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/fsgx.png' %}">
+		<div class="img_description">
+			<div>{% trans '风尚广西' %}</div>
+			<div>{% trans '引领时尚生活新方式' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/hzch.png' %}">
+		<div class="img_description">
+			<div>{% trans '会展策划' %}</div>
+			<div>{% trans '智创经典，卓然品质' %}</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row imgrow">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/pzrs.png' %}">
+		<div class="img_description">
+			<div>{% trans '品酌人生' %}</div>
+			<div>{% trans '让品位更有品位' %}</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{% static 'pc_front/js/index.js' %}"></script>
+{% endblock %}

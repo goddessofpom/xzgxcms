@@ -1,0 +1,78 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block title %}分类设置{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'backend/css/cate_setting.css' %}">
+<div class="layui-row">
+	<div class="layui-col-md1 layui-col-md-offset10"><a class="layui-btn" href="javascript:;" id="add_cate" >添加分类</a></div>
+</div>
+
+<div class="layui-row cate_list">
+	<div class="layui-col-md1 layui-col-md-offset1">编号</div>
+	<div class="layui-col-md2">分类名称</div>
+	<div class="layui-col-md4">简介</div>
+	<div class="layui-col-md3">操作</div>
+</div>
+
+{% for cate in cates %}
+<div class="layui-row cate_list">
+	<div class="layui-col-md1 layui-col-md-offset1">{{forloop.counter}}</div>
+	<div class="layui-col-md2">{{cate.name}}</div>
+	<div class="layui-col-md4">{{cate.description}}</div>
+	<div class="layui-col-md3">
+	<a href="#" class="layui-btn"><i class="layui-icon">&#xe67c;</i>上传简介视频</a><a href="#" class="layui-btn"><i class="layui-icon">&#xe67c;</i>上传图片</a><a href="javascript:;" class="layui-btn layui-btn-primary modify_cate" data="{{cate.id}}">修改</a>
+	</div>
+</div>
+{% endfor %}
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md3 layui-col-md-offset8"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}  
+            {% if page_obj.has_next %}  
+                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+            <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%}  
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cate_setting").addClass("layui-this")
+
+		layui.use('layer',function(){
+			var layer = layui.layer;
+			$("#add_cate").click(function(){
+			layer.open({
+				type:2,
+				content:"{% url 'backend:add_cate' %}",
+				title:'添加/修改分类',
+				area:['1000px','400px']
+			})
+		})
+
+			$(".modify_cate").click(function(){
+				var id = $(this).attr("data");
+			layer.open({
+				type:2,
+				content:"/backend/add_cate/?cate_id="+id,
+				title:'添加/修改分类',
+				area:['1000px','400px']
+			})
+		})
+		})
+	})
+</script>
+{% endblock %}
