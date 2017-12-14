@@ -81,6 +81,24 @@ class ZhiGuanTianXia(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
+class ZGZX(ListView):
+    model = ImgArticle
+    template_name = "pc_front/zgzx.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class QYLY(ListView):
+    model = ImgArticle
+    template_name = "pc_front/qyly.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class LTGY(ListView):
+    model = ImgArticle
+    template_name = "pc_front/ltgy.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
 
 
 

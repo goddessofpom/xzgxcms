@@ -1,0 +1,86 @@
+.title_row{
+	margin-top: 30px;
+	height: 80px;
+}
+.zixun_title{
+	font-size: 32px;
+	font-weight: bold;
+	color:#FF9999;
+	line-height: 80px;
+}
+.zixun_sub_title{
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 90px;
+	margin-left: 30px;
+}
+.split{
+	width: 100%;
+	color: black;
+	background-color: black;
+}
+.main_row{
+	margin-top: 70px;
+}
+.main_title{
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 30px;
+}
+.main_date{
+	margin-left: 30px;
+	color: #ccc;
+	margin-top: 20px;
+}
+.main_description{
+	margin-left: 30px;
+	margin-top: 20px;
+}
+.more{
+	float: right;
+}
+.img_news_title{
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.img_news_img{
+	width: 60%;
+	margin: 0 auto;
+	display: block;
+}
+.img_news{
+	margin-top: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+.main_img{
+	margin-top: 30px;
+}
+.main_img img{
+	width: 80%;
+}
+.right_img_list{
+	margin-top: 30px;
+}
+.right_img_list img{
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+}
+.lvtu_list{
+	list-style:none;
+	width: 100%;
+}
+.lvtu_list li{
+	position: relative;
+	width:30%;
+	float: left;
+	padding: 1.2rem;
+}
+.lvtu_list img{
+	width: 100%;
+	margin: 0 auto;
+	display: block;
+}

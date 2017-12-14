@@ -16,11 +16,11 @@
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="cate_list">
 		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
-			<li><a href="#">{% trans '直观资讯' %}</a></li>
-			<li><a href="#">{% trans '全域旅游' %}</a></li>
+			<li><a href="{% url 'pc_front:zhiguanzixun' %}">{% trans '直观资讯' %}</a></li>
+			<li><a href="{% url 'pc_front:quanyulvyou' %}">{% trans '全域旅游' %}</a></li>
 			<li><a href="#">{% trans '精选推荐' %}</a></li>
 			<li><a href="#">{% trans '食有态度' %}</a></li>
-			<li><a href="#">{% trans '旅游光影' %}</a></li>
+			<li><a href="{% url 'pc_front:lvtuguangying' %}">{% trans '旅途光影' %}</a></li>
 			<li><a href="#">{% trans '特别专题' %}</a></li>
 		</ul>
 	</div>
@@ -32,19 +32,238 @@
 <div class="layui-col-md8 layui-col-md-offset2">
 	<div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-			<div class="carousel_div"><img src="#" />
-			  <div>
-			    <div>我是标题标题标题</div>
-			    <div>我是导语导语导语</div>
+			<div class="carousel_div">
+			  <div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
 			  </div>
 			</div>
-			<div class="carousel_div"><img src="#" /></div>
-			<div class="carousel_div"><img src="#" /></div>
-			<div class="carousel_div"><img src="#" /></div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div>
+			</div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div></div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div></div>
 		</div>
 	</div>
 </div>
 </div>
+
+<div class="layui-row zhiguan_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 zhiguan_title">
+{% trans '直观资讯' %}
+</div>
+
+<div class="layui-col-md6 zhiguan_first">
+  <div>
+  我是标题
+  </div>
+  <div>
+  我是导语
+  </div>
+</div>
+
+<div class="layui-col-md8 layui-col-md-offset2 zhiguan_list_div">
+  <ul class="zhiguan_list">
+    <li>我是标题</li>
+    <li>我是标题</li>
+    <li>我是标题</li>
+    <li>我是标题</li>
+    <li>我是标题</li>
+    <li>我是标题</li>
+  </ul>
+</div>
+</div>
+
+<div class="layui-row other_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 other_title">
+{% trans '全域旅游' %}
+</div>
+
+<div class="layui-row lvyou_row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+
+  <div class="layui-col-md4">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+</div>
+
+<div class="layui-row lvyou_row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+
+  <div class="layui-col-md4">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+</div>
+
+<div class="layui-row lvyou_row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+
+  <div class="layui-col-md4">
+    <div class="layui-col-md6">
+      <img src="#"/>
+    </div>
+
+    <div class="layui-col-md6">
+    <div class="lvyou_title">标题</div>
+    <div class="lvyou_description">导语</div>
+    <div class="lvyou_content">简介简介</div>
+    </div>
+  </div>
+</div>
+
+<div class="layui-row other_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 other_title">
+{% trans '精选推荐' %}
+</div>
+
+<div class="layui-row jingxuan_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <img src="#" />
+    <div class="jingxuan_title">标题</div>
+    <div class="jingxuan_title">导语</div>
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+    <div class="jingxuan_title">标题</div>
+    <div class="jingxuan_title">导语</div>
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+    <div class="jingxuan_title">标题</div>
+    <div class="jingxuan_title">导语</div>
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+    <div class="jingxuan_title">标题</div>
+    <div class="jingxuan_title">导语</div>
+  </div>
+</div>
+
+<div class="layui-row other_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 other_title">
+{% trans '食有态度' %}
+</div>
+
+<div class="layui-row shiyou_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+</div>
+
+<div class="layui-row other_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 other_title">
+{% trans '光影旅途' %}
+</div>
+
+<div class="layui-row shiyou_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+</div>
+
+<div class="layui-row other_title_row">
+<div class="layui-col-md2 layui-col-md-offset2 other_title">
+{% trans '特别专题' %}
+</div>
+
+<div class="layui-row shiyou_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md2">
+    <img src="#" />
+  </div>
+</div>
+
 {% endblock %}
 
 {% endblock %}
@@ -58,6 +277,7 @@
 			carousel.render({
 				elem:"#carousel",
 				width:"100%",
+				height:"425px",
 				arrow:"hover",
 			})
 		})

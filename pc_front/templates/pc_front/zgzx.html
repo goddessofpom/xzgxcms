@@ -1,0 +1,78 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '直观资讯' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_zgtx.css' %}">
+<div class="layui-row title_row">
+  <div class="layui-col-md1 layui-col-md-offset2 zixun_title">
+  {% trans '直观资讯' %}
+  </div>
+  <div class="layui-col-md1">
+  <a href="#" class="zixun_sub_title">{% trans '区内' %}</a>
+  </div>
+
+  <div class="layui-col-md1">
+  <a href="#" class="zixun_sub_title">{% trans '国内' %}</a>
+  </div>
+
+  <div class="layui-col-md1">
+  <a href="#" class="zixun_sub_title">{% trans '国际' %}</a>
+  </div>
+
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <hr class="split" />
+  </div>
+</div>
+
+
+<div class="layui-row main_row">
+  <div class="layui-col-md6 layui-col-md-offset2">
+    <div class="main_title">
+    我是标题
+    </div>
+    <div class="main_date">
+    2017/01/01 星期二
+    </div>
+    <div class="main_description">
+      aaaaaaaaaaaaaaaaaaasffffdhhhhhhhhhhhhhhhhhhhhh
+    </div>
+
+    <div class="more">
+      <a href="#">{% trans '详细  》》' %}</a>
+    </div>
+  </div>
+
+  <div class="layui-col-md2">
+  <div class="img_news_title">{% trans '图片新闻' %}</div>
+  <a href="#">
+  <img class="img_news_img" src="#" />
+  <div class="img_news">
+  我是标题标题标题
+  </div>
+  </a>
+  </div>
+</div>
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md3 layui-col-md-offset8"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}  
+            {% if page_obj.has_next %}  
+                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+            <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%}
+{% endblock %}
+{% endblock %}

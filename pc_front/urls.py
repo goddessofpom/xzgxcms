@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia
+from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -11,4 +11,7 @@ urlpatterns = [
     url(r'^ydyl/$',YDYL.as_view(),name="ydyl"),
     url(r'^whjs/$',WHJS.as_view(),name="whjs"),
     url(r'^zhiguantianxia/$',ZhiGuanTianXia.as_view(),name="zhiguantianxia"),
+    url(r'^zhiguanzixun/$',ZGZX.as_view(),name="zhiguanzixun"),
+    url(r'^quanyulvyou/$',QYLY.as_view(),name="quanyulvyou"),
+    url(r'^lvtuguangying/$',LTGY.as_view(),name="lvtuguangying"),
 ]
