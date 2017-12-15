@@ -99,7 +99,23 @@ class LTGY(ListView):
     context_object_name = "article_list"
     paginate_by = 15
 
+class SYTD(ListView):
+    model = ImgArticle
+    template_name = "pc_front/sytd.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
+class JXTJ(ListView):
+    model = ImgArticle
+    template_name = "pc_front/jxtj.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class XunChengJi(View):
+    template_name = "pc_front/xunchengji.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
 
 
 

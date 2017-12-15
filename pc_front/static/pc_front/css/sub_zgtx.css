@@ -74,13 +74,112 @@
 	width: 100%;
 }
 .lvtu_list li{
-	position: relative;
 	width:30%;
 	float: left;
 	padding: 1.2rem;
+}
+.lvtu_list li p{
+	background-color: black;
+	opacity: 0.7;
+	color: white;
+	left: 0; 
+    top: 350px; 
+    right: 0; 
+    margin: auto;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
 }
 .lvtu_list img{
 	width: 100%;
 	margin: 0 auto;
 	display: block;
+}
+.shiyou_sub_title{
+	font-size: 18px;
+	font-weight: bold;
+	color: #FF9999;
+	padding-left: 30px;
+}
+.shiyou_carousel{
+	margin-top: 30px;
+}
+.shiyou_right{
+	background-color: rgb(40,40,40);
+	height: 425px;
+}
+.shiyou_right_title{
+	font-size: 26px;
+	font-weight: bold;
+	color: white;
+	margin-left: 5rem;
+	margin-top: 40px;
+}
+.shiyou_right_split{
+	height: 5px;
+	margin-left: 5rem;
+	margin-top: 30px;
+	color: red;
+	background-color: red;
+	width: 5rem;
+}
+.shiyou_right_description{
+	color: rgb(190,190,190);
+	margin-top: 30px;
+	margin-left: 5rem;
+}
+.shiyou_right_readmore{
+	border: 1px solid rgb(190,190,190);
+	width: 5rem;
+	margin-top: 30px;
+	padding: 10px;
+	text-align: center;
+	margin-left: 5rem;
+}
+.shiyou_right_readmore a{
+	color: rgb(190,190,190);
+	text-align: center;
+}
+.shiyou_list{
+	width: 100%;
+	list-style: none;
+}
+.shiyou_list li{
+	float: left;
+	width: 21%;
+	padding: 1.5rem;
+}
+.shiyou_list img{
+	width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+.shiyou_title{
+	margin-top: 15px;
+	text-align: center;
+	font-weight: bold;
+}
+.shiyou_description{
+	margin-top: 10px;
+	text-align: center;
+	color: rgb(190,190,190);
+}
+.jingxuan_img_list{
+	width: 100%;
+	list-style: none;
+	height: 437px;
+}
+.jingxuan_img_list li{
+	float: left;
+	width: 10%;
+	background-image: url("/static/pc_front/img/banner.png");
+	background-size: cover;
+	height: 437px;
+	cursor: pointer;
+}
+.jingxuan_img_list li:last-child{
+	width: 50%;
+	background-image: url("/static/pc_front/img/banner.png");
+	background-size: cover;
 }

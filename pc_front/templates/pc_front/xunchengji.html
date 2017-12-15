@@ -1,0 +1,72 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '寻城记' %}{% endblock %}
+{% block content %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/xunchengji.css' %}">
+<div class="layui-row xuncheng_head">
+	<div class="layui-col-md6 layui-col-md-offset2">
+		<img class="banner" src="{% static 'pc_front/img/banner.png' %}">
+	</div>
+
+	<div class="layui-col-md1">
+	  <div class="xuncheng_title">{% trans '寻城记' %}</div>
+	</div>
+	<div class="layui-col-md1">
+	  <div class="xuncheng_description">{% trans '用图文记录城市瞬间' %}</div>
+	</div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2"><hr class="split" /></div>
+</div>
+
+<div class="layui-row gx_story_title">
+  <div class="layui-col-md2 layui-col-md-offset2">
+  {% trans '故事广西' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul id="gx_story_sub_title">
+      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '旅游地理' %}</span></div></li></a><a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '城市味道' %}</span></li></a>
+      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '民风民俗' %}</span></li></a>
+      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '生产发展' %}</span></li></a>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset2">
+  {% trans '地方专题' %}
+  </div>
+
+  <div class="layui-col-md1 layui-col-md-offset3">
+  {% trans '更多' %}
+  </div>
+
+  <div class="layui-col-md1 layui-col-md-offset1">
+  {% trans '我们的城市' %}
+  </div>
+</div>
+{% endblock %}
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".gx_story").mouseover(function(){
+    	$(this).children(".gx_story_sub_title").show(500)
+    })
+
+    $(".gx_story_sub_title").mouseout(function(){
+    	$(this).hide()
+    })
+})
+</script>
+{% endblock %}

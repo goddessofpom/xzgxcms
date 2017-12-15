@@ -1,0 +1,59 @@
+.xuncheng_head{
+	margin-top: 50px;
+}
+.banner{
+	width: 100%;
+	display: block;
+	height: auto;
+}
+.xuncheng_title{
+	font-size: 72px;
+	font-weight: bold;
+	width: 80px;
+	margin-left: 20px;
+	margin-top: 30px;
+	color: #990000;
+}
+.xuncheng_description{
+	font-size: 18px;
+	font-weight: bold;
+	width: 20px;
+	margin-top: 120px;
+	margin-left: 20px;
+}
+.split{
+	width: 100%;
+	background-color: black;
+	color: black;
+}
+.gx_story_title{
+	margin-top: 30px;
+	font-weight: bold;
+	font-size: 24px;
+}
+.gx_story_list{
+    width: 100%;
+}
+.gx_story{
+	background-image: url("/static/pc_front/img/banner.png");
+	background-size: cover;
+	height: 200px;
+	width: 45%;
+	float: left;
+	margin-top: 50px;
+	margin-left: 30px;
+}
+.gx_story_sub_title{
+	font-weight: bold;
+	color: white;
+	background-color: rgba(192,192,192,0.6);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 200px;
+	display: none;
+}
+.gx_story_sub_title span{
+	opacity: 1;
+	font-size: 24px;
+}
