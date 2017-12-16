@@ -1,0 +1,144 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '风尚广西' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/fengshangguangxi.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 fengshang_title">
+  <p>{% trans '风尚广西' %}</p>
+  <p class="fengshang_sub_title">{% trans '引领时尚生活' %}</p>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="fengshang_nav">
+    <a href="#"><li>{% trans '首页' %}</li></a>
+    <a href="#"><li>{% trans '封面故事' %}</li></a>
+    <a href="#"><li>{% trans '风尚文化' %}</li></a>
+    <a href="#"><li>{% trans '精致女人' %}</li></a>
+    <a href="#"><li>{% trans '风尚男士' %}</li></a>
+    <a href="#"><li>{% trans '乐享生活' %}</li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="layui-carousel" id="carousel" >
+		<div carousel-item>
+			<div class="carousel_div">
+			  <div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div>
+			</div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div>
+			</div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div></div>
+			<div class="carousel_div">
+			<div class="carousel_title">
+			    <div>我是标题标题标题<br />我是导语</div>
+			  </div></div>
+		</div>
+	</div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <p class="fengmian_title">{% trans '封面故事' %}</p>
+  <p class="fengmian_sub_title">{% trans '人物·故事·专访' %}</p>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="fengmian_list">
+      <a href="#"><li><img src="#" /><p>我是标题标题</p></li></a>
+      <a href="#"><li><img src="#" /></li></a>
+      <a href="#"><li><img src="#" /></li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <p class="fengmian_title">{% trans '风尚文化' %}</p>
+  <p class="fengmian_sub_title">{% trans '民族与现代的完美融合' %}</p>
+  </div>
+</div>
+
+<div class="layui-row wenhua_part">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="layui-row">
+    <div class="layui-col-md12">
+      <img src="#" />
+    </div>
+    </div>
+
+    <div class="layui-row">
+      <div class="layui-col-md6 wenhua_sub_part">
+        <img src="#" />
+      </div>
+
+      <div class="layui-col-md6 wenhua_sub_part">
+        <img src="#" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="layui-col-md4">
+    <div class="layui-row">
+    <div class="layui-col-md6 wenhua_sub_part">
+        <img src="#" />
+      </div>
+
+      <div class="layui-col-md6 wenhua_sub_part">
+        <img src="#" />
+      </div>
+    </div>
+
+    <div class="layui-row">
+    <div class="layui-col-md12">
+      <img src="#" />
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <p class="fengmian_title">{% trans '精致女人' %}</p>
+  <p class="fengmian_sub_title">{% trans '护肤·彩妆·香水' %}</p>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('carousel',function(){
+			var carousel = layui.carousel;
+
+			carousel.render({
+				elem:"#carousel",
+				width:"100%",
+				height:"425px",
+				arrow:"hover",
+				indicator:"none"
+			})
+		})
+	})
+</script>
+{% endblock %}

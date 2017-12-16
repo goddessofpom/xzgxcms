@@ -1,0 +1,36 @@
+.lvyou_title_row{
+	height: 150px;
+	line-height: 150px;
+}
+
+.lvyou_title{
+	text-align: center;
+	font-weight: bold;
+	font-size: 40px;
+	color: #FF9999;
+	border-bottom: 1px solid #ccc;
+}
+.main_row{
+	margin-top: 30px;
+}
+.lvyou_list{
+	width: 100%;
+	list-style: none;
+}
+.lvyou_list li{
+	float: left;
+	width: 30%;
+	padding: 1.2rem;
+	margin: 0 auto;
+	text-align: center;
+}
+.lvyou_list img{
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+}
+.lvyou_list p{
+	margin-top: 10px;
+	background-color: rgb(242,242,242);
+	padding: 20px;
+}

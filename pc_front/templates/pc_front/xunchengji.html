@@ -32,9 +32,10 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul id="gx_story_sub_title">
-      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '旅游地理' %}</span></div></li></a><a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '城市味道' %}</span></li></a>
-      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '民风民俗' %}</span></li></a>
-      <a href="#"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '生产发展' %}</span></li></a>
+      <a href="{% url 'pc_front:lvyoudili' %}"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '旅游地理' %}</span></div></li></a>
+      <a href="{% url 'pc_front:chengshiweidao' %}"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '城市味道' %}</span></li></a>
+      <a href="{% url 'pc_front:minfengminsu' %}"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '民风民俗' %}</span></li></a>
+      <a href="{% url 'pc_front:shengchanfazhan' %}"><li class="gx_story"><div class="gx_story_sub_title"><span>{% trans '生产发展' %}</span></li></a>
     </ul>
   </div>
 </div>

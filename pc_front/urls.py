@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY,\
-SYTD,JXTJ,XunChengJi
+SYTD,JXTJ,XunChengJi,LYDL,CSWD,MFMS,SCFZ,FengShangGuangXi
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -18,4 +18,9 @@ urlpatterns = [
     url(r'^shiyoutaidu/$',SYTD.as_view(),name="shiyoutaidu"),
     url(r'^jingxuantuijian/$',JXTJ.as_view(),name="jingxuantuijian"),
     url(r'^xunchengji/$',XunChengJi.as_view(),name="xunchengji"),
+    url(r'^lvyoudili/$',LYDL.as_view(),name="lvyoudili"),
+    url(r'^chengshiweidao/$',CSWD.as_view(),name="chengshiweidao"),
+    url(r'^minfengminsu/$',MFMS.as_view(),name="minfengminsu"),
+    url(r'^shengchanfazhan/$',SCFZ.as_view(),name="shengchanfazhan"),
+    url(r'^fengshangguangxi/$',FengShangGuangXi.as_view(),name="fengshangguangxi"),
 ]

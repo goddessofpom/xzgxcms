@@ -117,7 +117,35 @@ class XunChengJi(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
+class LYDL(ListView):
+    model = ImgArticle
+    template_name = "pc_front/lydl.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
+class CSWD(ListView):
+    model = ImgArticle
+    template_name = "pc_front/cswd.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class MFMS(ListView):
+    model = ImgArticle
+    template_name = "pc_front/mfms.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class SCFZ(ListView):
+    model = ImgArticle
+    template_name = "pc_front/scfz.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class FengShangGuangXi(View):
+    template_name = "pc_front/fengshangguangxi.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
 
 
 
