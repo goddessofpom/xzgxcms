@@ -147,7 +147,11 @@ class FengShangGuangXi(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
-
+class FMGS(ListView):
+    model = ImgArticle
+    template_name = "pc_front/fmgs.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
 
 
