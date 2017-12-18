@@ -153,6 +153,35 @@ class FMGS(ListView):
     context_object_name = "article_list"
     paginate_by = 15
 
+class FSWH(ListView):
+    model = ImgArticle
+    template_name = "pc_front/fswh.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class JZNR(ListView):
+    model = ImgArticle
+    template_name = "pc_front/jznr.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class FSNS(ListView):
+    model = ImgArticle
+    template_name = "pc_front/fsns.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class LXSH(ListView):
+    model = ImgArticle
+    template_name = "pc_front/lxsh.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class PinZhuoRenSheng(View):
+    template_name = "pc_front/pinzhuorensheng.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
 
 
 

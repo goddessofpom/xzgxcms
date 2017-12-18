@@ -1,0 +1,83 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '风尚男士' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_fengshangguangxi.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 fengshang_title">
+  <p>{% trans '风尚广西' %}</p>
+  <p class="fengshang_sub_title">{% trans '引领时尚生活' %}</p>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="fengshang_nav">
+    <a href="#"><li>{% trans '首页' %}</li></a>
+    <a href="#"><li>{% trans '封面故事' %}</li></a>
+    <a href="#"><li>{% trans '风尚文化' %}</li></a>
+    <a href="#"><li>{% trans '精致女人' %}</li></a>
+    <a href="#"><li>{% trans '风尚男士' %}</li></a>
+    <a href="#"><li>{% trans '乐享生活' %}</li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row wenhua_title_row">
+  <div class="layui-col-md8 layui-col-md-offset2">{% trans '风尚男士' %}</div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="fengmian_banner">
+  </div>
+  </div>
+</div>
+
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="wenhua_list">
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+
+      <li>
+      <img src="#" />
+      <div class="wenhua_label">我是标签</div>
+      <div class="wenhua_title">我是标题标题</div>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}

@@ -79,3 +79,37 @@
 .fengmian_list img{
 	width: 100%;
 }
+.wenhua_title_row{
+	margin-bottom: 30px;
+}
+.wenhua_title_row div{
+	font-size: 40px;
+	font-weight: bold;
+	color: #330066;
+}
+.wenhua_list{
+	width: 100%;
+}
+.wenhua_list li{
+	float: left;
+	width: 28%;
+	margin: 1.5rem;
+	margin-top: 40px;
+}
+.wenhua_list img{
+	width: 100%;
+	height: 211px;
+}
+.wenhua_label{
+	margin-top: 20px;
+	width: 70px;
+	font-weight: bold;
+	color: white;
+	background-color: #CC3300;
+	border-radius: 2px;
+	text-align: center;
+	padding: 5px;
+}
+.wenhua_title{
+	margin-top: 20px;
+}

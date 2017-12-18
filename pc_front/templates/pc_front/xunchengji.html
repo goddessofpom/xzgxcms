@@ -41,17 +41,100 @@
 </div>
 </div>
 
-<div class="layui-row">
+<div class="layui-row gx_story_title">
   <div class="layui-col-md1 layui-col-md-offset2">
   {% trans '地方专题' %}
   </div>
 
-  <div class="layui-col-md1 layui-col-md-offset3">
+  <div class="layui-col-md1 layui-col-md-offset3 more_city">
   {% trans '更多' %}
   </div>
 
   <div class="layui-col-md1 layui-col-md-offset1">
   {% trans '我们的城市' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md5 layui-col-md-offset2">
+  <ul class="difang_list">
+    <li><img src="#" /></li>
+    <li><img src="#" /></li>
+    <li><img src="#" /></li>
+    <li><img src="#" /></li>
+  </ul>
+  </div>
+
+  <div class="layui-col-md2 layui-col-md-offset1 difang_carousel_row">
+  <div class="layui-carousel" id="carousel" >
+		<div carousel-item>
+			<div class="carousel_div">
+			  <ul class="difang_carousel_list">
+			    <li>
+			      <div class="carousel_list_title">标题</div>
+			      <img src="#" />
+			      <ul class="difang_sub_list">
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			      </ul>
+			    </li>
+
+			    <li>
+			      <div class="carousel_list_title">标题</div>
+			      <img src="#" />
+			      <ul class="difang_sub_list">
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			      </ul>
+			    </li>
+
+			    <li>
+			      <div class="carousel_list_title">标题</div>
+			      <img src="#" />
+			      <ul class="difang_sub_list">
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			      </ul>
+			    </li>
+
+			    <li>
+			      <div class="carousel_list_title">标题</div>
+			      <img src="#" />
+			      <ul class="difang_sub_list">
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			        <li>sadsa</li>
+			      </ul>
+			    </li>
+			  </ul>
+			</div>
+			<div class="carousel_div">
+			</div>
+			<div class="carousel_div">
+			</div>
+			<div class="carousel_div">
+			</div>
+		</div>
+	</div>
   </div>
 </div>
 {% endblock %}
@@ -68,6 +151,20 @@ $(document).ready(function(){
     $(".gx_story_sub_title").mouseout(function(){
     	$(this).hide()
     })
+
+
+    layui.use('carousel',function(){
+			var carousel = layui.carousel;
+
+			carousel.render({
+				elem:"#carousel",
+				width:"100%",
+				height:"1152px",
+				arrow:"hover",
+				anim:"updown",
+				indicator:"none"
+			})
+		})
 })
 </script>
 {% endblock %}

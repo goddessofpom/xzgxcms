@@ -30,6 +30,8 @@
 	margin-top: 30px;
 	font-weight: bold;
 	font-size: 24px;
+	height: 58px;
+	line-height: 58px;
 }
 .gx_story_list{
     width: 100%;
@@ -56,4 +58,53 @@
 .gx_story_sub_title span{
 	opacity: 1;
 	font-size: 24px;
+}
+.more_city{
+	font-size: 16px;
+	color: #ccc;
+}
+.difang_list{
+	width: 100%;
+}
+.difang_list li{
+	margin-top: 30px;
+	height: 258px;
+}
+.difang_list img{
+	width: 100%;
+	height: 258px;
+}
+.difang_carousel_row{
+	margin-top: 30px;
+}
+.difang_carousel_list{
+	width: 100%;
+	height: 1152px;
+}
+.difang_carousel_list li{
+	height: 25%;
+	width: 100%;
+}
+.difang_carousel_list img{
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	height: 112px;
+}
+.carousel_list_title{
+	font-size: 20px;
+	font-weight: bold;
+	border-left: 5px solid #FF9999;
+	padding-left: 10px;
+	margin-bottom: 20px;
+}
+.difang_sub_list{
+	width: 100%;
+}
+.difang_sub_list li{
+	float: left;
+	width: 18%;
+	font-size: 12px;
+	padding: 10px;
+	text-align: center;
 }
