@@ -1,0 +1,87 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '会展服务' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/huizhanfuwu.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <div class="huizhan_title">{% trans '会展服务' %}</div>
+    <div class="huizhan_sub_title">{% trans 'Exhibition planning' %}</div>
+    <hr class="split" />
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="huizhan_list">
+      <a href="#"><li>{% trans '灵渠论坛(服务)' %}</li></a>
+      <a href="#"><li>{% trans '会议服务' %}</li></a>
+      <a href="#"><li>{% trans '会展资讯' %}</li></a>
+      <a href="#"><li>{% trans '展览展示' %}</li></a>
+      <a href="#"><li>{% trans '会展案例' %}</li></a>
+      <a href="#"><li>{% trans '合作伙伴' %}</li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <div class="huizhan_banner">
+    </div>
+  </div>
+</div>
+
+<div class="layui-row lingqu_title_row">
+  <div class="layui-col-md3 layui-col-md-offset2">
+    <div class="lingqu_title">
+    {% trans '灵渠论坛' %}
+    </div>
+    <div class="lingqu_sub_title">
+    {% trans '专业化论坛服务' %}
+    </div>
+    <div class="lingqu_more">
+    {% trans '了解更多' %}
+    </div>
+  </div>
+
+  <div class="layui-col-md5">
+    <div class="lingqu_right">
+    </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset2">
+    <div class="fuwufanwei">
+    {% trans '服务范围' %}
+    </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="fuwu_list">
+      <li><div class="fuwu_list_img"></div><div class="fuwu_list_title">{% trans '会议会展' %}</div></li>
+      <li><div class="fuwu_list_img"></div><div class="fuwu_list_title">{% trans '文化展厅' %}</div></li>
+      <li><div class="fuwu_list_img"></div><div class="fuwu_list_title">{% trans '商务庆典' %}</div></li>
+      <li><div class="fuwu_list_img"></div><div class="fuwu_list_title">{% trans '活动策划' %}</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 zixun_row">
+    <div class="layui-col-md2 layui-col-md-offset1 zixun_title">
+    {% trans '会展资讯' %}
+    </div>
+
+    <div class="layui-col-md1 layui-col-md-offset2 zixun_more">
+    {% trans '查看更多>>>' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}

@@ -183,6 +183,12 @@ class PinZhuoRenSheng(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
+class HuiZhanFuWu(View):
+    template_name = "pc_front/huizhanfuwu.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
+
 
 
 
