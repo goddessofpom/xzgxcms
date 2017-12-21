@@ -99,7 +99,6 @@
 .zixun_row{
 	color: white;
 	background-color: #3D3D3D;
-	height: 416px;
 }
 .zixun_title{
 	background-color: #CC3300;
@@ -107,10 +106,69 @@
 	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
-	padding: 0.6rem;
 	margin-top: 10px;
 	height: 55px;
+	line-height: 55px;
 }
 .zixun_more{
 	margin-top: 45px;
+}
+.zixun_list{
+	padding: 0.6rem;
+	margin-top: 10px;
+	text-align: center;
+	height: 342px;
+}
+.zixun_list li{
+	height: 84px;
+	margin-top: 20px;
+	border: 1px solid white;
+}
+.zixun_list li div{
+	height: 26px;
+	line-height: 26px;
+}
+.zixun_right_list{
+	width: 100%;
+	text-align: center;
+	margin-top: 35px;
+}
+.zixun_right_list li{
+	float: left;
+	width: 46%;
+	padding: 0.6rem;
+}
+.zixun_right_list img{
+	width: 100%;
+	height: 114px;
+}
+.zixun_right_list div{
+	margin-top: 10px;
+}
+.chenggong_row{
+	margin-top: 20px;
+}
+.chenggong_list{
+	width: 100%;
+}
+.chenggong_list li{
+	width: 23%;
+	padding: 0.7rem;
+    float: left;
+}
+.chenggong_list img{
+	width: 100%;
+	height: 147px;
+	display: block;
+	margin: 0 auto;
+}
+.contact_list{
+	width: 100%;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+.contact_list li{
+	float: left;
+	width: 31%;
 }

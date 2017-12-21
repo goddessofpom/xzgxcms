@@ -17,8 +17,8 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="huizhan_list">
-      <a href="#"><li>{% trans '灵渠论坛(服务)' %}</li></a>
-      <a href="#"><li>{% trans '会议服务' %}</li></a>
+      <a href="{% url 'pc_front:huizhancehua' %}"><li>{% trans '灵渠论坛(服务)' %}</li></a>
+      <a href="{% url 'pc_front:huiyifuwu' %}"><li>{% trans '会议服务' %}</li></a>
       <a href="#"><li>{% trans '会展资讯' %}</li></a>
       <a href="#"><li>{% trans '展览展示' %}</li></a>
       <a href="#"><li>{% trans '会展案例' %}</li></a>
@@ -74,13 +74,108 @@
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2 zixun_row">
+    <div class="layui-row">
     <div class="layui-col-md2 layui-col-md-offset1 zixun_title">
     {% trans '会展资讯' %}
     </div>
 
-    <div class="layui-col-md1 layui-col-md-offset2 zixun_more">
+    <div class="layui-col-md1 layui-col-md-offset1 zixun_more">
     {% trans '查看更多>>>' %}
     </div>
+
+    <div class="layui-col-md1 layui-col-md-offset1 zixun_more">
+    {% trans '行业新闻' %}
+    </div>
+
+    <div class="layui-col-md1 layui-col-md-offset1 zixun_more">
+    {% trans '会展百科' %}
+    </div>
+
+    <div class="layui-col-md1 layui-col-md-offset1 zixun_more">
+    {% trans '查看更多>>>' %}
+    </div>
+    </div>
+
+    <div class="layui-row">
+    <div class="layui-col-md4 layui-col-md-offset1">
+      <ul class="zixun_list">
+        <li>
+        <div>标题</div>
+        <div>时间</div>
+        <div>地点</div>
+        </li>
+
+        <li>
+        <div>标题</div>
+        <div>时间</div>
+        <div>地点</div>
+        </li>
+
+        <li>
+        <div>标题</div>
+        <div>时间</div>
+        <div>地点</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="layui-col-md6 layui-col-md-offset1">
+      <ul class="zixun_right_list">
+        <li>
+          <img src="#" />
+          <div>标题标题标题标题</div>
+        </li>
+
+        <li>
+          <img src="#" />
+          <div>标题标题标题标题</div>
+        </li>
+
+        <li>
+          <img src="#" />
+          <div>标题标题标题标题</div>
+        </li>
+
+        <li>
+          <img src="#" />
+          <div>标题标题标题标题</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset2">
+    <div class="fuwufanwei">
+    {% trans '成功案例' %}
+    </div>
+  </div>
+</div>
+
+<div class="layui-row chenggong_row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="chenggong_list">
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+      <li><img src="#" /></li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 zixun_row">
+    <ul class="contact_list">
+      <li>联系电话</li>
+      <li>网址</li>
+      <li>地址</li>
+    </ul>
   </div>
 </div>
 {% endblock %}

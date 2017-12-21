@@ -1,0 +1,71 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '会展策划' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_hzfw.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 huizhan_title">
+  <p>{% trans '会展策划' %}</p>
+  <p class="huizhan_sub_title">{% trans 'Exhibition planning' %}</p>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="huizhan_nav">
+    <a href="#"><li>{% trans '论坛服务' %}</li></a>
+    <a href="#"><li>{% trans '会议服务' %}</li></a>
+    <a href="#"><li>{% trans '会展资讯' %}</li></a>
+    <a href="#"><li>{% trans '展览展示' %}</li></a>
+    <a href="#"><li>{% trans '会展案例' %}</li></a>
+    <a href="#"><li>{% trans '合作伙伴' %}</li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 luntan_title">
+  {% trans '灵渠论坛' %}
+  </div>
+</div>
+
+<div class="layui-row main_row">
+  <div class="layui-col-md3 layui-col-md-offset2 sub_text">
+    <div class="sub_text_title">{% trans '论坛服务' %}</div>
+    <div class="sub_text_description">{% trans '专业化论坛服务' %}</div>
+    <div class="sub_text_more">{% trans '了解更多' %}</div>
+  </div>
+
+  <div class="layui-col-md5 sub_img">
+    <img src="#" />
+  </div>
+</div>
+
+<div class="layui-row main_row">
+  <div class="layui-col-md5 layui-col-md-offset2 sub_img">
+    <img src="#" />
+  </div>
+
+  <div class="layui-col-md3 sub_text">
+    <div class="sub_text_title">{% trans '会后考察' %}</div>
+    <div class="sub_text_description">{% trans '全方位会后考察跟踪服务' %}</div>
+    <div class="sub_text_more">{% trans '了解更多' %}</div>
+  </div>
+</div>
+
+<div class="layui-row main_row">
+  <div class="layui-col-md3 layui-col-md-offset2 sub_text">
+    <div class="sub_text_title">{% trans '展览展示' %}</div>
+    <div class="sub_text_description">{% trans '最新意的展会展览' %}</div>
+    <div class="sub_text_more">{% trans '了解更多' %}</div>
+  </div>
+
+  <div class="layui-col-md5 sub_img">
+    <img src="#" />
+  </div>
+</div>
+{% endblock %}
+{% endblock %}

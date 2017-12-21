@@ -189,6 +189,18 @@ class HuiZhanFuWu(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
+class HZCH(View):
+    template_name = "pc_front/hzch.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
+
+class HYFW(View):
+    template_name = "pc_front/hyfw.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
+
 
 
 
