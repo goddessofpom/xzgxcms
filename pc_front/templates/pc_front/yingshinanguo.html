@@ -1,0 +1,283 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '影视南国' %}{% endblock %}
+{% block content %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/yingshinanguo.css' %}">
+
+<div class="layui-row yingshi_title">
+	<div class="layui-col-md4 layui-col-md-offset4">
+		<img src="#">
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="cate_list">
+		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
+			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
+			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
+			<li><a href="{% url 'pc_front:xunchengji' %}">{% trans '寻城记' %}</a></li>
+			<li><a href="#">{% trans '水墨丹青' %}</a></li>
+			<li><a href="{% url 'pc_front:fengshangguangxi' %}">{% trans '风尚广西' %}</a></li>
+			<li><a href="{% url 'pc_front:yingshinanguo' %}">{% trans '影视南国' %}</a></li>
+			<li><a href="{% url 'pc_front:huizhanfuwu' %}">{% trans '会展策划' %}</a></li>
+			<li><a href="{% url 'pc_front:pinzhuorensheng' %}">{% trans '品酌人生' %}</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md5 layui-col-md-offset2">
+		<div class="tv">
+			<div class="tv_img"><img src="/static/pc_front/img/banner.png" /></div>
+			<div class="tv_title">{% trans '新网视频，记录人类美学精神' %}</div>
+		</div>
+	</div>
+
+	<div class="layui-col-md3">
+	<div class="tv_right">
+		<img src="#" />
+	</div>
+	</div>
+</div>
+
+<div class="layui-row main_ul_row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="main_ul">
+			<a href="{% url 'pc_front:xinwangfm' %}"><li class="xinwangfm">
+			  <img src="#" />
+			  <div class="main_title">{% trans '新网FM' %}</div>
+			  <div class="main_desc">{% trans '播放流畅，推荐视频' %}</div>
+			</li></a>
+			<a href="{% url 'pc_front:xiaokachuang' %}"><li class="xiaokachuang">
+			  <img src="#" />
+			  <div class="main_title">{% trans '小咖创' %}</div>
+			  <div class="main_desc">{% trans '用户原创作品，编策导摄' %}</div>
+			</li></a>
+			<a href="{% url 'pc_front:bahaomi' %}"><li class="bahaomi">
+			  <img src="#" />
+			  <div class="main_title">{% trans '八毫米' %}</div>
+			  <div class="main_desc">{% trans '致敬人类电影史经典八毫米胶片，移轴延时唯美' %}</div>
+			</li></a>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row sub_row">
+	<div class="layui-col-md2 layui-col-md-offset2">
+		<span class="sub_title">{% trans '新网FM' %}</span><span class="recommand">{% trans '推荐视频' %}</span>
+	</div>
+	<div class="layui-col-md1 layui-col-md-offset5 more">
+		{% trans '更多视频' %}
+	</div>
+</div>
+
+<div class="layui-row sub_ul_row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="sub_ul">
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row sub_row">
+	<div class="layui-col-md2 layui-col-md-offset2">
+		<span class="sub_title">{% trans '小咖创' %}</span><span class="recommand">{% trans '编策导摄' %}</span>
+	</div>
+	<div class="layui-col-md1 layui-col-md-offset5 more">
+		{% trans '更多视频' %}
+	</div>
+</div>
+
+<div class="layui-row sub_ul_row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="sub_ul">
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row sub_row">
+	<div class="layui-col-md2 layui-col-md-offset2">
+		<span class="sub_title">{% trans '八毫米' %}</span><span class="recommand">{% trans '延时移轴唯美' %}</span>
+	</div>
+	<div class="layui-col-md1 layui-col-md-offset5 more">
+		{% trans '更多视频' %}
+	</div>
+</div>
+
+<div class="layui-row sub_ul_row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="sub_ul">
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+			<li>
+				<video src="#"></video>
+				<div class="video_title">我是标题标题标题</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<video src="#"></video>
+	</div>
+</div>
+{% endblock %}
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".main_ul").find("li").mouseenter(function(){
+			$(this).animate({borderLeftWidth:"0px",borderRightWidth:"0px",padding:"20px"},500)
+		})
+		$(".main_ul").find("li").mouseleave(function(){
+			$(this).animate({borderLeftWidth:"20px",borderRightWidth:"20px",padding:"0px"},500)
+		})
+	})
+</script>
+{% endblock%}
+

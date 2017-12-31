@@ -1,0 +1,90 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '小咖创' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_yingshinanguo.css' %}">
+
+<div class="layui-row main_title">
+	<div class="layui-col-md4 layui-col-md-offset4">
+		<img src="#">
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="cate_list">
+		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
+			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
+			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
+			<li><a href="{% url 'pc_front:xunchengji' %}">{% trans '寻城记' %}</a></li>
+			<li><a href="#">{% trans '水墨丹青' %}</a></li>
+			<li><a href="{% url 'pc_front:fengshangguangxi' %}">{% trans '风尚广西' %}</a></li>
+			<li><a href="{% url 'pc_front:yingshinanguo' %}">{% trans '影视南国' %}</a></li>
+			<li><a href="{% url 'pc_front:huizhanfuwu' %}">{% trans '会展策划' %}</a></li>
+			<li><a href="{% url 'pc_front:pinzhuorensheng' %}">{% trans '品酌人生' %}</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<img src="#" class="xinwang_banner" />
+	</div>
+</div>
+
+<div class="layui-row xkc_video_row">
+	<div class="layui-col-md6 layui-col-md-offset2">
+		<div class="xinwang_title"><span class="xinwang_sub_title1">{% trans '小咖创' %}</span><span class="xinwang_sub_title2">{% trans '编策导摄' %}</span></div>
+	</div>
+ 
+
+	<div class="layui-col-md2">
+		<div class="xinwang_title"><span class="xinwang_sub_title1">{% trans '微剧场' %}</span></div>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md6 layui-col-md-offset2">
+		<video class="xkc_video" src="#"></video>
+	</div>
+
+	<div class="layui-col-md2">
+		<ul class="xkc_right_ul">
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+		</ul>
+	</div>
+</div>
+
+
+<div class="layui-row xinwang_second_row">
+	<div class="layui-col-md6 layui-col-md-offset2">
+		<ul class="xinwang_second_ul">
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+		</ul>
+	</div>
+
+	<div class="layui-col-md2">
+		<ul class="xkc_right_ul">
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+			<li><img src="#" /><div>我是标题</div></li>
+		</ul>
+	</div>
+</div>
+
+
+
+{% endblock %}
+{% endblock %}

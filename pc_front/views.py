@@ -202,6 +202,30 @@ class HYFW(View):
         return render(request,self.template_name,self.extra_context)
 
 
+class YingShiNanGuo(View):
+    template_name = "pc_front/yingshinanguo.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
+
+class XWFM(ListView):
+    model = ImgArticle
+    template_name = "pc_front/xwfm.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class XKC(ListView):
+    model = ImgArticle
+    template_name = "pc_front/xkc.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+
+class BHM(ListView):
+    model = ImgArticle
+    template_name = "pc_front/bhm.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
 
 

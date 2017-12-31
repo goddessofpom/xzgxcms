@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY,\
 SYTD,JXTJ,XunChengJi,LYDL,CSWD,MFMS,SCFZ,FengShangGuangXi,FMGS,FSWH,JZNR,FSNS,LXSH, PinZhuoRenSheng,\
-HuiZhanFuWu,HZCH,HYFW
+HuiZhanFuWu,HZCH,HYFW,YingShiNanGuo,XWFM,XKC,BHM
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -33,4 +33,8 @@ urlpatterns = [
     url(r'^huizhanfuwu/$',HuiZhanFuWu.as_view(),name="huizhanfuwu"),
     url(r'^huizhancehua/$',HZCH.as_view(),name="huizhancehua"),
     url(r'^huiyifuwu/$',HYFW.as_view(),name="huiyifuwu"),
+    url(r'^yingshinanguo/$',YingShiNanGuo.as_view(),name="yingshinanguo"),
+    url(r'^xinwangfm/$',XWFM.as_view(),name="xinwangfm"),
+    url(r'^xiaokachuang/$',XKC.as_view(),name="xiaokachuang"),
+    url(r'^bahaomi/$',BHM.as_view(),name="bahaomi"),
 ]
