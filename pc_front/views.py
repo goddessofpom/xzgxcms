@@ -228,7 +228,35 @@ class BHM(ListView):
     paginate_by = 15
 
 
+class PZDT(ListView):
+    model = ImgArticle
+    template_name = "pc_front/pzdt.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
+class PZWH(ListView):
+    model = ImgArticle
+    template_name = "pc_front/pzwh.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class PZPP(ListView):
+    model = ImgArticle
+    template_name = "pc_front/pzpp.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class PZPJ(ListView):
+    model = ImgArticle
+    template_name = "pc_front/pzpj.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class ShuiMoDanQing(View):
+    template_name = "pc_front/shuimodanqing.html"
+    extra_context = {}
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
 
 
 

@@ -1,0 +1,159 @@
+.pinzhuo_title_row{
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+.pinzhuo_title{
+	color: #990033;
+	font-size: 60px;
+}
+.pinzhuo_title_ul{
+	width: 100%;
+	height: 80px;
+}
+.pinzhuo_title_ul li{
+	height: 80px;
+	float: left;
+	width: 20%;
+	text-align: center;
+	vertical-align: text-bottom;
+	font-size: 24px;
+	line-height: 120px;
+}
+.split{
+	margin-top: 10px;
+}
+.dongtai_sub_title{
+	color: #990033;
+	font-size: 32px;
+}
+.dongtai_sub_title2{
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.dongtai_left_ul{
+	width: 100%;
+}
+.dongtai_left_ul li{
+	width: 100%;
+	padding: 30px;
+}
+.dongtai_left_ul img{
+	width: 35%;
+	height: 155px;
+}
+.dongtai_left_div{
+	display: inline-block;
+	width: 55%;
+	padding-left: 20px;
+	height: 155px;
+	vertical-align: top;
+	overflow: hidden;
+}
+.dongtai_left_title{
+	color: #003399;
+}
+.dongtai_left_desc{
+	color: #868686;
+	padding-top: 10px;
+	height: 60px;
+}
+.dongtai_more{
+	margin-left: 50%;
+	margin-top: 20px;
+}
+.dongtai_date{
+	margin-left: 50%;
+	margin-top: 5px;
+	color: #AEAEAE;
+	font-size: 10px;
+}
+.dongtai_right{
+	border: 1px solid #ccc;
+}
+.dongtai_right_title{
+	padding: 5px 10px;
+	font-size: 24px;
+	color: #990033;
+	text-align: center;
+	margin-top: 20px;
+}
+.dongtai_right_ul{
+	width: 100%;
+}
+.dongtai_right_ul li{
+	width: 100%;
+	margin-bottom: 30px;
+	text-align:center;
+}
+.dongtai_right_ul img{
+	height: 109px;
+	width: 80%;
+	margin: 0 auto;
+}
+.dongtai_right_ul div{
+	margin-top: 30px;
+}
+.wenhua_title{
+	color: #990033;
+	font-size: 32px;
+	margin-bottom: 10px;
+}
+.carousel_div{
+	background-image: url("/static/pc_front/img/banner.png");
+	background-size: cover;
+	height: 470px;
+}
+.wenhua_sub_title{
+	padding-left: 30px;
+	font-size: 22px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+.wenhua_label{
+    color: #990033;
+    margin-right: 30px;
+}
+.wenhua_ul{
+	width: 100%;
+}
+.wenhua_ul li{
+	width: 22%;
+	padding: 1rem;
+	float: left;
+}
+.wenhua_ul_row{
+	margin-top: 30px;
+}
+.wenhua_ul img{
+	width: 100%;
+	height: 162px;
+}
+.pinjian_row{
+	margin-top: 30px;
+}
+.pinjian_title{
+	font-size: 22px;
+	font-weight: bold;
+}
+.pinjian_desc{
+	margin-top: 20px;
+	color: #868686;
+}
+.pinjian_ul{
+	width: 100%;
+}
+.pinjian_ul li{
+	width: 30%;
+	padding: 1rem;
+	float: left;
+}
+.pinjian_ul img{
+	width: 100%;
+	height: 137px;
+}
+.pinjian_more{
+	color:#000000;
+	font-size: 12px;
+	margin-top: 200px;
+}

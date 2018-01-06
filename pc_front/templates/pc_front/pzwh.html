@@ -1,0 +1,83 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '文化' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_pinzhuorensheng.css' %}">
+
+<div class="layui-row pinzhuo_title_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <div class="pinzhuo_title">{% trans '品酌人生' %}</div>
+  </div>
+
+  <div class="layui-col-md5 layui-col-md-offset1">
+    <ul class="pinzhuo_title_ul">
+      <li><a href="{% url 'pc_front:pinzhuodongtai' %}">{% trans '动态' %}</a></li>
+      <li>{% trans '文化' %}</li>
+      <li>{% trans '品牌' %}</li>
+      <li>{% trans '品鉴' %}</li>
+      <li>{% trans '售卖' %}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset2 wenhua_title">
+    {% trans '文化' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="layui-carousel" id="carousel" >
+    <div carousel-item>
+      <div class="carousel_div"></div>
+      <div class="carousel_div"></div>
+      <div class="carousel_div"></div>
+      <div class="carousel_div"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 wenhua_sub_title">
+    <span class="wenhua_label">历史</span>我是标题标题
+  </div>
+</div>
+
+<div class="layui-row wenhua_ul_row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="wenhua_ul">
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+      <li><img src="#"></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    layui.use('carousel',function(){
+      var carousel = layui.carousel;
+
+      carousel.render({
+        elem:"#carousel",
+        width:"100%",
+        height:"475px",
+        arrow:"hover",
+        indicator:"none"
+      })
+    })
+  })
+</script>
+{% endblock %}

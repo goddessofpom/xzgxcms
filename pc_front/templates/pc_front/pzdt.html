@@ -1,0 +1,106 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '动态' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_pinzhuorensheng.css' %}">
+
+<div class="layui-row pinzhuo_title_row">
+  <div class="layui-col-md2 layui-col-md-offset2">
+    <div class="pinzhuo_title">{% trans '品酌人生' %}</div>
+  </div>
+
+  <div class="layui-col-md5 layui-col-md-offset1">
+    <ul class="pinzhuo_title_ul">
+      <li><a href="{% url 'pc_front:pinzhuodongtai' %}">{% trans '动态' %}</a></li>
+      <li>{% trans '文化' %}</li>
+      <li>{% trans '品牌' %}</li>
+      <li>{% trans '品鉴' %}</li>
+      <li>{% trans '售卖' %}</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset2 dongtai_sub_title">
+    {% trans '动态' %}
+  </div>
+  <div class="layui-col-md1 dongtai_sub_title2">
+    {% trans '咖啡' %}
+  </div>
+  <div class="layui-col-md1 dongtai_sub_title2">
+    {% trans '红酒' %}
+  </div>
+  <div class="layui-col-md1 dongtai_sub_title2">
+    {% trans '茶' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <hr class="split" />
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md6 layui-col-md-offset2">
+  <ul class="dongtai_left_ul">
+    <li>
+      <img src="#" />
+      <div class="dongtai_left_div">
+        <div class="dongtai_left_title">标题</div>
+        <div class="dongtai_left_desc">简介</div>
+        <div class="dongtai_more">{% trans '阅读全文》》》' %}</div>
+        <div class="dongtai_date">日期</div>
+      </div>
+    </li>
+
+    <li>
+      <img src="#" />
+      <div class="dongtai_left_div">
+        <div class="dongtai_left_title">标题</div>
+        <div class="dongtai_left_desc">简介</div>
+        <div class="dongtai_more">{% trans '阅读全文》》》' %}</div>
+        <div class="dongtai_date">日期</div>
+      </div>
+    </li>
+
+    <li>
+      <img src="#" />
+      <div class="dongtai_left_div">
+        <div class="dongtai_left_title">标题</div>
+        <div class="dongtai_left_desc">简介</div>
+        <div class="dongtai_more">{% trans '阅读全文》》》' %}</div>
+        <div class="dongtai_date">日期</div>
+      </div>
+    </li>
+  </ul>
+  </div>
+
+  <div class="layui-col-md2 dongtai_right">
+    <div class="dongtai_right_title">{% trans '图片内容' %}</div>
+    <ul class="dongtai_right_ul">
+      <li>
+        <img src="#" />
+        <div>我是标题</div>
+      </li>
+
+      <li>
+        <img src="#" />
+        <div>我是标题</div>
+      </li>
+
+      <li>
+        <img src="#" />
+        <div>我是标题</div>
+      </li>
+    </ul>
+  </div>
+
+
+</div>
+{% endblock %}
+{% endblock %}
+
