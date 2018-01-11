@@ -1,0 +1,27 @@
+{% extends 'backend/base.html' %}
+{% block title %}网站基本设置{% endblock %}
+
+{% block left %}
+<ul class="layui-nav layui-nav-tree">
+	<li class="layui-nav-item layui-this"><a href="#">网站基本设置</a></li>
+	<li class="layui-nav-item"><a href="#">轮播设置</a></li>
+	<li class="layui-nav-item"><a href="#">友情链接设置</a></li>
+</ul>
+{% endblock %}
+
+{% block right %}
+<table class="layui-table">
+  <optgroup>
+    <col width="100">
+    <col width="500">
+    <col>
+  </optgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>轮播名称</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+</table>
+{% endblock %}

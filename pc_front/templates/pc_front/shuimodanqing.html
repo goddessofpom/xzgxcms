@@ -21,6 +21,18 @@
 </div>
 
 <div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="shuimo_list">
+      <li>{% trans '首页' %}</li>
+      <li>{% trans '艺廊' %}</li>
+      <li><a href="{% url 'pc_front:mingrentang' %}">{% trans '名人堂' %}</a></li>
+      <li><a href="{% url 'pc_front:shuimoyixun' %}">{% trans '艺讯' %}</a></li>
+      <li><a href="{% url 'pc_front:shuimowujie' %}">{% trans '无界' %}</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
   <div class="layui-col-md12">
     <div class="shuimo_main">
       <div class="shuimo"></div>
@@ -91,6 +103,60 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="mingrentang_title">{% trans '艺讯' %}</div>
   <div class="mingrentang_desc">{% trans 'Artistic Message' %}</div>
+  </div>
+</div>
+
+<div class="layui-row shuimo_yixun_row">
+<div class="layui-col-md4 layui-col-md-offset2">
+  <div class="shuimo_yixun_left_img">
+  </div>
+</div>
+
+  <div class="layui-col-md4">
+    <ul class="shuimo_yixun_right_ul">
+      <li>{% trans '热门艺讯' %}</li>
+      <li>讲堂</li>
+      <li>讲堂</li>
+      <li>讲堂</li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
+  {% trans 'More' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="mingrentang_title">{% trans '无界' %}</div>
+  <div class="mingrentang_desc">{% trans 'Unbounded' %}</div>
+  </div>
+</div>
+
+
+<div class="layui-row shuimo_wujie_row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="shuimo_wujie_left_img">
+    </div>
+    <div class="shuimo_wujie_title">
+    线下活动标题：标题标题标题标题标题
+    </div>
+  </div>
+
+  <div class="layui-col-md4">
+    <div class="shuimo_wujie_left_img">
+    </div>
+    <div class="shuimo_wujie_title">
+    线下活动标题：标题标题标题标题标题
+    </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
+  {% trans 'More' %}
   </div>
 </div>
 {% endblock %}

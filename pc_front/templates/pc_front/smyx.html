@@ -1,0 +1,157 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '艺讯' %}{% endblock %}
+{% block content %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_shuimodanqing.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="layui-carousel" id="carousel" >
+		<div carousel-item>
+			<div class="carousel_div"></div>
+			<div class="carousel_div"></div>
+			<div class="carousel_div"></div>
+			<div class="carousel_div"></div>
+		</div>
+	</div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="shuimo_list">
+      <li>{% trans '首页' %}</li>
+      <li>{% trans '艺廊' %}</li>
+      <li><a href="{% url 'pc_front:mingrentang' %}">{% trans '名人堂' %}</a></li>
+      <li>{% trans '艺讯' %}</li>
+      <li>{% trans '无界' %}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row mingrentang_title">
+  <div class="layui-col-md3 layui-col-md-offset2">
+    {% trans '艺讯   Artistic Message' %}
+  </div>
+</div>
+
+<div class="layui-row shuimo_yixun_row">
+<div class="layui-col-md4 layui-col-md-offset2">
+  <div class="shuimo_yixun_left_title">
+    {% trans '艺 • 人物' %}
+  </div>
+  <div class="shuimo_yixun_left_img">
+  </div>
+</div>
+
+  <div class="layui-col-md4">
+    <ul class="shuimo_yixun_right_ul">
+      <li>{% trans '热门艺讯' %}</li>
+      <li>讲堂</li>
+      <li>讲堂</li>
+      <li>讲堂</li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
+  {% trans 'More' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md3 layui-col-md-offset2 yixun_sub_title">
+    {% trans '艺 • 讲堂' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="jiangtang_list">
+      <li>
+        <div class="jiangtang_img"></div>
+        <div class="jiangtang_title">标题</div>
+      </li>
+      <li>
+        <div class="jiangtang_img"></div>
+        <div class="jiangtang_title">标题</div>
+      </li>
+      <li>
+        <div class="jiangtang_img"></div>
+        <div class="jiangtang_title">标题</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
+  {% trans 'More' %}
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md3 layui-col-md-offset2 yixun_sub_title">
+    {% trans '展讯' %}
+  </div>
+</div>
+
+
+<div class="layui-row shuimo_wujie_row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+    <div class="shuimo_wujie_left_img">
+    </div>
+    <div class="shuimo_wujie_title">
+    线下活动标题：标题标题标题标题标题
+    </div>
+  </div>
+
+  <div class="layui-col-md4">
+    <div class="shuimo_wujie_left_img">
+    </div>
+    <div class="shuimo_wujie_title">
+    线下活动标题：标题标题标题标题标题
+    </div>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
+  {% trans 'More' %}
+  </div>
+</div>
+{% endblock %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    layui.use('carousel',function(){
+      var carousel = layui.carousel;
+
+      carousel.render({
+        elem:"#carousel",
+        width:"100%",
+        height:"510px",
+        arrow:"hover",
+      })
+    })
+
+    layui.use('carousel',function(){
+      var carousel = layui.carousel;
+
+      carousel.render({
+        elem:"#carousel2",
+        width:"100%",
+        height:"300px",
+        arrow:"hover",
+        indicator:"none",
+      })
+    })
+  })
+</script>
+{% endblock %}

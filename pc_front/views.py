@@ -258,7 +258,23 @@ class ShuiMoDanQing(View):
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
 
+class MRT(ListView):
+    model = ImgArticle
+    template_name = "pc_front/mrt.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
+class SMYX(ListView):
+    model = ImgArticle
+    template_name = "pc_front/smyx.html"
+    context_object_name = "article_list"
+    paginate_by = 15
+
+class SMWJ(ListView):
+    model = ImgArticle
+    template_name = "pc_front/smwj.html"
+    context_object_name = "article_list"
+    paginate_by = 15
 
 
 

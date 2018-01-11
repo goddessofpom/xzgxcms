@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from pc_front.models import Cate
+from models import Carousel,CarouselItem
 
 
 # Create your views here.
@@ -121,6 +122,15 @@ class AddCate(LoginRequiredMixin,View):
             Cate.objects.create(parent=parent_cate,name=name,description=short_description)
         return HttpResponseRedirect(reverse("backend:cate_setting"))
 
+class IndexView(LoginRequiredMixin,View):
+    template_name = "backend/index.html"
+    extra_context = {}
+
+    def get(self,request):
+        carousels = Carousel.objects.select_related().all()
+
+        self.extra_context['carousels'] = carousels
+        return render(request,self.template_name,self.extra_context)
 
 
 

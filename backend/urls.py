@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from views import LoginView, SettingView, Register,CateSetting,AddCate
+from views import LoginView, SettingView, Register,CateSetting,AddCate,IndexView
 from django.contrib.auth.models import User
 
 
@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^register/$',Register.as_view(),name="register"),
     url(r'^cate_setting/$',CateSetting.as_view(),name="cate_setting"),
     url(r'^add_cate/$',AddCate.as_view(),name="add_cate"),
+    url(r'^index/$',IndexView.as_view(),name="index"),
 ]
