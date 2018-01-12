@@ -1,0 +1,85 @@
+{% extends 'backend/base.html' %}
+{% block title %}文章设置{% endblock %}
+{% block left %}
+<ul class="layui-nav layui-nav-tree">
+	<li class="layui-nav-item layui-this"><a href="{% url 'backend:article' %}">全部文章</a></li>
+	{% for cate in cates %}
+	<li class="layui-nav-item"><a href="#">{{cate.name}}</a></li>
+	{% endfor %}
+</ul>
+{% endblock%}
+
+{% block right%}
+<div class="layui-row">
+  <div class="layui-col-md2 layui-col-md-offset10">
+    <a href="javascript:;" id="add_article" class="layui-btn">发布文章</a>
+  </div>
+</div>
+
+<table class="layui-table">
+  <optgroup>
+  </optgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>文章标题</th>
+      <th>分类</th>
+      <th>更新时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for article in articles %}
+    <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{article.title}}</td>
+    <td>{{article.cate.name}}</td>
+    <td>{{article.update_time}}</td>
+    <td><a href="{% url 'backend:add_article_detail' article.id %}">修改</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md3 layui-col-md-offset8"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a href="/backend/article?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}  
+            {% if page_obj.has_next %}  
+                <a href="/backend/article?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+            <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%}  
+
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#article").addClass("layui-this")
+
+	layui.use('layer',function(){
+	    var layer = layui.layer;
+		$("#add_article").click(function(){
+			layer.open({
+				type:2,
+				content:"{% url 'backend:add_article' %}",
+				title:'添加文章',
+				area:['1000px','600px']
+			})
+		})
+
+	})
+})
+</script>
+{% endblock %}

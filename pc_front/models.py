@@ -13,6 +13,7 @@ class Cate(MPTTModel):
     description = models.CharField(max_length=500,help_text="分类简介",blank=True,null=True)
     media = models.FileField(blank=True,null=True,help_text="分类短片")
     url = models.CharField(max_length=200,help_text="分类的url",blank=True,null=True)
+    is_article = models.BooleanField(default=0,help_text="分类下是否有文章，0：无，1：有")
 
     def __unicode__(self):
         return self.name
@@ -29,6 +30,9 @@ class ImgArticle(models.Model):
     author = models.CharField(max_length=50,help_text="文章作者",blank=True,null=True)
     description = models.CharField(max_length=500,help_text="文章简介",blank=True,null=True)
     content = models.TextField()
+    label = models.CharField(max_length=100,blank=True,null=True,help_text="文章标签")
+    status = models.BooleanField(default=0,help_text="是否审核，0：未审核，1：已审核")
+    display_mode = models.IntegerField(default=0,help_text="文章显示模式，0：标准模式，1：多图模式")
     created_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
@@ -39,16 +43,8 @@ class ImgArticle(models.Model):
         verbose_name = "图片文章"
         ordering = ['update_time']
 
-class Carousel(models.Model):
-    name = models.CharField(max_length=100,help_text="轮播名称")
-    query_code = models.CharField(max_length=100,help_text="用于查询轮播")
-
-class CarouselItem(models.Model):
-    carousel = models.ForeignKey(Carousel,help_text="所属轮播",on_delete=models.CASCADE)
-    img = models.ImageField(upload_to="carousel_img",help_text="轮播图片")
-    title = models.CharField(max_length=200,help_text="轮播标题")
-    desc = models.CharField(max_length=200,help_text="轮播简介")
-    url = models.CharField(max_length=500,help_text="轮播所指向的url")
-
-    created_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField(auto_now=True)
+class Images(models.Model):
+    article = models.ForeignKey(ImgArticle,help_text="所属文章",on_delete=models.CASCADE)
+    img = models.ImageField(upload_to="article_img")
+    title = models.CharField(max_length=200,blank=True,null=True,help_text="图片标题")
+    description = models.CharField(max_length=500,null=True,blank=True,help_text="图片简介")

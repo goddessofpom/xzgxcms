@@ -7,8 +7,13 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from pc_front.models import Cate
+from pc_front.models import Cate,ImgArticle
 from models import Carousel,CarouselItem
+from utils import handle_img
+import traceback
+import json
+from django.core.files.storage import default_storage
+from django.conf import settings
 
 
 # Create your views here.
@@ -133,4 +138,87 @@ class IndexView(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
 
+class Article(LoginRequiredMixin,ListView):
+    model = ImgArticle
+    template_name = "backend/article.html"
+    extra_context = {}
+    context_object_name = "articles"
+    paginate_by = 15
 
+    def get_queryset(self):
+        cate_id = self.request.GET.get("cate_id")
+        if cate_id:
+            cate = Cate.objects.get(pk=cate_id)
+            articles = ImgArticle.objects.filter(cate=cate)
+        else:
+            articles = ImgArticle.objects.all()
+        return articles
+
+    def get_context_data(self,**kwargs):
+        context = super(Article, self).get_context_data(**kwargs)
+        cates = Cate.objects.filter(is_article=True)
+        context['cates'] = cates
+        return context
+
+
+class AddArticle(LoginRequiredMixin,View):
+    template_name = "backend/add_article.html"
+    extra_context = {}
+
+    def get(self,request):
+        cates = Cate.objects.filter(is_article=True)
+
+        self.extra_context['cates'] = cates
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        cate_id = request.POST.get("cate")
+        cate = Cate.objects.get(pk=cate_id)
+        title = request.POST.get("title")
+        description = request.POST.get("desc")
+        author = request.POST.get("author")
+        label = request.POST.get("label")
+        mode = int(request.POST.get("mode"))
+
+        article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode)
+
+        if mode == 0:
+            return HttpResponseRedirect(reverse("backend:add_article_detail",args=[article.id]))
+
+
+class AddArticleDetail(LoginRequiredMixin,View):
+    template_name = "backend/add_article_detail.html"
+    extra_context = {}
+
+    def get(self,request,article_id):
+        article = ImgArticle.objects.get(pk=article_id)
+        self.article = article
+
+        self.extra_context['article'] = article
+
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request,article_id):
+        if request.is_ajax():
+            try:
+                article = ImgArticle.objects.get(pk=article_id)
+                text = request.POST.get("text")
+                article.content = text
+                article.save()
+            except:
+                print traceback.print_exc()
+        return HttpResponse("success")
+
+
+class UploadImg(View):
+    def post(self,request):
+        try:
+            img = request.FILES.get("img")
+            path = default_storage.save(settings.MEDIA_ROOT +'/' + img.name, img)
+
+            url = '/site_media/' + img.name 
+
+        except:
+            print traceback.print_exc()
+        
+        return HttpResponse(json.dumps({'errno':0,'data':[url]}),content_type="application/json")

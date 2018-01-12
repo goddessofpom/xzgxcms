@@ -1,0 +1,55 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block title %}编辑文章内容{% endblock %}
+{% block content %}
+<div class="layui-row">
+  <div class="layui-col-md1 layui-col-md-offset10">
+    <button class="layui-btn" id="submit">保存</button>
+  </div>
+</div>
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <div id="text" class="text" style="height: 700px;"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'backend/wangEditor-3.0.15/release/wangEditor.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#article").addClass("layui-this");
+
+	var E = window.wangEditor
+	var editor = new E('#text');
+
+	// 配置服务器端地址
+    editor.customConfig.uploadImgServer = "{% url 'backend:upload_img' %}"
+    editor.customConfig.uploadFileName = "img"
+
+    editor.customConfig.debug = true
+
+    editor.customConfig.uploadImgParams = {'csrfmiddlewaretoken':'{{csrf_token}}'}
+	editor.create()
+
+	editor.txt.html("{{article.content|safe}}")
+
+
+	$("#submit").click(function(){
+		var text = editor.txt.html();
+		var data = {'text':text,'csrfmiddlewaretoken':'{{csrf_token}}'}
+		$.ajax({
+			url:"{% url 'backend:add_article_detail' article.id %}",
+			type:"post",
+			data:data,
+			success:function(){
+				window.location.href = "{% url 'backend:article' %}"
+			},
+			error:function(data){
+				console.log(data)
+			}
+		})
+	})
+})
+</script>
+{% endblock %}

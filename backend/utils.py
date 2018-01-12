@@ -38,3 +38,9 @@ def decode_base64_file(data):
         complete_file_name = "%s.%s" % (file_name, file_extension,)
 
         return ContentFile(decoded_file, name=complete_file_name)
+
+
+def handle_img(f,path):
+    with open(path,'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
