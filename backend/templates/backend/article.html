@@ -3,10 +3,6 @@
 {% block left %}
 <ul class="layui-nav layui-nav-tree">
 	<li class="layui-nav-item layui-this"><a href="{% url 'backend:article' %}">全部文章</a></li>
-	{% for cate in cates %}
-	<li class="layui-nav-item"><a href="#">{{cate.name}}</a></li>
-	{% endfor %}
-</ul>
 {% endblock%}
 
 {% block right%}
@@ -36,7 +32,14 @@
     <td>{{article.title}}</td>
     <td>{{article.cate.name}}</td>
     <td>{{article.update_time}}</td>
-    <td><a href="{% url 'backend:add_article_detail' article.id %}">修改</a></td>
+    <td><a href="{% url 'backend:add_article_detail' article.id %}">修改内容</a>
+    <a href="javascript:;" class="modify_article_base" style="margin-left: 20px;" data="{{article.id}}">修改文章设置</a>
+    <a href="javascript:;" class="delete_article" style="margin-left: 20px;" data="{{article.id}}">删除文章</a>
+    <a href="javascript:;" class="confirm_article" style="margin-left: 20px;" data="{{article.id}}">{% if article.status == 0 %}审核文章{% elif article.status == 1 %}反审文章{% endif %}</a>
+    <a href="javascript:;" class="add_img" style="margin-left: 20px;" data="{{article.id}}">添加图片</a>
+    <a href="javascript:;" class="modify_img" style="margin-left: 20px;" data="{{article.id}}">修改图片</a>
+    <a href="javascript:;" class="delete_img" style="margin-left: 20px;" data="{{article.id}}">删除图片</a>
+    </td>
     </tr>
     {% endfor %}
   </tbody>
@@ -75,9 +78,92 @@ $(document).ready(function(){
 				type:2,
 				content:"{% url 'backend:add_article' %}",
 				title:'添加文章',
-				area:['1000px','600px']
+				area:['1000px','800px']
 			})
 		})
+
+    $(".modify_article_base").click(function(){
+      var article_id = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:add_article' %}?article_id=" + article_id,
+        title:'修改文章设置',
+        area:['1000px','800px']
+      })
+    })
+
+
+    $(".delete_article").click(function(){
+    var data = {article_id:$(this).attr("data")}
+      layer.open({
+        type:0,
+        btn:["确认","取消"],
+        yes:function(index,layero){
+          $.ajax({
+            type:"GET",
+            url:"{% url 'backend:delete_article' %}",
+            data:data,
+            success:function(data){
+              window.location.reload()
+            }
+          })
+        },
+        content:"确认进行操作",
+        title:"删除文章",
+        area:['400px','200px']
+      })
+    })
+
+    $(".confirm_article").click(function(){
+    var data = {article_id:$(this).attr("data")}
+      layer.open({
+        type:0,
+        btn:["确认","取消"],
+        yes:function(index,layero){
+          $.ajax({
+            type:"GET",
+            url:"{% url 'backend:confirm_article' %}",
+            data:data,
+            success:function(data){
+              window.location.reload()
+            }
+          })
+        },
+        content:"确认进行操作",
+        title:"审核/反审文章",
+        area:['400px','200px']
+      })
+    })
+
+    $(".add_img").click(function(){
+      var article_id = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:add_article_img' %}?article_id=" + article_id,
+        title:'新增图片',
+        area:['1000px','800px']
+      })
+    })
+
+    $(".modify_img").click(function(){
+      var article_id = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:modify_article_img' %}?article_id=" + article_id,
+        title:'修改图片',
+        area:['1000px','800px']
+      })
+    })
+
+    $(".delete_img").click(function(){
+      var article_id = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:delete_article_img' %}?article_id=" + article_id,
+        title:'删除图片',
+        area:['800px','300px']
+      })
+    })
 
 	})
 })

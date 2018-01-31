@@ -1,0 +1,85 @@
+{% extends 'backend/base.html' %}
+{% block title %}添加轮播图片{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form class="layui-form" method="POST" style="margin-top: 30px;" target="_parent">
+{% csrf_token %}
+
+  <input type="hidden" name="item_id" value="{{carousel_item.id}}">
+  <input type="hidden" name="carousel_id" value="{{carousel.id}}">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">标题：</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" lay-verify="required" class="layui-input" value="{{carousel_item.title}}" style="width: 600px;" />
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">指向链接：</label>
+    <div class="layui-input-block">
+      <input type="text" name="url" lay-verify="required" class="layui-input" style="width: 600px;" value="{{carousel_item.url}}" />
+    </div>
+  </div>
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">简介：</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea" style="width: 600px;" name="desc">{{carousel_item.desc}}</textarea>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">轮播图片：</label>
+    <div class="layui-input-block">
+      <img src="/site_media/{{carousel_item.img}}" id="img" style="width: 200px;height: 200px;{% if not carousel_item %}opacity: 0;{% endif %}" /><a href="javascript:;" id="upload_img">上传图片</a>
+      <input type="hidden" name="img_src" id="img_src" />
+    </div>
+  </div>
+
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit>提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+	layui.use("form",function(){
+		var form = layui.form;
+		form.render();
+	})
+
+
+   layui.use('upload',function(){
+    var upload = layui.upload;
+
+    var uploadInst = upload.render({
+      elem:"#upload_img",
+      auto:false,
+      accept:"images",
+      choose:function(obj){
+        obj.preview(function(index,file,result){
+             $("#img").attr("src",result).css("opacity",1)
+             $("#img_src").val(result)
+        })
+      },
+      done:function(res,index,upload){
+          alert(res.msg);
+          window.location.reload();
+      },
+      error:function(error){
+        console.log(error)
+      }
+    })
+  })
+})
+</script>
+{% endblock %}

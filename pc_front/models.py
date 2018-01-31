@@ -41,7 +41,7 @@ class ImgArticle(models.Model):
 
     class Meta:
         verbose_name = "图片文章"
-        ordering = ['update_time']
+        ordering = ['-update_time']
 
 class Images(models.Model):
     article = models.ForeignKey(ImgArticle,help_text="所属文章",on_delete=models.CASCADE)

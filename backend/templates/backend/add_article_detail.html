@@ -3,8 +3,12 @@
 {% block title %}编辑文章内容{% endblock %}
 {% block content %}
 <div class="layui-row">
-  <div class="layui-col-md1 layui-col-md-offset10">
+  <div class="layui-col-md1 layui-col-md-offset9">
     <button class="layui-btn" id="submit">保存</button>
+  </div>
+
+  <div class="layui-col-md1">
+     <a href="#" class="layui-btn layui-btn-primary" onclick="window.history.go(-1)">返回</a>
   </div>
 </div>
 <div class="layui-row">
@@ -32,7 +36,9 @@ $(document).ready(function(){
     editor.customConfig.uploadImgParams = {'csrfmiddlewaretoken':'{{csrf_token}}'}
 	editor.create()
 
-	editor.txt.html("{{article.content|safe}}")
+	var content = "{{article.content}}"
+
+	editor.txt.text(htmlDecode(content))
 
 
 	$("#submit").click(function(){

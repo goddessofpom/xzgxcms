@@ -7,13 +7,15 @@
 <form class="layui-form" method="POST" style="margin-top: 30px;" target="_parent">
 {% csrf_token %}
 
+  <input type="hidden" name="article_id" value="{{article.id}}">
+
   <div class="layui-form-item" style="width: 600px;">
     <label class="layui-form-label">文章分类：</label>
     <div class="layui-input-block">
       <select name="cate" lay-verify="required">
         <option value=""></option>
         {% for cate in cates %}
-        <option value="{{cate.id}}">{{cate.name}}</option>
+        <option value="{{cate.id}}" {% if article.cate.id == cate.id %}selected{% endif %}>{{cate.name}}</option>
         {% endfor %}
       </select>
     </div>
@@ -22,36 +24,44 @@
   <div class="layui-form-item">
     <label class="layui-form-label">文章标题：</label>
     <div class="layui-input-block">
-      <input type="text" name="title" lay-verify="required" class="layui-input" style="width: 600px;" />
+      <input type="text" name="title" lay-verify="required" class="layui-input" style="width: 600px;" value="{{article.title}}" />
     </div>
   </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">文章作者：</label>
     <div class="layui-input-block">
-      <input type="text" name="author" class="layui-input" style="width: 100px;" />
+      <input type="text" name="author" class="layui-input" style="width: 100px;" value="{{article.author}}" />
     </div>
   </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">文章标签：</label>
     <div class="layui-input-block">
-      <input type="text" name="label" class="layui-input" style="width: 100px;" />
+      <input type="text" name="label" class="layui-input" style="width: 100px;" value="{{article.label}}" />
     </div>
   </div>
 
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">文章简介：</label>
     <div class="layui-input-block">
-      <textarea class="layui-textarea" style="width: 600px;" name="desc"></textarea>
+      <textarea class="layui-textarea" style="width: 600px;" name="desc">{{article.description}}</textarea>
+    </div>
+  </div>
+
+    <div class="layui-form-item">
+    <label class="layui-form-label">封面图片：</label>
+    <div class="layui-input-block">
+      <img src="/site_media/{{article.cover}}" id="img" style="width: 200px;height: 200px;{% if not article %}opacity: 0;{% endif %}" /><a href="javascript:;" id="upload_img">上传图片</a>
+      <input type="hidden" name="img_src" id="img_src" />
     </div>
   </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">文章模式</label>
     <div class="layui-input-block">
-      <input type="radio" name="mode" value="0" title="标准模式" checked>
-      <input type="radio" name="mode" value="1" title="多图模式">
+      <input type="radio" name="mode" value="0" title="标准模式" {% if article.display_mode == 0 or not article %}checked{% endif %}>
+      <input type="radio" name="mode" value="1" title="多图模式" {% if article.display_mode == 1 %}checked{% endif %}>
     </div>
   </div>
 
@@ -72,6 +82,29 @@ $(document).ready(function(){
 		var form = layui.form;
 		form.render();
 	})
+
+  layui.use('upload',function(){
+    var upload = layui.upload;
+
+    var uploadInst = upload.render({
+      elem:"#upload_img",
+      auto:false,
+      accept:"images",
+      choose:function(obj){
+        obj.preview(function(index,file,result){
+             $("#img").attr("src",result).css("opacity",1)
+             $("#img_src").val(result)
+        })
+      },
+      done:function(res,index,upload){
+          alert(res.msg);
+          window.location.reload();
+      },
+      error:function(error){
+        console.log(error)
+      }
+    })
+  })
 })
 </script>
 {% endblock %}

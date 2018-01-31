@@ -1,0 +1,9 @@
+*.pyc
+.svn
+.settings
+.project
+.pydevproject
+xzgxcms/settings.py
+*.log
+*.DS_Store
+tags
