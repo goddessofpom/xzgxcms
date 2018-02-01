@@ -2,7 +2,9 @@
 {% block title %}文章设置{% endblock %}
 {% block left %}
 <ul class="layui-nav layui-nav-tree">
-	<li class="layui-nav-item layui-this"><a href="{% url 'backend:article' %}">全部文章</a></li>
+	<li class="layui-nav-item" id="sub_article"><a href="{% url 'backend:article' %}">全部文章</a></li>
+  <li class="layui-nav-item" id="yingshinanguo"><a href="{% url 'backend:yingshinanguo' %}">影视南国</a></li>
+  <li class="layui-nav-item"><a href="#">名人堂</a></li>
 {% endblock%}
 
 {% block right%}
@@ -70,6 +72,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#article").addClass("layui-this")
+  $("#sub_article").addClass("layui-this")
 
 	layui.use('layer',function(){
 	    var layer = layui.layer;

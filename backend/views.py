@@ -7,13 +7,14 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from pc_front.models import Cate,ImgArticle,Images
+from pc_front.models import Cate,ImgArticle,Images,MediaArticle
 from models import Carousel,CarouselItem
 from utils import handle_img,decode_base64_file
 import traceback
 import json
 from django.core.files.storage import default_storage
 from django.conf import settings
+from django.db.models import Q
 
 
 # Create your views here.
@@ -208,7 +209,7 @@ class AddArticle(LoginRequiredMixin,View):
         else:
             if not img_src:
                 self.template_name = "backend/error.html"
-                error_message = "两次密码输入不一致"
+                error_message = "上传封面图片"
                 self.extra_context['error_message'] = error_message
                 return render(request,self.template_name,self.extra_context)
 
@@ -477,3 +478,72 @@ class DeleteArticleImg(LoginRequiredMixin,View):
         item.delete()
         return HttpResponseRedirect(reverse("backend:article"))
 
+class YingShiNanGuo(LoginRequiredMixin,ListView):
+    model = ImgArticle
+    template_name = "backend/yingshinanguo.html"
+    extra_context = {}
+    context_object_name = "articles"
+    paginate_by = 15
+
+    def get_queryset(self):
+        articles = MediaArticle.objects.all()
+        return articles
+
+    def get_context_data(self,**kwargs):
+        context = super(YingShiNanGuo, self).get_context_data(**kwargs)
+        return context
+
+class AddMediaArticle(LoginRequiredMixin,View):
+    template_name = "backend/add_media_article.html"
+    extra_context = {}
+
+    def get(self,request):
+        cates = Cate.objects.filter(query_code__in=['xwfm','xkc','bhm'])
+
+        article_id = request.GET.get("article_id")
+
+        if article_id:
+            article = MediaArticle.objects.get(pk=article_id)
+        else:
+            article = None
+
+        self.extra_context['cates'] = cates
+        self.extra_context['article'] = article
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        cate_id = request.POST.get("cate")
+        cate = Cate.objects.get(pk=cate_id)
+        title = request.POST.get("title")
+        description = request.POST.get("desc")
+        author = request.POST.get("author")
+        label = request.POST.get("label")
+
+        img_src = request.POST.get("img_src")
+
+        article_id = request.POST.get("article_id")
+
+        if article_id:
+            article = MediaArticle.objects.get(pk=article_id)
+            article.cate = cate
+            article.title = title
+            article.description = description
+            article.author = author
+            article.label = label
+
+            if img_src:
+                cover = decode_base64_file(img_src)
+                article.cover = cover
+            article.save()
+        else:
+            if not img_src:
+                self.template_name = "backend/error.html"
+                error_message = "请上传封面图片"
+                self.extra_context['error_message'] = error_message
+                return render(request,self.template_name,self.extra_context)
+
+            cover = decode_base64_file(img_src)
+
+            article = MediaArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,cover=cover)
+
+        return HttpResponseRedirect(reverse("backend:yingshinanguo"))

@@ -48,3 +48,24 @@ class Images(models.Model):
     img = models.ImageField(upload_to="article_img")
     title = models.CharField(max_length=200,blank=True,null=True,help_text="图片标题")
     description = models.CharField(max_length=500,null=True,blank=True,help_text="图片简介")
+
+
+
+class MediaArticle(models.Model):
+    title = models.CharField(max_length=200,help_text="文章标题")
+    cate = models.ForeignKey(Cate,help_text="所属分类",on_delete=models.CASCADE)
+    cover = models.ImageField(upload_to="article_img",help_text="文章封面")
+    author = models.CharField(max_length=50,help_text="文章作者",blank=True,null=True)
+    media = models.FileField(upload_to="article_media")
+    description = models.CharField(max_length=500,help_text="文章简介",blank=True,null=True)
+    label = models.CharField(max_length=100,blank=True,null=True,help_text="文章标签")
+    status = models.BooleanField(default=0,help_text="是否审核，0：未审核，1：已审核")
+    created_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "影视文章"
+        ordering = ['-update_time']
