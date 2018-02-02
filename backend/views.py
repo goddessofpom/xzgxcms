@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from pc_front.models import Cate,ImgArticle,Images,MediaArticle
 from models import Carousel,CarouselItem
-from utils import handle_img,decode_base64_file
+from utils import handle_img,decode_base64_file,create_log
 import traceback
 import json
 from django.core.files.storage import default_storage
@@ -126,6 +126,9 @@ class AddCate(LoginRequiredMixin,View):
             cate.save()
         else:
             Cate.objects.create(parent=parent_cate,name=name,description=short_description)
+
+        content = "添加了分类%s"%(name.encode("utf8"),)
+        create_log(request.user.username,content)
         return HttpResponseRedirect(reverse("backend:cate_setting"))
 
 class IndexView(LoginRequiredMixin,View):
@@ -217,6 +220,9 @@ class AddArticle(LoginRequiredMixin,View):
 
             article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode,cover=cover)
 
+        content = "添加/修改了文章配置%s"%(title.encode("utf8"),)
+        create_log(request.user.username,content)
+
         if mode == 0:
             return HttpResponseRedirect(reverse("backend:add_article_detail",args=[article.id]))
         elif mode == 1:
@@ -242,6 +248,9 @@ class AddArticleDetail(LoginRequiredMixin,View):
                 text = request.POST.get("text")
                 article.content = text
                 article.save()
+
+                content = "添加/修改了文章内容%s"%(title.encode("utf8"),)
+                create_log(request.user.username,content)
             except:
                 print traceback.print_exc()
         return HttpResponse("success")
@@ -324,6 +333,10 @@ class AddCarouselItem(LoginRequiredMixin,View):
             CarouselItem.objects.create(title=title,url=url,desc=desc,img=img,carousel=carousel)
 
 
+        content = "添加/修改了轮播%s"%(title.encode("utf8"),)
+        create_log(request.user.username,content,1)
+
+
 
         return HttpResponseRedirect(reverse("backend:carousel_setting"))
 
@@ -364,6 +377,9 @@ class DeleteCarouselItem(LoginRequiredMixin,View):
     def post(self,request):
         item_id = request.POST.get("item_id")
         item = CarouselItem.objects.get(pk=item_id)
+
+        content = "删除了轮播%s"%(item.title.encode("utf8"),)
+        create_log(request.user.username,content)
         item.delete()
         return HttpResponseRedirect(reverse("backend:carousel_setting"))
 
@@ -373,6 +389,8 @@ class DeleteArticle(LoginRequiredMixin,View):
     def get(self,request):
         if request.is_ajax():
             article_id = request.GET.get("article_id")
+            content = "删除了文章%s"%(ImgArticle.objects.get(pk=article_id).title.encode("utf8"),)
+            create_log(request.user.username,content)
             ImgArticle.objects.get(pk=article_id).delete()
             return HttpResponse("删除成功")
 
@@ -384,6 +402,10 @@ class ConfirmArticle(LoginRequiredMixin,View):
             article = ImgArticle.objects.get(pk=article_id)
             article.status = not article.status
             article.save()
+
+            content = "审核/反审核了文章%s"%(article.title.encode("utf8"),)
+            create_log(request.user.username,content)
+
             return HttpResponse("操作成功")
 
 
@@ -441,6 +463,9 @@ class AddArticleImg(LoginRequiredMixin,View):
 
             Images.objects.create(title=title,description=desc,img=decode_base64_file(img_src),article=article)
 
+        content = "添加/删除了文章图片%s"%(title.encode("utf8"),)
+        create_log(request.user.username,content)
+
         return HttpResponseRedirect(reverse("backend:article"))
 
 
@@ -475,6 +500,8 @@ class DeleteArticleImg(LoginRequiredMixin,View):
     def post(self,request):
         item_id = request.POST.get("item_id")
         item = Images.objects.get(pk=item_id)
+        content = "删除了文章图片%s"%(item.title.encode("utf8"),)
+        create_log(request.user.username,content)
         item.delete()
         return HttpResponseRedirect(reverse("backend:article"))
 
@@ -512,16 +539,31 @@ class AddMediaArticle(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+
+        if request.is_ajax():
+            try:
+                base_dir = settings.BASE_DIR
+                file = request.FILES['file']
+                file_name = file.name
+                url = "article_media/" + file_name
+                path = base_dir + "/media/" + url
+                handle_img(file,path)
+                return HttpResponse(json.dumps({'code':0,'url':url}),content_type="application/json")
+            except:
+                print traceback.print_exc()
+
         cate_id = request.POST.get("cate")
         cate = Cate.objects.get(pk=cate_id)
         title = request.POST.get("title")
         description = request.POST.get("desc")
         author = request.POST.get("author")
         label = request.POST.get("label")
+        media_url = request.POST.get("media_url")
 
         img_src = request.POST.get("img_src")
 
         article_id = request.POST.get("article_id")
+
 
         if article_id:
             article = MediaArticle.objects.get(pk=article_id)
@@ -530,6 +572,7 @@ class AddMediaArticle(LoginRequiredMixin,View):
             article.description = description
             article.author = author
             article.label = label
+            article.media = media_url
 
             if img_src:
                 cover = decode_base64_file(img_src)
@@ -544,6 +587,47 @@ class AddMediaArticle(LoginRequiredMixin,View):
 
             cover = decode_base64_file(img_src)
 
-            article = MediaArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,cover=cover)
+            article = MediaArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,cover=cover,media=media_url)
+
+        content = "添加/修改视频文章%s"%(title.encode("utf8"),)
+        create_log(request.user.username,content)
 
         return HttpResponseRedirect(reverse("backend:yingshinanguo"))
+
+
+class DeleteMediaArticle(LoginRequiredMixin,View):
+    def get(self,request):
+        if request.is_ajax():
+            article_id = request.GET.get("article_id")
+            content = "删除了文章%s"%(MediaArticle.objects.get(pk=article_id).title.encode("utf8"),)
+            create_log(request.user.username,content)
+            MediaArticle.objects.get(pk=article_id).delete()
+            return HttpResponse("删除成功")
+
+class ConfirmMediaArticle(LoginRequiredMixin,View):
+    def get(self,request):
+        if request.is_ajax():
+            article_id = request.GET.get("article_id")
+            article = MediaArticle.objects.get(pk=article_id)
+            article.status = not article.status
+            article.save()
+
+            content = "审核/反审核了文章%s"%(article.title.encode("utf8"),)
+            create_log(request.user.username,content)
+
+            return HttpResponse("操作成功")
+
+
+class AuthGroupSetting(LoginRequiredMixin,View):
+    template_name = "backend/auth_group.html"
+    extra_context = {}
+
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)
+
+class AddGroup(LoginRequiredMixin,View):
+    template_name = "backend/add_group.html"
+    extra_context = {}
+
+    def get(self,request):
+        return render(request,self.template_name,self.extra_context)

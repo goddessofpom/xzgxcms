@@ -1,16 +1,9 @@
-{% extends 'backend/base.html' %}
-{% block title %}系统设置{% endblock %}
-{% block left %}
-<ul class="layui-nav layui-nav-tree">
-	<li class="layui-nav-item" id="admin_config"><a href="{% url 'backend:setting' %}">管理员管理</a></li>
-	<li class="layui-nav-item" id="auth_group"><a href="{% url 'backend:auth_group' %}">职位管理</a></li>
-</ul>
-{% endblock%}
-
+{% extends 'backend/setting.html' %}
+{% block title %}职位管理{% endblock %}
 {% block right %}
 <div class="layui-row">
 	<div class="layui-col-md1 layui-col-md-offset10">
-		<a href="javascript:;" class="layui-btn" id="add_admin">添加管理员</a>
+		<a href="javascript:;" class="layui-btn" id="add_group">添加职位</a>
 	</div>
 </div>
 
@@ -20,9 +13,7 @@
   <thead>
     <tr>
       <th>序号</th>
-      <th>用户名称</th>
-      <th>职位</th>
-      <th>注册时间</th>
+      <th>职位名称</th>
       <th>操作</th>
     </tr>
   </thead>
@@ -31,8 +22,6 @@
     {% for user in user_list %}
     <tr>
     <td>{{forloop.counter}}</td>
-    <td>{{user.username}}</td>
-    <td>{{user.group.name}}</td>
     <td>{{user.date_joined|date:'Y-m-d'}}</td>
     <td><a href="#">修改密码</a><a href="#" style="margin-left: 20px;">设置职位</a><a href="#" style="margin-left: 20px;">删除</a></td>
     </tr>
@@ -46,15 +35,15 @@
     <div class="pagination">  
         <span class="page-links">  
             {% if page_obj.has_previous %}  
-                <a class="layui-btn layui-btn-primary" href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
+                <a class="layui-btn layui-btn-primary" href="/backend/auth_group?page={{ page_obj.previous_page_number }}">上一页</a>  
             {% endif %}
             {% if i == page_obj.number %}
                 <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
             {% else %}
-                <a class="layui-btn layui-btn-primary" href="/backend/setting?page={{i}}">{{i}}</a>
+                <a class="layui-btn layui-btn-primary" href="/backend/auth_group?page={{i}}">{{i}}</a>
             {% endif %}
             {% if page_obj.has_next %}  
-                <a class="layui-btn layui-btn-primary" href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+                <a class="layui-btn layui-btn-primary" href="/backend/auth_group?page={{ page_obj.next_page_number }}">下一页</a>  
             {% endif %}  
            <!-- <span class="page-current">  
                 第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
@@ -64,27 +53,25 @@
 </div>
 </div>
 {%endif%} 
-
-
-
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#admin_config").addClass("layui-this")
-		layui.use('layer',function(){
+$(document).ready(function(){
+	$("#auth_group").addClass("layui-this")
+	$("#setting").addClass("layui-this")
+
+	layui.use('layer',function(){
 			var layer = layui.layer;
-			$("#add_admin").click(function(){
+			$("#add_group").click(function(){
 			layer.open({
 				type:2,
-				content:"{% url 'backend:register' %}",
-				title:'添加管理员',
+				content:"{% url 'backend:add_group' %}",
+				title:'添加职位',
 				area:['600px','300px']
 			})
 		})
 		})
-		$("#setting").addClass("layui-this")
-	})
+})
 </script>
 {% endblock %}

@@ -43,6 +43,13 @@ class ImgArticle(models.Model):
         verbose_name = "图片文章"
         ordering = ['-update_time']
 
+        permissions = (
+            ("add_img_article","添加图片文章"),
+            ("modify_img_article","修改图片文章"),
+            ("delete_img_article","删除图片文章"),
+            ("confirm_img_article","审核图片文章")
+            )
+
 class Images(models.Model):
     article = models.ForeignKey(ImgArticle,help_text="所属文章",on_delete=models.CASCADE)
     img = models.ImageField(upload_to="article_img")
@@ -69,3 +76,10 @@ class MediaArticle(models.Model):
     class Meta:
         verbose_name = "影视文章"
         ordering = ['-update_time']
+
+        permissions = (
+            ("add_media_article","添加视频文章"),
+            ("modify_media_article","修改视频文章"),
+            ("delete_media_article","删除视频文章"),
+            ("confirm_media_article","审核视频文章")
+            )

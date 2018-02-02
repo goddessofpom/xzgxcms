@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*- 
+from models import OperationLog
 def decode_base64_file(data):
     '''
     ' 将base64图片转为ImageField可保存的类型
@@ -44,3 +45,7 @@ def handle_img(f,path):
     with open(path,'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+
+def create_log(username,content,log_type=0):
+    OperationLog.objects.create(username=username,content=content,log_type=log_type)

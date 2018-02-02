@@ -57,10 +57,19 @@
     </div>
   </div>
 
+  <div class="layui-form-item">
+    <label class="layui-form-label">视频：</label>
+    <div class="layui-input-block">
+      <a href="javascript:;" id="upload_media">上传视频</a>
+      <input type="hidden" name="media_url" id="media_url" value="{{article.media}}">
+    </div>
+  </div>
+
+
 
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" lay-submit>提交</button>
+      <button class="layui-btn" lay-submit id="submit">提交</button>
       <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     </div>
   </div>
@@ -95,6 +104,21 @@ $(document).ready(function(){
       error:function(error){
         console.log(error)
       }
+    })
+
+
+    var uploadMedia = upload.render({
+      elem:'#upload_media',
+      accept:"video",
+      method:"POST",
+      data:{"csrfmiddlewaretoken":"{{csrf_token}}"},
+      done:function(res, index, upload){
+            if(res.code == 0){
+              console.log(res.url)
+              $("#media_url").val(res.url)
+              alert("视频上传成功")
+                }
+            }
     })
   })
 })

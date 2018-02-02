@@ -15,3 +15,18 @@ class CarouselItem(models.Model):
 
     created_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+    	permissions = (
+            ('add_carousel_item',"添加轮播"),
+            ('modify_carousel_item',"修改轮播"),
+            ('delete_carousel_item',"删除轮播")
+    		)
+
+
+class OperationLog(models.Model):
+	username = models.CharField(max_length=100)
+	content = models.CharField(max_length=500)
+	log_type = models.IntegerField(default=0,help_text="0:内容日志，1：系统日志")
+
+	created_time = models.DateTimeField(auto_now_add=True)
