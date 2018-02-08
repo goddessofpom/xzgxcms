@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +18,21 @@
 {% block body%}
 {% endblock %}
 
-{% block footer%}
 {% endblock %}
 
+{% block footer%}
+<div class="layui-row">
+  <div class="layui-col-md2 layui-col-md-offset3">
+    <img src="#" >
+  </div>
+  <div class="layui-col-md4">
+    <div>{% trans '联系我们' %}</div>
+    <div>{% trans '新华网广西频道《行走广西》栏目组' %}</div>
+    <div>{% trans '内容合作：' %}</div>
+  </div>
+</div>
 {% endblock %}
+
 </div>
 </body>
 {% block script %}

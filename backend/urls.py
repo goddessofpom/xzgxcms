@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from views import LoginView, SettingView, Register,CateSetting,AddCate,IndexView,Article,AddArticle,AddArticleDetail,\
 UploadImg,CarouselSetting,AddCarouselItem,ModifyCarouselItem,DeleteCarouselItem,DeleteArticle,ConfirmArticle,AddArticleImg,\
 ModifyArticleImg,DeleteArticleImg,YingShiNanGuo,AddMediaArticle,DeleteMediaArticle,ConfirmMediaArticle,AuthGroupSetting,\
-AddGroup
+AddGroup,OperationLog
 from django.contrib.auth.models import User
 
 
@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^confirm_media_article/$',ConfirmMediaArticle.as_view(),name="confirm_media_article"),
     url(r'^auth_group/$',AuthGroupSetting.as_view(),name="auth_group"),
     url(r'^add_group/$',AddGroup.as_view(),name="add_group"),
+    url(r'^operation_log/$',OperationLog.as_view(),name="operation_log"),
 ]

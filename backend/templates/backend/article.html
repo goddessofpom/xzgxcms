@@ -58,7 +58,7 @@
             {% if i == page_obj.number %}
                 <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
             {% else %}
-                <a class="layui-btn layui-btn-primary" href="/backend/cate_setting?page={{i}}">{{i}}</a>
+                <a class="layui-btn layui-btn-primary" href="/backend/article?page={{i}}">{{i}}</a>
             {% endif %}
             {% if page_obj.has_next %}  
                 <a class="layui-btn layui-btn-primary" href="/backend/article?page={{ page_obj.next_page_number }}">下一页</a>  

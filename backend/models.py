@@ -30,3 +30,6 @@ class OperationLog(models.Model):
 	log_type = models.IntegerField(default=0,help_text="0:内容日志，1：系统日志")
 
 	created_time = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-created_time']

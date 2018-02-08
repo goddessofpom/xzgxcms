@@ -1,0 +1,66 @@
+{% extends 'backend/base.html' %}
+{% block title %}日志查询{% endblock %}
+{% block left %}
+<ul class="layui-nav layui-nav-tree">
+	<li class="layui-nav-item layui-this"><a href="#">全部日志</a></li>
+{% endblock%}
+
+{% block right%}
+<div class="layui-row">
+</div>
+
+<table class="layui-table">
+  <optgroup>
+  </optgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>操作内容</th>
+      <th>操作用户</th>
+      <th>操作时间</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for log in logs %}
+    <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{log.content}}</td>
+    <td>{{log.username}}</td>
+    <td>{{log.created_time|date:'Y-m-d H:i:s'}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/backend/operation_log?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/backend/operation_log?page={{i}}">{{i}}</a>
+            {% endif %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/backend/operation_log?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
+
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$("#operation_log").addClass("layui-this")
+</script>
+{% endblock %}

@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from pc_front.models import Cate,ImgArticle,Images,MediaArticle
-from models import Carousel,CarouselItem
+from models import Carousel,CarouselItem, OperationLog
 from utils import handle_img,decode_base64_file,create_log
 import traceback
 import json
@@ -631,3 +631,12 @@ class AddGroup(LoginRequiredMixin,View):
 
     def get(self,request):
         return render(request,self.template_name,self.extra_context)
+
+
+
+class OperationLog(LoginRequiredMixin,ListView):
+    model = OperationLog
+    template_name = "backend/operation_log.html"
+    extra_context = {}
+    context_object_name = "logs"
+    paginate_by = 20
