@@ -8,18 +8,32 @@
 <form class="layui-form" style="margin-top: 30px;" target="_parent" method="POST">
 {% csrf_token %}
   <div class="layui-form-item">
-  	<label class="layui-form-label">分类名称</label>
+  	<label class="layui-form-label">职位名称</label>
   	<div class="layui-input-block">
-  		<input type="text" name="name" class="layui-input" lay-verify="required" value="{{now_cate.name}}" />
+  		<input type="text" name="name" class="layui-input" lay-verify="required" value="{{group.name}}" />
   	</div>
   </div>
 
     <div class="layui-form-item">
     <label class="layui-form-label">选择权限</label>
     <div class="layui-input-block">
-      <input type="checkbox" name="like[write]" title="写作">
-      <input type="checkbox" name="like[read]" title="阅读">
-      <input type="checkbox" name="like[dai]" title="发呆">
+      <input type="checkbox" name="permission" value="add_carousel_item" title="添加轮播" {% for per in group.permissions.all %}{% if per.codename == 'add_carousel_item' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="modify_carousel_item" title="修改轮播" {% for per in group.permissions.all %}{% if per.codename == 'modify_carousel_item' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="delete_carousel_item" title="删除轮播" {% for per in group.permissions.all %}{% if per.codename == 'delete_carousel_item' %}checked{% endif %} {% endfor %}>
+    </div>
+
+    <div class="layui-input-block">
+      <input type="checkbox" name="permission" value="add_img_article" title="添加图片文章" {% for per in group.permissions.all %}{% if per.codename == 'add_img_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="modify_img_article" title="修改图片文章" {% for per in group.permissions.all %}{% if per.codename == 'modify_img_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="delete_img_article" title="删除图片文章" {% for per in group.permissions.all %}{% if per.codename == 'delete_img_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="confirm_img_article" title="审核图片文章" {% for per in group.permissions.all %}{% if per.codename == 'confirm_img_article' %}checked{% endif %} {% endfor %}>
+    </div>
+
+    <div class="layui-input-block">
+      <input type="checkbox" name="permission" value="add_media_article" title="添加视频文章" {% for per in group.permissions.all %}{% if per.codename == 'add_media_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="modify_media_article" title="修改视频文章" {% for per in group.permissions.all %}{% if per.codename == 'modify_media_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="delete_media_article" title="删除视频文章" {% for per in group.permissions.all %}{% if per.codename == 'delete_media_article' %}checked{% endif %} {% endfor %}>
+      <input type="checkbox" name="permission" value="confirm_media_article" title="审核视频文章" {% for per in group.permissions.all %}{% if per.codename == 'confirm_media_article' %}checked{% endif %} {% endfor %}>
     </div>
   </div>
 

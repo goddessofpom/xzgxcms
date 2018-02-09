@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group,Permission
 from pc_front.models import Cate,ImgArticle,Images,MediaArticle
 from models import Carousel,CarouselItem, OperationLog
 from utils import handle_img,decode_base64_file,create_log
@@ -15,7 +15,6 @@ import json
 from django.core.files.storage import default_storage
 from django.conf import settings
 from django.db.models import Q
-
 
 # Create your views here.
 class LoginRequiredMixin(object):
@@ -184,6 +183,12 @@ class AddArticle(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("add_img_article") or not request.user.has_perm("modify_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
+
         cate_id = request.POST.get("cate")
         cate = Cate.objects.get(pk=cate_id)
         title = request.POST.get("title")
@@ -242,6 +247,11 @@ class AddArticleDetail(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request,article_id):
+        if not request.user.has_perm("add_img_article") or not request.user.has_perm("modify_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         if request.is_ajax():
             try:
                 article = ImgArticle.objects.get(pk=article_id)
@@ -299,6 +309,11 @@ class AddCarouselItem(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("add_carousel_item"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
 
         title = request.POST.get("title")
         url = request.POST.get("url")
@@ -346,6 +361,11 @@ class ModifyCarouselItem(LoginRequiredMixin,View):
     extra_context = {}
 
     def get(self,request):
+        if not request.user.has_perm("modify_carousel_item"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
 
         carousel_id = request.GET.get("carousel_id")
         carousel = Carousel.objects.get(pk=carousel_id)
@@ -375,6 +395,11 @@ class DeleteCarouselItem(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("delete_carousel_item"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         item_id = request.POST.get("item_id")
         item = CarouselItem.objects.get(pk=item_id)
 
@@ -387,6 +412,11 @@ class DeleteCarouselItem(LoginRequiredMixin,View):
 
 class DeleteArticle(LoginRequiredMixin,View):
     def get(self,request):
+        if not request.user.has_perm("delete_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         if request.is_ajax():
             article_id = request.GET.get("article_id")
             content = "删除了文章%s"%(ImgArticle.objects.get(pk=article_id).title.encode("utf8"),)
@@ -397,6 +427,11 @@ class DeleteArticle(LoginRequiredMixin,View):
 
 class ConfirmArticle(LoginRequiredMixin,View):
     def get(self,request):
+        if not request.user.has_perm("confirm_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         if request.is_ajax():
             article_id = request.GET.get("article_id")
             article = ImgArticle.objects.get(pk=article_id)
@@ -436,6 +471,11 @@ class AddArticleImg(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("add_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         article_id = request.POST.get("article_id")
         article = ImgArticle.objects.get(pk=article_id)
 
@@ -463,7 +503,7 @@ class AddArticleImg(LoginRequiredMixin,View):
 
             Images.objects.create(title=title,description=desc,img=decode_base64_file(img_src),article=article)
 
-        content = "添加/删除了文章图片%s"%(title.encode("utf8"),)
+        content = "添加/修改了文章图片%s"%(title.encode("utf8"),)
         create_log(request.user.username,content)
 
         return HttpResponseRedirect(reverse("backend:article"))
@@ -473,6 +513,11 @@ class ModifyArticleImg(LoginRequiredMixin,View):
     template_name = "backend/modify_article_img.html"
     extra_context = {}
     def get(self,request):
+        if not request.user.has_perm("modify_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         article_id = request.GET.get("article_id")
         article = ImgArticle.objects.get(pk=article_id)
         imgs = Images.objects.filter(article=article)
@@ -498,6 +543,11 @@ class DeleteArticleImg(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("delete_img_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         item_id = request.POST.get("item_id")
         item = Images.objects.get(pk=item_id)
         content = "删除了文章图片%s"%(item.title.encode("utf8"),)
@@ -539,6 +589,11 @@ class AddMediaArticle(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
+        if not request.user.has_perm("add_media_article") or not request.user.has_perm("modify_media_article")
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
 
         if request.is_ajax():
             try:
@@ -597,6 +652,11 @@ class AddMediaArticle(LoginRequiredMixin,View):
 
 class DeleteMediaArticle(LoginRequiredMixin,View):
     def get(self,request):
+        if not request.user.has_perm("delete_media_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         if request.is_ajax():
             article_id = request.GET.get("article_id")
             content = "删除了文章%s"%(MediaArticle.objects.get(pk=article_id).title.encode("utf8"),)
@@ -606,6 +666,11 @@ class DeleteMediaArticle(LoginRequiredMixin,View):
 
 class ConfirmMediaArticle(LoginRequiredMixin,View):
     def get(self,request):
+        if not request.user.has_perm("confirm_media_article"):
+            self.template_name = "backend/error.html"
+            error_message = "你没有权限"
+            self.extra_context['error_message'] = error_message
+            return render(request,self.template_name,self.extra_context)
         if request.is_ajax():
             article_id = request.GET.get("article_id")
             article = MediaArticle.objects.get(pk=article_id)
@@ -623,6 +688,9 @@ class AuthGroupSetting(LoginRequiredMixin,View):
     extra_context = {}
 
     def get(self,request):
+        groups = Group.objects.all()
+
+        self.extra_context['groups'] = groups
         return render(request,self.template_name,self.extra_context)
 
 class AddGroup(LoginRequiredMixin,View):
@@ -630,7 +698,31 @@ class AddGroup(LoginRequiredMixin,View):
     extra_context = {}
 
     def get(self,request):
+        group_name = request.GET.get("group_name")
+        if group_name:
+            group = Group.objects.select_related().get(name=group_name)
+
+            self.extra_context['group'] = group
         return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        name = request.POST.get("name")
+        permissions = request.POST.getlist("permission")
+
+
+        group,created = Group.objects.get_or_create(name=name)
+        group.permissions.clear() 
+        for per in permissions:
+            permission = Permission.objects.get(codename=per)
+            group.permissions.add(permission)
+
+        content = "添加/修改了职位%s"%(group.name.encode("utf8"),)
+        create_log(request.user.username,content,log_type=1)
+
+        return HttpResponseRedirect(reverse("backend:auth_group"))
+
+
+
 
 
 
@@ -640,3 +732,43 @@ class OperationLog(LoginRequiredMixin,ListView):
     extra_context = {}
     context_object_name = "logs"
     paginate_by = 20
+
+
+class DeleteGroup(LoginRequiredMixin,View):
+    def get(self,request):
+        if request.is_ajax():
+            group_id = request.GET.get("group_id")
+            content = "删除了职位%s"%(Group.objects.get(pk=group_id).name.encode("utf8"),)
+            create_log(request.user.username,content,log_type=1)
+            Group.objects.get(pk=group_id).delete()
+            return HttpResponse("删除成功")
+
+
+class GroupSetting(LoginRequiredMixin,View):
+    template_name = "backend/group_setting.html"
+    extra_context = {}
+    def get(self,request):
+        user_id = request.GET.get("user_id")
+
+        groups = Group.objects.all()
+
+        if user_id:
+            user = User.objects.get(pk=user_id)
+
+            self.extra_context['user'] = user
+        self.extra_context['groups'] = groups
+
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        group_id = request.POST.get("group_id")
+        user_id = request.POST.get("user_id")
+
+        user = User.objects.get(pk=user_id)
+
+        user.groups.clear()
+        
+        if group_id:
+            user.groups.add(group_id)
+
+        return HttpResponseRedirect(reverse("backend:setting"))

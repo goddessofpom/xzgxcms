@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from views import LoginView, SettingView, Register,CateSetting,AddCate,IndexView,Article,AddArticle,AddArticleDetail,\
 UploadImg,CarouselSetting,AddCarouselItem,ModifyCarouselItem,DeleteCarouselItem,DeleteArticle,ConfirmArticle,AddArticleImg,\
 ModifyArticleImg,DeleteArticleImg,YingShiNanGuo,AddMediaArticle,DeleteMediaArticle,ConfirmMediaArticle,AuthGroupSetting,\
-AddGroup,OperationLog
+AddGroup,OperationLog,DeleteGroup,GroupSetting
 from django.contrib.auth.models import User
 
 
@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^auth_group/$',AuthGroupSetting.as_view(),name="auth_group"),
     url(r'^add_group/$',AddGroup.as_view(),name="add_group"),
     url(r'^operation_log/$',OperationLog.as_view(),name="operation_log"),
+    url(r'^delete_group/$',DeleteGroup.as_view(),name="delete_group"),
+    url(r'^group_setting/$',GroupSetting.as_view(),name="group_setting"),
 ]

@@ -19,11 +19,11 @@
   </thead>
 
   <tbody>
-    {% for user in user_list %}
+    {% for group in groups %}
     <tr>
     <td>{{forloop.counter}}</td>
-    <td>{{user.date_joined|date:'Y-m-d'}}</td>
-    <td><a href="#">修改密码</a><a href="#" style="margin-left: 20px;">设置职位</a><a href="#" style="margin-left: 20px;">删除</a></td>
+    <td>{{group.name}}</td>
+    <td><a href="javascript:;" style="margin-left: 20px;" class="modify_permission" data="{{group.name}}">修改权限</a><a href="javascript:;" class="delete_group" data={{group.id}} style="margin-left: 20px;">删除</a></td>
     </tr>
     {% endfor %}
   </tbody>
@@ -68,9 +68,43 @@ $(document).ready(function(){
 				type:2,
 				content:"{% url 'backend:add_group' %}",
 				title:'添加职位',
-				area:['600px','300px']
+				area:['800px','400px']
 			})
 		})
+
+      $(".modify_permission").click(function(){
+        var data = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:add_group' %}?group_name=" + data,
+        title:'修改权限',
+        area:['800px','400px']
+      })
+    })
+
+
+    $(".delete_group").click(function(){
+    var data = {group_id:$(this).attr("data")}
+      layer.open({
+        type:0,
+        btn:["确认","取消"],
+        yes:function(index,layero){
+          $.ajax({
+            type:"GET",
+            url:"{% url 'backend:delete_group' %}",
+            data:data,
+            success:function(data){
+              window.location.reload()
+            }
+          })
+        },
+        content:"确认进行操作",
+        title:"删除职位",
+        area:['400px','200px']
+      })
+    })
+
+
 		})
 })
 </script>

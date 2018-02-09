@@ -32,9 +32,9 @@
     <tr>
     <td>{{forloop.counter}}</td>
     <td>{{user.username}}</td>
-    <td>{{user.group.name}}</td>
+    <td>{{user.groups.all.0.name}}</td>
     <td>{{user.date_joined|date:'Y-m-d'}}</td>
-    <td><a href="#">修改密码</a><a href="#" style="margin-left: 20px;">设置职位</a><a href="#" style="margin-left: 20px;">删除</a></td>
+    <td><a href="#">修改密码</a><a href="javascript:;" class="group_setting" data="{{user.id}}" style="margin-left: 20px;">设置职位</a><a href="#" style="margin-left: 20px;">删除</a></td>
     </tr>
     {% endfor %}
   </tbody>
@@ -83,6 +83,17 @@
 				area:['600px','300px']
 			})
 		})
+
+
+    $(".group_setting").click(function(){
+      var data = $(this).attr("data")
+      layer.open({
+        type:2,
+        content:"{% url 'backend:group_setting' %}?user_id=" + data,
+        title:'职位设置',
+        area:['600px','200px']
+      })
+    })
 		})
 		$("#setting").addClass("layui-this")
 	})
