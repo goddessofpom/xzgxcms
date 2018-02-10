@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*- 
 from django.shortcuts import render
-from models import Cate,ImgArticle
+from models import Cate,ImgArticle, MediaArticle
 from django.views.generic import ListView, View
 
 # Create your views here.
@@ -277,6 +277,26 @@ class SMWJ(ListView):
     paginate_by = 15
 
 
+class ArticleDetail(View):
+    template_name = "pc_front/article_detail.html"
+    extra_context = {}
+
+    def get(self,request,article_id):
+        article = ImgArticle.objects.get(pk=article_id)
+
+        self.extra_context['article'] = article
+        return render(request,self.template_name,self.extra_context)
+
+
+class MediaDetail(View):
+    template_name = "pc_front/media_detail.html"
+    extra_context = {}
+
+    def get(self,request,article_id):
+        article = MediaArticle.objects.get(pk=article_id)
+
+        self.extra_context['article'] = article
+        return render(request,self.template_name,self.extra_context)
 
 
 

@@ -1,7 +1,8 @@
 from django.conf.urls import include, url
 from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY,\
 SYTD,JXTJ,XunChengJi,LYDL,CSWD,MFMS,SCFZ,FengShangGuangXi,FMGS,FSWH,JZNR,FSNS,LXSH, PinZhuoRenSheng,\
-HuiZhanFuWu,HZCH,HYFW,YingShiNanGuo,XWFM,XKC,BHM,PZDT,PZWH,PZPP,PZPJ,ShuiMoDanQing,MRT,SMYX,SMWJ
+HuiZhanFuWu,HZCH,HYFW,YingShiNanGuo,XWFM,XKC,BHM,PZDT,PZWH,PZPP,PZPJ,ShuiMoDanQing,MRT,SMYX,SMWJ,ArticleDetail,\
+MediaDetail
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -45,4 +46,6 @@ urlpatterns = [
     url(r'^mingrentang/$',MRT.as_view(),name="mingrentang"),
     url(r'^shuimoyixun/$',SMYX.as_view(),name="shuimoyixun"),
     url(r'^shuimowujie/$',SMWJ.as_view(),name="shuimowujie"),
+    url(r'^article_detail/(?P<article_id>\w+)/$',ArticleDetail.as_view(),name="article_detail"),
+    url(r'^media_detail/(?P<article_id>\w+)/$',MediaDetail.as_view(),name="media_detail"),
 ]

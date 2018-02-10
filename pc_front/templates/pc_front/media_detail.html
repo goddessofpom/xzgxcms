@@ -1,0 +1,29 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '文章详情' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/article_detail.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md6 layui-col-md-offset2 title">
+    我是标题
+  </div>
+
+  <hr />
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md2 layui-col-md-offset2 author">
+    编辑：xxx
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md6 layui-col-md-offset2">
+    我是文章内容
+  </div>
+</div>
+{% endblock %}
+{% endblock %}

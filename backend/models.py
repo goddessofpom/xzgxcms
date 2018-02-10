@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*- 
 from django.db import models
+from pc_front.models import Cate, ImgArticle
 
 # Create your models here.
 class Carousel(models.Model):
@@ -33,3 +34,12 @@ class OperationLog(models.Model):
 
 	class Meta:
 		ordering = ['-created_time']
+
+
+class FriendLink(models.Model):
+    name = models.CharField(max_length=50)
+    url = models.CharField(max_length=200)
+    index = models.IntegerField(default=0,help_text="排序")
+
+    class Meta:
+        ordering = ['index']
