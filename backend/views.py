@@ -589,7 +589,7 @@ class AddMediaArticle(LoginRequiredMixin,View):
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
-        if not request.user.has_perm("add_media_article") or not request.user.has_perm("modify_media_article")
+        if not request.user.has_perm("add_media_article") or not request.user.has_perm("modify_media_article"):
             self.template_name = "backend/error.html"
             error_message = "你没有权限"
             self.extra_context['error_message'] = error_message

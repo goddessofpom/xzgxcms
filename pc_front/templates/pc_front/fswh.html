@@ -16,12 +16,12 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="fengshang_nav">
-    <a href="#"><li>{% trans '首页' %}</li></a>
-    <a href="#"><li>{% trans '封面故事' %}</li></a>
-    <a href="#"><li>{% trans '风尚文化' %}</li></a>
-    <a href="#"><li>{% trans '精致女人' %}</li></a>
-    <a href="#"><li>{% trans '风尚男士' %}</li></a>
-    <a href="#"><li>{% trans '乐享生活' %}</li></a>
+    <a href="{% url 'pc_front:index' %}"><li>{% trans '首页' %}</li></a>
+    <a href="{% url 'pc_front:fengmiangushi' %}"><li>{% trans '封面故事' %}</li></a>
+    <a href="{% url 'pc_front:fengshangwenhua' %}"><li>{% trans '风尚文化' %}</li></a>
+    <a href="{% url 'pc_front:jingzhinvren' %}"><li>{% trans '精致女人' %}</li></a>
+    <a href="{% url 'pc_front:fengshangnanshi' %}"><li>{% trans '风尚男士' %}</li></a>
+    <a href="{% url 'pc_front:lexiangshenghuo' %}"><li>{% trans '乐享生活' %}</li></a>
     </ul>
   </div>
 </div>
@@ -41,43 +41,43 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="wenhua_list">
+      {% for article in articles %}
+      <a href="{% url 'pc_front:article_detail' article.id %}">
       <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
+      <img src="/site_media/{{article.cover}}" />
+      <div class="wenhua_label">{{article.label}}</div>
+      <div class="wenhua_title">{{article.title}}</div>
       </li>
-
-      <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
-      </li>
-
-      <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
-      </li>
-
-      <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
-      </li>
-
-      <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
-      </li>
-
-      <li>
-      <img src="#" />
-      <div class="wenhua_label">我是标签</div>
-      <div class="wenhua_title">我是标题标题</div>
-      </li>
+    </a>
+    {% endfor %}
     </ul>
   </div>
 </div>
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/fengshangwenhua?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/fengshangwenhua?page={{i}}">{{i}}</a>
+            {% endif %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/fengshangwenhua?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
 {% endblock %}
 {% endblock %}

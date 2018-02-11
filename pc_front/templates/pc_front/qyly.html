@@ -18,43 +18,28 @@
 
 <div class="layui-row main_row">
   <div class="layui-col-md6 layui-col-md-offset2">
+    {% for article in articles %}
     <div class="layui-row main_img">
     <div class="main_title">
-    我是标题
+    {{article.title}}
     </div>
     <div class="main_img">
       <div class="layui-col-md4">
-        <img src="#" />
+        <img src="/site_media/{{article.cover}}" />
       </div>
 
       <div class="layui-col-md6">
-        <div class="main_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsaaaaaaaaaa</div>
-        <div class="main_date">2017/12/12 星期二</div>
+        <div class="main_description">{{article.description}}</div>
+        <div class="main_date">{{article.created_time
+        date|'Y-m-d'}}</div>
       </div>
     </div>
     </div>
-
-    <div class="layui-row main_img">
-    <div class="main_title">
-    我是标题
-    </div>
-    <div class="main_img">
-      <div class="layui-col-md4">
-        <img src="#" />
-      </div>
-
-      <div class="layui-col-md6">
-        <div class="main_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsaaaaaaaaaa</div>
-        <div class="main_date">2017/12/12 星期二</div>
-      </div>
-    </div>
-    </div>
-
-
+    {% endfor %}
 
   </div>
 
-  <div class="layui-col-md2">
+  <!--<div class="layui-col-md2">
   <div class="img_news_title">{% trans '旅游' %}</div>
   
   <div class="layui-col-md6 right_img_list">
@@ -89,27 +74,32 @@
     <a href="#"><img src="#" /></a>
   </div>
 
-  </div>
+  </div> -->
 </div>
 
 {% if is_paginated %}
 <div class="layui-row"> 
-<div class="layui-col-md3 layui-col-md-offset8"> 
+<div class="layui-col-md12" style="text-align: center;"> 
     <div class="pagination">  
         <span class="page-links">  
             {% if page_obj.has_previous %}  
-                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
-            {% endif %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/quanyulvyou?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/quanyulvyou?page={{i}}">{{i}}</a>
+            {% endif %}
             {% if page_obj.has_next %}  
-                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/quanyulvyou?page={{ page_obj.next_page_number }}">下一页</a>  
             {% endif %}  
-            <span class="page-current">  
+           <!-- <span class="page-current">  
                 第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
-            </span>  
+            </span>  -->
         </span>  
     </div>  
 </div>
 </div>
-{%endif%}
+{%endif%} 
 {% endblock %}
 {% endblock %}

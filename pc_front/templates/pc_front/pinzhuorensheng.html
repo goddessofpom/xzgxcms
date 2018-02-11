@@ -33,24 +33,15 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-			<div class="carousel_div">
+      {% for item in carousel.carouselitem.all %}
+      <a href="{{item.url}}">
+			<div class="carousel_div" style="background: url('/site_media/{{item.img}}');">
 			  <div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
+			    <div>{{item.title}}<br />{{item.desc}}</div>
 			  </div>
 			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div>
-			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
+    </a>
+      {% endfor %}
 		</div>
 	</div>
   </div>

@@ -16,7 +16,7 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="fengshang_nav">
-    <a href="#"><li>{% trans '首页' %}</li></a>
+    <a href="{% url 'pc_front:index' %}"><li>{% trans '首页' %}</li></a>
     <a href="{% url 'pc_front:fengmiangushi' %}"><li>{% trans '封面故事' %}</li></a>
     <a href="{% url 'pc_front:fengshangwenhua' %}"><li>{% trans '风尚文化' %}</li></a>
     <a href="{% url 'pc_front:jingzhinvren' %}"><li>{% trans '精致女人' %}</li></a>
@@ -30,27 +30,18 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-			<div class="carousel_div">
+      {% for item in carousel.carouselitem.all %}
+      <a href="{{item.url}}">
+			<div class="carousel_div" style="background-image: url('/site_media/{{item.img}}');">
 			  <div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
+			    <div>{{item.title}}<br />{{item.desc}}</div>
 			  </div>
 			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div>
-			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
-		</div>
+    </a>
+      {% endfor %}
 	</div>
   </div>
+</div>
 </div>
 
 <div class="layui-row">
@@ -63,9 +54,9 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="fengmian_list">
-      <a href="#"><li><img src="#" /><p>我是标题标题</p></li></a>
-      <a href="#"><li><img src="#" /></li></a>
-      <a href="#"><li><img src="#" /></li></a>
+      {% for article in fengmian_list %}
+      <a href="{% url 'pc_front:article_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /><p>{{article.title}}</p></li></a>
+      {% endfor %}
     </ul>
   </div>
 </div>
@@ -81,17 +72,17 @@
   <div class="layui-col-md4 layui-col-md-offset2">
     <div class="layui-row">
     <div class="layui-col-md12">
-      <img src="#" />
+      <img src="/site_media/{{fengshang_list.0.cover}}" />
     </div>
     </div>
 
     <div class="layui-row">
       <div class="layui-col-md6 wenhua_sub_part">
-        <img src="#" />
+        <img src="/site_media/{{fengshang_list.1.cover}}" />
       </div>
 
       <div class="layui-col-md6 wenhua_sub_part">
-        <img src="#" />
+        <img src="/site_media/{{fengshang_list.2.cover}}" />
       </div>
     </div>
   </div>
@@ -100,17 +91,17 @@
   <div class="layui-col-md4">
     <div class="layui-row">
     <div class="layui-col-md6 wenhua_sub_part">
-        <img src="#" />
+        <img src="/site_media/{{fengshang_list.3.cover}}" />
       </div>
 
       <div class="layui-col-md6 wenhua_sub_part">
-        <img src="#" />
+        <img src="/site_media/{{fengshang_list.4.cover}}" />
       </div>
     </div>
 
     <div class="layui-row">
     <div class="layui-col-md12">
-      <img src="#" />
+      <img src="/site_media/{{fengshang_list.5.cover}}" />
     </div>
     </div>
   </div>
@@ -124,48 +115,58 @@
 </div>
 
 <div class="layui-row jingzhi_row">
+  <a href="{% url 'pc_front:article_detail' jingzhinvren.0.id %}">
   <div class="layui-col-md3 layui-col-md-offset2 jingzhi_left">
-    <img src="#" />
+    <img src="/site_media/{{jingzhinvren.0.cover}}" />
   </div>
 
   <div class="layui-col-md4 layui-col-md-offset1 jingzhi_right">
-    <div class="jingzhi_label">我是标签</div>
-    <div class="jingzhi_title">我是标题标题</div>
-    <div class="jingzhi_description">我是简介简介简介</div>
+    <div class="jingzhi_label">{{jingzhinvren.0.label}}</div>
+    <div class="jingzhi_title">{{jingzhinvren.0.title}}</div>
+    <div class="jingzhi_description">{{jingzhinvren.0.description}}</div>
   </div>
+</a>
 </div>
 
 <div class="layui-row jingzhi_row">
+  <a href="{% url 'pc_front:article_detail' jingzhinvren.1.id %}">
   <div class="layui-col-md3 layui-col-md-offset2 jingzhi_left">
-    <img src="#" />
+    <img src="/site_media/{{jingzhinvren.1.cover}}" />
   </div>
 
   <div class="layui-col-md4 layui-col-md-offset1 jingzhi_right">
-    <div class="jingzhi_label">我是标签</div>
-    <div class="jingzhi_title">我是标题标题</div>
-    <div class="jingzhi_description">我是简介简介简介</div>
+    <div class="jingzhi_label">{{jingzhinvren.1.label}}</div>
+    <div class="jingzhi_title">{{jingzhinvren.1.title}}</div>
+    <div class="jingzhi_description">{{jingzhinvren.1.description}}</div>
   </div>
+</a>
 </div>
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="jingzhi_list">
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' jingzhinvren.2.id %}">
+        <div><img src="/site_media/{{jingzhinvren.2.cover}}"></div>
+        <div class="jingzhi_list_label">{{jingzhinvren.2.label}}</div>
+        <div class="jingzhi_list_title">{{jingzhinvren.2.title}}</div>
+      </a>
       </li>
 
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' jingzhinvren.3.id %}">
+        <div><img src="/site_media/{{jingzhinvren.3.cover}}"></div>
+        <div class="jingzhi_list_label">{{jingzhinvren.3.label}}</div>
+        <div class="jingzhi_list_title">{{jingzhinvren.3.title}}</div>
+      </a>
       </li>
 
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' jingzhinvren.4.id %}">
+        <div><img src="/site_media/{{jingzhinvren.4.cover}}"></div>
+        <div class="jingzhi_list_label">{{jingzhinvren.4.label}}</div>
+        <div class="jingzhi_list_title">{{jingzhinvren.4.title}}</div>
+      </a>
       </li>
     </ul>
   </div>
@@ -180,48 +181,58 @@
 </div>
 
 <div class="layui-row jingzhi_row">
+  <a href="{% url 'pc_front:article_detail' fengshannanshi.0.id %}">
   <div class="layui-col-md3 layui-col-md-offset2 jingzhi_left">
-    <img src="#" />
+    <img src="/site_media/{{fengshangnanshi.0.cover}}" />
   </div>
 
   <div class="layui-col-md4 layui-col-md-offset1 jingzhi_right">
-    <div class="jingzhi_label">我是标签</div>
-    <div class="jingzhi_title">我是标题标题</div>
-    <div class="jingzhi_description">我是简介简介简介</div>
+    <div class="jingzhi_label">{{fengshangnanshi.0.label}}</div>
+    <div class="jingzhi_title">{{fengshangnanshi.0.title}}</div>
+    <div class="jingzhi_description">{{fengshangnanshi.0.description}}</div>
   </div>
+</a>
 </div>
 
 <div class="layui-row jingzhi_row">
+  <a href="{% url 'pc_front:article_detail' fengshangnanshi.1.id %}">
   <div class="layui-col-md3 layui-col-md-offset2 jingzhi_left">
-    <img src="#" />
+    <img src="/site_media/{{fengshangnanshi.1.cover}}" />
   </div>
 
   <div class="layui-col-md4 layui-col-md-offset1 jingzhi_right">
-    <div class="jingzhi_label">我是标签</div>
-    <div class="jingzhi_title">我是标题标题</div>
-    <div class="jingzhi_description">我是简介简介简介</div>
+    <div class="jingzhi_label">{{fengshangnanshi.1.label}}</div>
+    <div class="jingzhi_title">{{fengshangnanshi.1.title}}</div>
+    <div class="jingzhi_description">{{fengshangnanshi.1.description}}</div>
   </div>
+</a>
 </div>
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="jingzhi_list">
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' fengshangnanshi.2.id %}">
+        <div><img src="/site_media/{{fengshangnanshi.2.cover}}"></div>
+        <div class="jingzhi_list_label">{{fengshangnanshi.2.label}}</div>
+        <div class="jingzhi_list_title">{{fengshangnanshi.2.title}}</div>
+      </a>
       </li>
 
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' fengshangnanshi.3.id %}">
+        <div><img src="/site_media/{{fengshangnanshi.3.cover}}"></div>
+        <div class="jingzhi_list_label">{{fengshangnanshi.3.label}}</div>
+        <div class="jingzhi_list_title">{{fengshangnanshi.3.title}}</div>
+      </a>
       </li>
 
       <li>
-        <div><img src="#"></div>
-        <div class="jingzhi_list_label">我是标签</div>
-        <div class="jingzhi_list_title">我是内容</div>
+        <a href="{% url 'pc_front:article_detail' fengshangnanshi.4.id %}">
+        <div><img src="/site_media/{{fengshangnanshi.4.cover}}"></div>
+        <div class="jingzhi_list_label">{{fengshangnanshi.4.label}}</div>
+        <div class="jingzhi_list_title">{{fengshangnanshi.4.title}}</div>
+      </a>
       </li>
     </ul>
   </div>
@@ -237,12 +248,9 @@
 <div class="layui-row lexiang_row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="lexiang_list">
-      <li><img src="#" /></li>
-      <li><img src="#" /></li>
-      <li><img src="#" /></li>
-      <li><img src="#" /></li>
-      <li><img src="#" /></li>
-      <li><img src="#" /></li>
+      {% for article in lexiangshenghuo %}
+      <a href="{% url 'pc_front:article_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /></li></a>
+      {% endfor %}
     </ul>
   </div>
 </div>

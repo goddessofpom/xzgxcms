@@ -6,11 +6,11 @@
 .cate_list{
 	list-style: none;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 20px;
 	width: 100%;
 	text-align: center;
-	height: 66px;
-	line-height: 66px;
+	height: 46px;
+	line-height: 46px;
 }
 .cate_list li{
 	float: left;
@@ -40,7 +40,6 @@
 .carousel_div{
 	width: 100%;
 	height: 425px;
-	background-image: url("/static/pc_front/img/banner.png");
 	background-size: 100%;
 }
 .carousel_div img{
@@ -129,4 +128,10 @@
 	width: 80%;
 	margin:0 auto;
 	display: block;
+}
+
+.main_header{
+	height: 120px;
+	background: url("/static/pc_front/img/zhiguantianxia.jpg") center no-repeat;
+	background-size: 100% 100%;
 }

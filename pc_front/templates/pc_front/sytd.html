@@ -25,29 +25,25 @@
 <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
     <div carousel-item>
+      {% for item in carousel.carouselitem.all %}
       <div>
-        <div id="carousel_div1" class="layui-col-md8">
+        <div" class="layui-col-md8" style="background-image: url('/site_media/{{item.img}}');-webkit-background-size:cover;background-size:cover;height: 425px;">
         </div>
         <div class="layui-col-md4 shiyou_right">
           <div class="shiyou_right_title">
-          我是标题标题
+          {{item.title}}
           </div>
           <hr class="shiyou_right_split" />
           <div class="shiyou_right_description">
-          我是简介简介简介
+          {{item.description}}
           </div>
           <div class="shiyou_right_readmore">
-            <a href="#">{% trans '阅读全文' %}</a>
+            <a href="{{item.url}}">{% trans '阅读全文' %}</a>
           </div>
 
         </div>
       </div>
-      <div class="carousel_div2">
-      </div>
-      <div class="carousel_div3">
-      </div>
-      <div class="carousel_div4">
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -56,87 +52,47 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
   <ul class="shiyou_list">
+    {% for article in articles %}
     <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
+      <img src="/site_media/{{article.cover}}" />
+      <p class="shiyou_title">{{article.title}}</p>
+      <p class="shiyou_description">{{article.description}}</p>
     </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
-
-    <li>
-      <img src="#" />
-      <p class="shiyou_title">我是标题标题</p>
-      <p class="shiyou_description">我是简介</p>
-    </li>
+    {% endfor %}
   </ul>
   </div>
 </div>
+
 {% if is_paginated %}
 <div class="layui-row"> 
-<div class="layui-col-md3 layui-col-md-offset8"> 
+<div class="layui-col-md12" style="text-align: center;"> 
     <div class="pagination">  
         <span class="page-links">  
             {% if page_obj.has_previous %}  
-                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
-            {% endif %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/shiyoutaidu?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/shiyoutaidu?page={{i}}">{{i}}</a>
+            {% endif %}
             {% if page_obj.has_next %}  
-                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/shiyoutaidu?page={{ page_obj.next_page_number }}">下一页</a>  
             {% endif %}  
-            <span class="page-current">  
+           <!-- <span class="page-current">  
                 第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
-            </span>  
+            </span>  -->
         </span>  
     </div>  
 </div>
 </div>
-{%endif%}
+{%endif%} 
 {% endblock %}
 {% endblock %}
 
 
 {% block script %}
 <style type="text/css">
-#carousel_div1{
-  background-image: url("/static/pc_front/img/banner.png");
-  -webkit-background-size:cover;
-  background-size:cover;
-  height: 425px;
-}
 </style>
 <script type="text/javascript">
   $(document).ready(function(){

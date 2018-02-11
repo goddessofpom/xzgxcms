@@ -6,10 +6,15 @@
 
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/zhiguantianxia.css' %}">
-<div class="layui-row">
+<!--<div class="layui-row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<img class="banner" src="{% static 'pc_front/img/banner.png' %}">
 	</div>
+</div> -->
+
+<div class="layui-row">
+  <div class="layui-col-md6 layui-col-md-offset2 main_header">
+  </div>
 </div>
 
 <div class="layui-row">
@@ -32,24 +37,13 @@
 <div class="layui-col-md8 layui-col-md-offset2">
 	<div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-			<div class="carousel_div">
+      {% for item in carousel.carpiselitem.all %}
+			<div class="carousel_div" style="background-image: url('/site_media/{{item.img}}')">
 			  <div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
+			    <div>{{item.title}}<br />{{ item.desc}}</div>
 			  </div>
 			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div>
-			</div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
-			<div class="carousel_div">
-			<div class="carousel_title">
-			    <div>我是标题标题标题<br />我是导语</div>
-			  </div></div>
+      {% endfor %}
 		</div>
 	</div>
 </div>
@@ -61,22 +55,23 @@
 </div>
 
 <div class="layui-col-md6 zhiguan_first">
+  {% if zhiguan_first%}
+  <a href="{% url 'pc_front:article_detail' zhiguan_first.id %}">
   <div>
-  我是标题
+  {{zhiguan_first.title}}
   </div>
   <div>
-  我是导语
+  {{zhiguan_first.description}}
   </div>
+</a>
+{% endif %}
 </div>
 
 <div class="layui-col-md8 layui-col-md-offset2 zhiguan_list_div">
   <ul class="zhiguan_list">
-    <li>我是标题</li>
-    <li>我是标题</li>
-    <li>我是标题</li>
-    <li>我是标题</li>
-    <li>我是标题</li>
-    <li>我是标题</li>
+    {% for article in zhiguan_list %}
+    <li><a href="{% url 'pc_front:article_detail' article.id %}">{{article.title}}</a></li>
+    {% endfor %}
   </ul>
 </div>
 </div>
@@ -87,81 +82,20 @@
 </div>
 
 <div class="layui-row lvyou_row">
-  <div class="layui-col-md4 layui-col-md-offset2">
+  {% for article in quanyu_list %}
+  <div class="layui-col-md4 {% if forloop.counter in 024 %}layui-col-md-offset2{% endif %}">
+    <a href="{% url 'pc_front:article_detail' article.id %}">
     <div class="layui-col-md6">
-      <img src="#"/>
+      <img src="/site_media/{{article.cover}}"/>
     </div>
 
     <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
+    <div class="lvyou_title">{{article.title}}</div>
+    <div class="lvyou_description">{{article.description}}</div>
     </div>
+  </a>
   </div>
-
-  <div class="layui-col-md4">
-    <div class="layui-col-md6">
-      <img src="#"/>
-    </div>
-
-    <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
-    </div>
-  </div>
-</div>
-
-<div class="layui-row lvyou_row">
-  <div class="layui-col-md4 layui-col-md-offset2">
-    <div class="layui-col-md6">
-      <img src="#"/>
-    </div>
-
-    <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
-    </div>
-  </div>
-
-  <div class="layui-col-md4">
-    <div class="layui-col-md6">
-      <img src="#"/>
-    </div>
-
-    <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
-    </div>
-  </div>
-</div>
-
-<div class="layui-row lvyou_row">
-  <div class="layui-col-md4 layui-col-md-offset2">
-    <div class="layui-col-md6">
-      <img src="#"/>
-    </div>
-
-    <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
-    </div>
-  </div>
-
-  <div class="layui-col-md4">
-    <div class="layui-col-md6">
-      <img src="#"/>
-    </div>
-
-    <div class="layui-col-md6">
-    <div class="lvyou_title">标题</div>
-    <div class="lvyou_description">导语</div>
-    <div class="lvyou_content">简介简介</div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 <div class="layui-row other_title_row">
@@ -170,29 +104,15 @@
 </div>
 
 <div class="layui-row jingxuan_row">
-  <div class="layui-col-md2 layui-col-md-offset2">
-    <img src="#" />
-    <div class="jingxuan_title">标题</div>
-    <div class="jingxuan_title">导语</div>
+  {% for article in jingxuan_list %}
+  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+    <a href="{% url 'pc_front:article_detail' article.id %}">
+    <img src="/site_media/{{article.cover}}" />
+    <div class="jingxuan_title">{{article.title}}</div>
+    <div class="jingxuan_title">{{article.description}}</div>
+  </a>
   </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-    <div class="jingxuan_title">标题</div>
-    <div class="jingxuan_title">导语</div>
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-    <div class="jingxuan_title">标题</div>
-    <div class="jingxuan_title">导语</div>
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-    <div class="jingxuan_title">标题</div>
-    <div class="jingxuan_title">导语</div>
-  </div>
+  {% endfor %}
 </div>
 
 <div class="layui-row other_title_row">
@@ -201,21 +121,13 @@
 </div>
 
 <div class="layui-row shiyou_row">
-  <div class="layui-col-md2 layui-col-md-offset2">
-    <img src="#" />
+  {% for article in shiyou_list %}
+  <a href="{% url 'pc_front:article_detail' article.id %}">
+  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+    <img src="/site_media/{{article.cover}}" />
   </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
+  </a>
+  {% endfor %}
 </div>
 
 <div class="layui-row other_title_row">
@@ -224,24 +136,16 @@
 </div>
 
 <div class="layui-row shiyou_row">
-  <div class="layui-col-md2 layui-col-md-offset2">
-    <img src="#" />
+  {% for article in lvtu_list %}
+  <a href="{% url 'pc_front:article_detail' article.id %}">
+  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+    <img src="/site_media/{{article.cover}}" />
   </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
-
-  <div class="layui-col-md2">
-    <img src="#" />
-  </div>
+  </a>
+  {% endfor %}
 </div>
 
-<div class="layui-row other_title_row">
+<!--<div class="layui-row other_title_row">
 <div class="layui-col-md2 layui-col-md-offset2 other_title">
 {% trans '特别专题' %}
 </div>
@@ -262,7 +166,7 @@
   <div class="layui-col-md2">
     <img src="#" />
   </div>
-</div>
+</div> -->
 
 {% endblock %}
 

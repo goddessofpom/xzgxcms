@@ -36,7 +36,9 @@ $(document).ready(function(){
     editor.customConfig.uploadImgParams = {'csrfmiddlewaretoken':'{{csrf_token}}'}
 	editor.create()
 
-	var content = "{{article.content}}"
+	var content = "{{article.content|safe}}"
+
+	console.log(content)
 
 	editor.txt.text(htmlDecode(content))
 

@@ -5,10 +5,23 @@
 {% block content %}
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_beautiful_gx.css' %}">
-<div class="layui-row">
+<!--<div class="layui-row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<img class="banner" src="{% static 'pc_front/img/banner.png' %}">
 		<hr />
+	</div>
+</div> -->
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		<ul class="cate_list">
+			<li class="zuimeiguangxi_logo"></li>
+			<li><a href="{% url 'pc_front:dcmz' %}">{% trans '多彩民族' %}</a></li>
+			<li><a href="{% url 'pc_front:bgdd' %}">{% trans '八桂大地' %}</a></li>
+			<li><a href="{% url 'pc_front:rwys' %}">{% trans '人文艺术' %}</a></li>
+			<li><a href="{% url 'pc_front:ydyl' %}">{% trans '一带一路' %}</a></li>
+			<li><a href="{% url 'pc_front:whjs' %}">{% trans '文化建设' %}</a></li>
+		</ul>
 	</div>
 </div>
 {% endblock %}
@@ -17,51 +30,38 @@
 <div class="layui-row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="article_list">
+			{% for article in articles %}
 			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
+				<img src="/site_media/{{article.cover}}">
+				<div>{{article.description}}</div>
 			</li>
-			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
-			</li>
-			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
-			</li>
-			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
-			</li>
-			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
-			</li>
-			<li>
-				<img src="#">
-				<div>苏州最新打开方式，颠覆你对江南水乡的想象！</div>
-			</li>
+			{% endfor %}
 		</ul>
 	</div>
 </div>
 {% if is_paginated %}
 <div class="layui-row"> 
-<div class="layui-col-md3 layui-col-md-offset8"> 
+<div class="layui-col-md12" style="text-align: center;"> 
     <div class="pagination">  
         <span class="page-links">  
             {% if page_obj.has_previous %}  
-                <a href="/backend/setting?page={{ page_obj.previous_page_number }}">上一页</a>  
-            {% endif %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/dcmz?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/dcmz?page={{i}}">{{i}}</a>
+            {% endif %}
             {% if page_obj.has_next %}  
-                <a href="/backend/setting?page={{ page_obj.next_page_number }}">下一页</a>  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/dcmz?page={{ page_obj.next_page_number }}">下一页</a>  
             {% endif %}  
-            <span class="page-current">  
+           <!-- <span class="page-current">  
                 第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
-            </span>  
+            </span>  -->
         </span>  
     </div>  
 </div>
 </div>
-{%endif%}
+{%endif%} 
 {% endblock %}
 {% endblock %}

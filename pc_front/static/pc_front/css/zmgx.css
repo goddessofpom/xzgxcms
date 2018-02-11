@@ -8,13 +8,19 @@
 	width: 100%;
 	text-align: center;
 	font-size: 18px;
-	height: 66px;
-	line-height: 66px;
+	height: 106px;
+	line-height: 106px;
 }
 
 .cate_list li{
 	float: left;
-	width: 20%;
+	width: 15%;
+	font-weight: bold;
+	height: 106px;
+}
+.zuimeiguangxi_logo{
+	background: url('/static/pc_front/img/zuimeiguangxi.jpg') center no-repeat;
+	background-size: 100% 100%;
 }
 .yx_title{
 	font-size: 24px;

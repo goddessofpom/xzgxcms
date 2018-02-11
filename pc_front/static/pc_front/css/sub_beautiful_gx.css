@@ -21,3 +21,22 @@
     height: 43px;
     line-height: 43px;
 }
+.cate_list{
+	list-style: none;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	height: 106px;
+	line-height: 106px;
+}
+
+.cate_list li{
+	float: left;
+	width: 15%;
+	font-weight: bold;
+	height: 106px;
+}
+.zuimeiguangxi_logo{
+	background: url('/static/pc_front/img/zuimeiguangxi.jpg') center no-repeat;
+	background-size: 100% 100%;
+}

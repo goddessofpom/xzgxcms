@@ -13,7 +13,6 @@
 	line-height: 40px;
 }
 .carousel_div{
-	background-image: url("/static/pc_front/img/banner.png");
 	background-size: cover;
 	height: 510px;
 }

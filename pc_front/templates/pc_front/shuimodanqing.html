@@ -11,10 +11,9 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-			<div class="carousel_div"></div>
-			<div class="carousel_div"></div>
-			<div class="carousel_div"></div>
-			<div class="carousel_div"></div>
+      {% for item in carousel.carouselitem.all %}
+			<a href="{{item.url}}"><div class="carousel_div" style="background: url('/site_media/{{item.img}}');"></div></a>
+      {% endfor %}
 		</div>
 	</div>
   </div>
@@ -23,8 +22,8 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="shuimo_list">
-      <li>{% trans '首页' %}</li>
-      <li>{% trans '艺廊' %}</li>
+      <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
+      <li><a href="#">{% trans '艺廊' %}</a></li>
       <li><a href="{% url 'pc_front:mingrentang' %}">{% trans '名人堂' %}</a></li>
       <li><a href="{% url 'pc_front:shuimoyixun' %}">{% trans '艺讯' %}</a></li>
       <li><a href="{% url 'pc_front:shuimowujie' %}">{% trans '无界' %}</a></li>
