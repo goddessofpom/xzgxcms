@@ -16,6 +16,8 @@
     <div id="text" class="text" style="height: 700px;"></div>
   </div>
 </div>
+
+<input type="hidden" id="article_content" value="{{article.content|safe}}" />
 {% endblock %}
 
 {% block script %}
@@ -36,11 +38,13 @@ $(document).ready(function(){
     editor.customConfig.uploadImgParams = {'csrfmiddlewaretoken':'{{csrf_token}}'}
 	editor.create()
 
-	var content = "{{article.content|safe}}"
 
-	console.log(content)
+	var content = $("#article_content").val()
 
-	editor.txt.text(htmlDecode(content))
+
+
+
+	editor.txt.text(htmlDecode(content)) 
 
 
 	$("#submit").click(function(){
@@ -57,7 +61,7 @@ $(document).ready(function(){
 				console.log(data)
 			}
 		})
-	})
+	}) 
 })
 </script>
 {% endblock %}

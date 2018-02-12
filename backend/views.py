@@ -255,11 +255,11 @@ class AddArticleDetail(LoginRequiredMixin,View):
         if request.is_ajax():
             try:
                 article = ImgArticle.objects.get(pk=article_id)
-                text = request.POST.get("text")
+                text = request.POST.get("text").encode("utf8")
                 article.content = text
                 article.save()
 
-                content = "添加/修改了文章内容%s"%(title.encode("utf8"),)
+                content = "添加/修改了文章内容%s"%(article.title.encode("utf8"),)
                 create_log(request.user.username,content)
             except:
                 print traceback.print_exc()
