@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group,Permission
-from pc_front.models import Cate,ImgArticle,Images,MediaArticle
+from pc_front.models import Cate,ImgArticle,Images,MediaArticle,City,Area
 from models import Carousel,CarouselItem, OperationLog
 from utils import handle_img,decode_base64_file,create_log
 import traceback
@@ -772,3 +772,50 @@ class GroupSetting(LoginRequiredMixin,View):
             user.groups.add(group_id)
 
         return HttpResponseRedirect(reverse("backend:setting"))
+
+class CitySetting(LoginRequiredMixin,View):
+    template_name = "backend/city_setting.html"
+    extra_context = {}
+
+    def get(self,request):
+        city = City.objects.all()
+
+        self.extra_context['city'] = city
+        return render(request,self.template_name,self.extra_context)
+
+class AddCity(LoginRequiredMixin,View):
+    template_name = "backend/add_city.html"
+    extra_context = {}
+
+    def get(self,request):
+        city_id = request.GET.get("city_id")
+        if city_id:
+            city = City.objects.get(pk=city_id)
+        else:
+            city = None
+
+        self.extra_context['city'] = city
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        city_id = request.POST.get("city_id")
+        name = request.POST.get("name")
+        img_src = request.POST.get("img_src")
+
+        if img_src:
+            cover = decode_base64_file(img_src)
+        else:
+            cover = None
+
+        if city_id:
+            city = City.objects.get(pk=city_id)
+            city.name = name
+            city.cover = cover
+            city.save()
+        else:
+            City.objects.create(name=name,cover=cover)
+
+        return HttpResponseRedirect(reverse("backend:city_setting"))
+
+
+

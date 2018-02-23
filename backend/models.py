@@ -43,3 +43,10 @@ class FriendLink(models.Model):
 
     class Meta:
         ordering = ['index']
+
+class Topic(models.Model):
+    name = models.CharField(max_length=20)
+
+class TopicArticle(models.Model):
+    topic = models.ForeignKey(Topic,on_delete=models.CASCADE)
+    article = models.ForeignKey(ImgArticle,on_delete=models.CASCADE)
