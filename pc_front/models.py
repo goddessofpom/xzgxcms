@@ -22,6 +22,14 @@ class Cate(MPTTModel):
         verbose_name = "分类"
         ordering = ['id']
 
+class City(models.Model):
+    name = models.CharField(max_length=20)
+    cover = models.ImageField(upload_to='cate_cover',blank=True,null=True)
+
+class Area(models.Model):
+    name = models.CharField(max_length=20)
+    city = models.ForeignKey(City,on_delete=models.CASCADE)
+
 
 class ImgArticle(models.Model):
     title = models.CharField(max_length=200,help_text="文章标题")
@@ -35,6 +43,8 @@ class ImgArticle(models.Model):
     display_mode = models.IntegerField(default=0,help_text="文章显示模式，0：标准模式，1：多图模式")
     created_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+    area = models.ForeignKey(Area,blank=True,null=True,on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.title
@@ -83,3 +93,8 @@ class MediaArticle(models.Model):
             ("delete_media_article","删除视频文章"),
             ("confirm_media_article","审核视频文章")
             )
+
+
+
+
+

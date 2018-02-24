@@ -1,0 +1,69 @@
+{% extends 'backend/base.html' %}
+{% block title %}添加城市{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="layui-row">
+<div class="layui-col-md8 layui-col-md-offset2">
+<form class="layui-form" style="margin-top: 30px;" target="_parent" method="POST">
+{% csrf_token %}
+  <div class="layui-form-item">
+  	<label class="layui-form-label">城市名称</label>
+  	<div class="layui-input-block">
+  		<input type="text" name="name" class="layui-input" lay-verify="required" value="{{city.name}}" />
+      <input type="hidden" name="city_id" value="{{city.id}}">
+  	</div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">城市图片：</label>
+    <div class="layui-input-block">
+      <img src="/site_media/{{city.cover}}" id="img" style="width: 200px;height: 200px;{% if not city %}opacity: 0;{% endif %}" /><a href="javascript:;" id="upload_img">上传图片</a>
+      <input type="hidden" name="img_src" id="img_src" />
+    </div>
+  </div>
+
+  
+  <div class="layui-form-item">
+  	<div class="layui-input-block">
+  		<button class="layui-btn" lay-submit>确定</button>
+  	</div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('form',function(){
+			var form = layui.form;
+			form.render()
+		})
+
+      layui.use('upload',function(){
+    var upload = layui.upload;
+
+    var uploadInst = upload.render({
+      elem:"#upload_img",
+      auto:false,
+      accept:"images",
+      choose:function(obj){
+        obj.preview(function(index,file,result){
+             $("#img").attr("src",result).css("opacity",1)
+             $("#img_src").val(result)
+        })
+      },
+      done:function(res,index,upload){
+          alert(res.msg);
+          window.location.reload();
+      },
+      error:function(error){
+        console.log(error)
+      }
+    })
+  })
+
+	})
+</script>
+{% endblock %}
