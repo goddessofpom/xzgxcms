@@ -1,0 +1,38 @@
+{% extends 'backend/base.html' %}
+{% block title %}添加地区{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="layui-row">
+<div class="layui-col-md8 layui-col-md-offset2">
+<form class="layui-form" style="margin-top: 30px;" target="_parent" method="POST">
+{% csrf_token %}
+  <div class="layui-form-item">
+  	<label class="layui-form-label">地区名称</label>
+  	<div class="layui-input-block">
+  		<input type="text" name="name" class="layui-input" lay-verify="required" value="" />
+  	</div>
+  </div>
+
+  <input type="hidden" name="city_id" value="{{city.id}}">
+
+
+  <div class="layui-form-item">
+  	<div class="layui-input-block">
+  		<button class="layui-btn" lay-submit>确定</button>
+  	</div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('form',function(){
+			var form = layui.form;
+			form.render()
+		})
+	})
+</script>
+{% endblock %}

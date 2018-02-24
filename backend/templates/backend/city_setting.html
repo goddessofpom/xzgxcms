@@ -4,7 +4,8 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'backend/css/cate_setting.css' %}">
 <div class="layui-row">
-	<div class="layui-col-md1 layui-col-md-offset10"><a class="layui-btn" href="javascript:;" id="add_city" >添加城市</a></div>
+	<div class="layui-col-md1 layui-col-md-offset9"><a class="layui-btn" href="javascript:;" id="add_city" >添加城市</a></div>
+	<div class="layui-col-md1"><a href="javascript:;" class="layui-btn" id="delete_city">删除城市</a></div>
 </div>
 
 <div class="layui-row cate_list">
@@ -18,10 +19,9 @@
 <div class="layui-row cate_list">
 	<div class="layui-col-md1 layui-col-md-offset1">{{forloop.counter}}</div>
 	<div class="layui-col-md1">{{c.name}}</div>
-	<div class="layui-col-md6">{% for area in c.area.all %}{{area.name}}{% endfor %}</div>
+	<div class="layui-col-md6">{% for area in c.area_set.all %}{{area.name}}，{% endfor %}</div>
 	<div class="layui-col-md3">
-	<a href="#" class="layui-btn add_area">添加地区</a><a href="#" class="layui-btn">删除地区</a><a href="javascript:;" class="layui-btn layui-btn-primary modify_city" data="{{c.id}}">修改</a>
-	<a href="javascript:;" class="layui-btn layui-btn-primary modify_city" data="{{c.id}}">删除</a>
+	<a href="javascript:;" class="layui-btn add_area" data="{{c.id}}">添加地区</a><a href="javascript:;" class="layui-btn delete_area" data="{{c.id}}">删除地区</a><a href="javascript:;" class="layui-btn layui-btn-primary modify_city" data="{{c.id}}">修改</a>
 	</div>
 </div>
 {% endfor %}
@@ -53,6 +53,35 @@
 				area:['800px','500px']
 			})
 		})
+
+			$(".add_area").click(function(){
+				var id = $(this).attr("data")
+				layer.open({
+				type:2,
+				content:"/backend/add_area/?city_id="+id,
+				title:'添加地区',
+				area:['800px','200px']
+			})
+			})
+
+			$(".delete_area").click(function(){
+				var id = $(this).attr("data")
+				layer.open({
+				type:2,
+				content:"/backend/delete_area/?city_id="+id,
+				title:'删除地区',
+				area:['800px','400px']
+			})
+			})
+
+			$("#delete_city").click(function(){
+				layer.open({
+				type:2,
+				content:"/backend/delete_city/",
+				title:'删除城市',
+				area:['800px','400px']
+			})
+			})
 		})
 	})
 </script>

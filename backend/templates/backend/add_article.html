@@ -28,6 +28,18 @@
     </div>
   </div>
 
+  <div class="layui-form-item" style="width: 600px;">
+    <label class="layui-form-label">所属地区(可不填)：</label>
+    <div class="layui-input-block">
+      <select name="area_id" lay-verify="required" lay-filter="item">
+        <option value=""></option>
+        {% for a in area %}
+        <option value="{{a.id}}" {% if article.area.id == a.id %}selected{% endif %}>{{a.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
   <div class="layui-form-item">
     <label class="layui-form-label">文章作者：</label>
     <div class="layui-input-block">

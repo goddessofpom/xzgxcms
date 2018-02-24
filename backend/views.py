@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group,Permission
 from pc_front.models import Cate,ImgArticle,Images,MediaArticle,City,Area
-from models import Carousel,CarouselItem, OperationLog
+from models import Carousel,CarouselItem, OperationLog,Topic
 from utils import handle_img,decode_base64_file,create_log
 import traceback
 import json
@@ -173,6 +173,8 @@ class AddArticle(LoginRequiredMixin,View):
 
         article_id = request.GET.get("article_id")
 
+        area = Area.objects.all()
+
         if article_id:
             article = ImgArticle.objects.get(pk=article_id)
         else:
@@ -180,6 +182,7 @@ class AddArticle(LoginRequiredMixin,View):
 
         self.extra_context['cates'] = cates
         self.extra_context['article'] = article
+        self.extra_context['area'] = area
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
@@ -196,6 +199,11 @@ class AddArticle(LoginRequiredMixin,View):
         author = request.POST.get("author")
         label = request.POST.get("label")
         mode = int(request.POST.get("mode"))
+        area_id = request.POST.get("area_id")
+        if area_id:
+            area = Area.objects.get(pk=area_id)
+        else:
+            area = None
 
         img_src = request.POST.get("img_src")
 
@@ -209,6 +217,7 @@ class AddArticle(LoginRequiredMixin,View):
             article.author = author
             article.label = label
             article.display_mode = mode
+            article.area = area
 
             if img_src:
                 cover = decode_base64_file(img_src)
@@ -223,7 +232,7 @@ class AddArticle(LoginRequiredMixin,View):
 
             cover = decode_base64_file(img_src)
 
-            article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode,cover=cover)
+            article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode,cover=cover,area=area)
 
         content = "添加/修改了文章配置%s"%(title.encode("utf8"),)
         create_log(request.user.username,content)
@@ -778,7 +787,7 @@ class CitySetting(LoginRequiredMixin,View):
     extra_context = {}
 
     def get(self,request):
-        city = City.objects.all()
+        city = City.objects.select_related().all()
 
         self.extra_context['city'] = city
         return render(request,self.template_name,self.extra_context)
@@ -817,5 +826,67 @@ class AddCity(LoginRequiredMixin,View):
 
         return HttpResponseRedirect(reverse("backend:city_setting"))
 
+class AddArea(LoginRequiredMixin,View):
+    template_name = "backend/add_area.html"
+    extra_context = {}
+
+    def get(self,request):
+        city_id = request.GET.get("city_id")
+        city = City.objects.get(pk=city_id)
+
+        self.extra_context['city'] = city
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        city_id = request.POST.get("city_id")
+        name = request.POST.get("name")
+        city = City.objects.get(pk=city_id)
+
+        Area.objects.create(name=name,city=city)
+
+        return HttpResponseRedirect(reverse("backend:city_setting"))
+
+class DeleteArea(LoginRequiredMixin,View):
+    template_name = "backend/delete_area.html"
+    extra_context = {}
+
+    def get(self,request):
+        city_id = request.GET.get("city_id")
+        city = City.objects.get(pk=city_id)
+
+        self.extra_context['city'] = city
+
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        area_id = request.POST.get("area_id")
+        Area.objects.get(pk=area_id).delete()
+        return HttpResponseRedirect(reverse("backend:city_setting"))
+
+class DeleteCity(LoginRequiredMixin,View):
+    template_name = "backend/delete_city.html"
+    extra_context = {}
+
+    def get(self,request):
+        city = City.objects.all()
+
+        self.extra_context['city'] = city
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        city_id = request.POST.get("city_id")
+        City.objects.get(pk=city_id).delete()
+        return HttpResponseRedirect(reverse("backend:city_setting"))
+
+
+class TopicSetting(LoginRequiredMixin,View):
+    template_name = "backend/topic_setting.html"
+    extra_context = {}
+
+    def get(self,request):
+        topic = Topic.objects.all()
+        self.extra_context['topic'] = topic
+
+        return render(request,self.template_name,self.extra_context)
 
 
