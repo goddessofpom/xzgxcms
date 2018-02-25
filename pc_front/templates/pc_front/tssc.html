@@ -1,0 +1,53 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '特色生产' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_xcj.css' %}">
+<div class="layui-row lvyou_title_row">
+  <div class="layui-col-md8 layui-col-md-offset2 lvyou_title">
+  {% trans '特色生产' %}
+  </div>
+</div>
+
+
+<div class="layui-row main_row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="lvyou_list">
+      {% for article in articles %}
+      <a href="{% url 'pc_front:article_detail' article.id %}"><li>
+        <img src="/site_media/{{article.cover}}" />
+        <p>{{article.title}}</p>
+      </li></a>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/minfengminsu?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/minfengminsu?page={{i}}">{{i}}</a>
+            {% endif %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/minfengminsu?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
+{% endblock %}
+{% endblock %}

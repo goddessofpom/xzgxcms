@@ -1,0 +1,43 @@
+{% extends 'backend/base.html' %}
+{% block title %}添加专题文章{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="layui-row">
+<div class="layui-col-md8 layui-col-md-offset2">
+<form class="layui-form" style="margin-top: 30px;" target="_parent" method="POST">
+{% csrf_token %}
+  <div class="layui-form-item" style="width: 600px;">
+    <label class="layui-form-label">要加入专题的文章：</label>
+    <div class="layui-input-block">
+      <select name="article_id" lay-verify="required" lay-filter="item">
+        <option value=""></option>
+        {% for a in article %}
+        <option value="{{a.id}}">{{a.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <input type="hidden" name="topic_id" value="{{topic.id}}">
+
+
+  <div class="layui-form-item">
+  	<div class="layui-input-block">
+  		<button class="layui-btn" lay-submit>确定</button>
+  	</div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		layui.use('form',function(){
+			var form = layui.form;
+			form.render()
+		})
+	})
+</script>
+{% endblock %}

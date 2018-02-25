@@ -37,11 +37,23 @@
 				var topic_id = $(this).attr("data")
 			layer.open({
 				type:2,
-				content:"{% url 'backend:add_city' %}",
-				title:'添加/修改城市',
-				area:['800px','500px']
+				content:"{% url 'backend:add_topic_article' %}?topic_id=" + topic_id,
+				title:'添加专题文章',
+				area:['800px','200px']
 			})
 		})
+
+
+			$(".delete_article").click(function(){
+				var topic_id = $(this).attr("data")
+			layer.open({
+				type:2,
+				content:"{% url 'backend:delete_topic_article' %}?topic_id=" + topic_id,
+				title:'删除专题文章',
+				area:['800px','400px']
+			})
+		})
+
 
 		})
 	})

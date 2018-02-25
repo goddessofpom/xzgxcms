@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group,Permission
 from pc_front.models import Cate,ImgArticle,Images,MediaArticle,City,Area
-from models import Carousel,CarouselItem, OperationLog,Topic
+from models import Carousel,CarouselItem, OperationLog,Topic,TopicArticle
 from utils import handle_img,decode_base64_file,create_log
 import traceback
 import json
@@ -888,5 +888,52 @@ class TopicSetting(LoginRequiredMixin,View):
         self.extra_context['topic'] = topic
 
         return render(request,self.template_name,self.extra_context)
+
+class AddTopicArticle(LoginRequiredMixin,View):
+    template_name = "backend/add_topic_article.html"
+    extra_context = {}
+
+    def get(self,request):
+        topic_id = request.GET.get("topic_id")
+        topic = Topic.objects.get(pk=topic_id)
+
+        article = ImgArticle.objects.filter(Q(cate__query_code="lydl")|Q(cate__query_code="cswd")|Q(cate__query_code="mfms")|Q(cate__query_code="scfz"))
+
+        self.extra_context['article'] = article
+        self.extra_context['topic'] = topic
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        topic_id = request.POST.get("topic_id")
+        article_id = request.POST.get("article_id")
+        topic = Topic.objects.get(pk=topic_id)
+        article = ImgArticle.objects.get(pk=article_id)
+
+        TopicArticle.objects.create(article=article,topic=topic)
+
+        return HttpResponseRedirect(reverse("backend:topic_setting"))
+
+class DeleteTopicArticle(LoginRequiredMixin,View):
+    template_name = "backend/delete_topic_article.html"
+    extra_context = {}
+
+    def get(self,request):
+        topic_id = request.GET.get("topic_id")
+        topic = Topic.objects.get(pk=topic_id)
+        article = TopicArticle.objects.filter(topic=topic)
+
+        self.extra_context['article'] = article
+        self.extra_context['topic'] = topic
+
+        return render(request,self.template_name,self.extra_context)
+
+    def post(self,request):
+        article_id = request.POST.get("article.id")
+        TopicArticle.objects.get(pk=article_id).delete()
+
+        return HttpResponseRedirect(reverse("backend:topic_setting")) 
+
+
+
 
 

@@ -13,10 +13,10 @@
 
   <div class="layui-col-md5 layui-col-md-offset1">
     <ul class="pinzhuo_title_ul">
-      <li><a href="{% url 'pc_front:pinzhuodongtai' %}">{% trans '动态' %}</a></li>
-      <li>{% trans '文化' %}</li>
-      <li>{% trans '品牌' %}</li>
-      <li>{% trans '品鉴' %}</li>
+      <li><a href="{% url 'pc_front:pinzhuodongtai' %}?query_code=kafei">{% trans '动态' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuowenhua' %}">{% trans '文化' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuopinpai' %}">{% trans '品牌' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuopinjian' %}">{% trans '品鉴' %}</a></li>
       <li>{% trans '售卖' %}</li>
     </ul>
   </div>
@@ -28,21 +28,23 @@
   </div>
 </div>
 
+{% for article in articles %}
 <div class="layui-row pinjian_row">
   <div class="layui-col-md7 layui-col-md-offset2">
-  <div class="pinjian_title">我是标题</div>
-  <div class="pinjian_desc">我是简介</div>
+  <div class="pinjian_title">{{article.title}}</div>
+  <div class="pinjian_desc">{{article.description}}</div>
   <ul class="pinjian_ul">
-    <li><img src="#"></li>
-    <li><img src="#"></li>
-    <li><img src="#"></li>
+    <li><img src="/site_media/{{article.images_set.0}}"></li>
+    <li><img src="/site_media/{{article.images_set.1}}"></li>
+    <li><img src="/site_media/{{article.images_set.2}}"></li>
   </ul>
   </div>
 
   <div class="layui-col-md1">
-    <div class="pinjian_more">{% trans '查看全文' %}</div>
+    <div class="pinjian_more"><a href="{% url 'pc_front:article_detail' article.id %}">{% trans '查看全文' %}</a></div>
   </div>
 </div>
+{% endfor %}
 
 {% endblock %}
 {% endblock %}

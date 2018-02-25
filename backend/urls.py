@@ -2,7 +2,8 @@ from django.conf.urls import include, url
 from views import LoginView, SettingView, Register,CateSetting,AddCate,IndexView,Article,AddArticle,AddArticleDetail,\
 UploadImg,CarouselSetting,AddCarouselItem,ModifyCarouselItem,DeleteCarouselItem,DeleteArticle,ConfirmArticle,AddArticleImg,\
 ModifyArticleImg,DeleteArticleImg,YingShiNanGuo,AddMediaArticle,DeleteMediaArticle,ConfirmMediaArticle,AuthGroupSetting,\
-AddGroup,OperationLog,DeleteGroup,GroupSetting,CitySetting,AddCity,AddArea,DeleteArea,DeleteCity,TopicSetting
+AddGroup,OperationLog,DeleteGroup,GroupSetting,CitySetting,AddCity,AddArea,DeleteArea,DeleteCity,TopicSetting,AddTopicArticle,\
+DeleteTopicArticle
 from django.contrib.auth.models import User
 
 
@@ -41,4 +42,6 @@ urlpatterns = [
     url(r'^delete_area/$',DeleteArea.as_view(),name="delete_area"),
     url(r'^delete_city/$',DeleteCity.as_view(),name="delete_city"),
     url(r'^topic_setting/$',TopicSetting.as_view(),name="topic_setting"),
+    url(r'^add_topic_article/$',AddTopicArticle.as_view(),name="add_topic_article"),
+    url(r'^delete_topic_article/$',DeleteTopicArticle.as_view(),name="delete_topic_article"),
 ]
