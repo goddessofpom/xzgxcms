@@ -1,0 +1,39 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '区域导航' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/qydh.css' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+  	<img class="banner" src="#" />
+  </div>	
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md4 layui-col-md-offset2">
+  	<img src="#" />
+  	<p>
+  		简介简介简介简介
+  	</p>
+  </div>
+
+  <div class="layui-col-md4">
+  	<h3> {% trans '区域快报' %}</h3>
+  	<ul>
+  		{% for article in qykb %}
+  		<li><a href="{% url 'article_detail' article.id %}">{{article.title}}</a><span>{{article.created_time|date:'Y-m-d'}}</span></li>
+  		{% endfor %}
+  	</ul>
+  </div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2">
+		{% trans '人文地理' %}
+	</div>
+</div>
+{% endblock %}
+{% endblock %}

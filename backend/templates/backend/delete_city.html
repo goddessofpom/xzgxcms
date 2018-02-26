@@ -1,0 +1,41 @@
+{% extends 'backend/base.html' %}
+{% block title %}选择删除的城市{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form class="layui-form" method="POST" style="margin-top: 30px;" target="_parent">
+{% csrf_token %}
+
+  <div class="layui-form-item" style="width: 600px;">
+    <label class="layui-form-label">选择删除的城市：</label>
+    <div class="layui-input-block">
+      <select name="city_id" lay-verify="required" lay-filter="item">
+        <option value=""></option>
+        {% for c in city %}
+        <option value="{{c.id}}">{{c.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit>确定</button>
+    </div>
+  </div>
+
+</form>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+	layui.use("form",function(){
+		var form = layui.form;
+
+		form.render();
+	})
+})
+</script>
+{% endblock %}

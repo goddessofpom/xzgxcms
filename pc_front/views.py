@@ -238,6 +238,26 @@ class MFMS(ListView):
         articles = ImgArticle.objects.filter(cate__query_code="mfms",status=1)
         return articles
 
+class RWDL(ListView):
+    model = ImgArticle
+    template_name = "pc_front/rwdl.html"
+    context_object_name = "articles"
+    paginate_by = 15
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(cate__query_code="rwdl",status=1)
+        return articles
+
+class TSSC(ListView):
+    model = ImgArticle
+    template_name = "pc_front/tssc.html"
+    context_object_name = "articles"
+    paginate_by = 15
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(cate__query_code="tssc",status=1)
+        return articles
+
 class SCFZ(ListView):
     model = ImgArticle
     template_name = "pc_front/scfz.html"
@@ -336,14 +356,32 @@ class LXSH(ListView):
         articles = ImgArticle.objects.filter(cate__query_code="lxsh",status=1)
         return articles
 
-class PinZhuoRenSheng(View):
+class PinZhuoRenSheng(ListView):
     template_name = "pc_front/pinzhuorensheng.html"
-    extra_context = {}
-    def get(self,request):
-        carousel = Carousel.objects.select_related().get(query_code="pzrs")
+    paginate_by = 2
+    context_object_name = "articles"
+    model = ImgArticle
+    def get_queryset(self):
+        articles = []
+        content = ImgArticle.objects.filter(Q(cate__query_code="pzwh")|Q(cate__query_code="pzpp")|Q(cate__query_code="pzpj")).filter(status=1)
+        count = 0
+        esult = []
+        for c in content:
+            if count == 3:
+                articles.append(result)
+                count = 0
+                result = []
+            else:
+                count = count + 1
+                result.append(c)
+        return articles
 
-        self.extra_context['carousel'] = carousel
-        return render(request,self.template_name,self.extra_context)
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="pzrs")
+        kwargs['carousel'] = carousel
+        
+        return super(PinZhuoRenSheng,self).get_context_data(**kwargs)
+
 
 class HuiZhanFuWu(View):
     template_name = "pc_front/huizhanfuwu.html"
@@ -368,6 +406,24 @@ class YingShiNanGuo(View):
     template_name = "pc_front/yingshinanguo.html"
     extra_context = {}
     def get(self,request):
+        try:
+            xinwang_article = MediaArticle.objects.filter(status=1,cate__query_code="xwfm")[:12]
+        except:
+            xinwang_article = MediaArticle.objects.filter(status=1,cate__query_code="xwfm")
+
+        try:
+            xiaokachuang_article = MediaArticle.objects.filter(status=1,cate__query_code="xkc")[:12]
+        except:
+            xiaokachuang_article = MediaArticle.objects.filter(status=1,cate__query_code="xkc")
+
+        try:
+            bahaomi_article = MediaArticle.objects.filter(status=1,cate__query_code="bhm")[:12]
+        except:
+            bahaomi_article = MediaArticle.objects.filter(status=1,cate__query_code="bhm")
+
+        self.extra_context['xinwang_article'] = xinwang_article
+        self.extra_context['xiaokachuang_article'] = xiaokachuang_article
+        self.extra_context['bahaomi_article'] = bahaomi_article
         return render(request,self.template_name,self.extra_context)
 
 class XWFM(ListView):
@@ -393,26 +449,66 @@ class BHM(ListView):
 class PZDT(ListView):
     model = ImgArticle
     template_name = "pc_front/pzdt.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "articles"
+    paginate_by = 6
+
+    def get_queryset(self):
+        query_code = self.request.GET.get("query_code")
+        articles = ImgArticle.objects.filter(status=1,cate__query_code=query_code)
+        return articles
+
+    def get_context_data(self,**kwargs):
+        query_code = self.request.GET.get("query_code")
+        try:
+            img_article = ImgArticle.objects.filter(cate__query_code=query_code,status=1,display_mode=1)[:3]
+        except:
+            img_article = ImgArticle.objects.filter(cate__query_code=query_code,status=1,display_mode=1)
+        kwargs['query_code'] = query_code
+        kwargs['img_article'] = img_article
+        
+        return super(PZDT,self).get_context_data(**kwargs)
 
 class PZWH(ListView):
     model = ImgArticle
     template_name = "pc_front/pzwh.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "articles"
+    paginate_by = 16
+
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="pzwh")
+        kwargs['carousel'] = carousel
+        
+        return super(PZWH,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(status=1,cate__query_code="pzwh")
+        return articles
 
 class PZPP(ListView):
     model = ImgArticle
     template_name = "pc_front/pzpp.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "articles"
+    paginate_by = 16
+
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="pzpp")
+        kwargs['carousel'] = carousel
+        
+        return super(PZWH,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(status=1,cate__query_code="pzpp")
+        return articles
 
 class PZPJ(ListView):
     model = ImgArticle
     template_name = "pc_front/pzpj.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "article"
+    paginate_by = 6
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(status=1,cate__query_code="pzpj",display_mode=1)
+        return articles
 
 class ShuiMoDanQing(View):
     template_name = "pc_front/shuimodanqing.html"
@@ -462,6 +558,16 @@ class MediaDetail(View):
 
         self.extra_context['article'] = article
         return render(request,self.template_name,self.extra_context)
+
+class QYDH(View):
+    template_name = "pc_front/qydh.html"
+    extra_context = {}
+
+    def get(self,request):
+        qykb = ImgArticle.objects.filter(cate__query_code="qykb")
+
+        self.extra_context['qykb'] = qykb
+        return render(request,self.template_name,self.extra_context) 
 
 
 

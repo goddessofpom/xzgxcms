@@ -17,7 +17,7 @@
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="cate_list">
 		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
-			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:quyudaohang' %}">{% trans '区域导航' %}</a></li>
 			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
 			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
 			<li><a href="{% url 'pc_front:xunchengji' %}">{% trans '寻城记' %}</a></li>
@@ -72,61 +72,20 @@
 		<span class="sub_title">{% trans '新网FM' %}</span><span class="recommand">{% trans '推荐视频' %}</span>
 	</div>
 	<div class="layui-col-md1 layui-col-md-offset5 more">
-		{% trans '更多视频' %}
+		<a href="{% url 'pc_front:xinwangfm' %}">{% trans '更多视频' %}</a>
 	</div>
 </div>
 
 <div class="layui-row sub_ul_row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="sub_ul">
+		{% for article in xinwangfm_article %}
 			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
+
+				<img src="/site_media/{{article.cover}}">
+				<div class="video_title">{{article.title}}</div>
 			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
+		{% endfor %}
 		</ul>
 	</div>
 </div>
@@ -136,61 +95,19 @@
 		<span class="sub_title">{% trans '小咖创' %}</span><span class="recommand">{% trans '编策导摄' %}</span>
 	</div>
 	<div class="layui-col-md1 layui-col-md-offset5 more">
-		{% trans '更多视频' %}
+		<a href="{% url 'pc_front:xiaokachuang' %}">{% trans '更多视频' %}</a>
 	</div>
 </div>
 
 <div class="layui-row sub_ul_row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="sub_ul">
+		{% for article in xiaokachuang_article %}
 			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
+				<img src="/site_media/{{article.cover}}" />
+				<div class="video_title">{{article.title}}</div>
 			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
+		{% endfor %}
 		</ul>
 	</div>
 </div>
@@ -200,70 +117,28 @@
 		<span class="sub_title">{% trans '八毫米' %}</span><span class="recommand">{% trans '延时移轴唯美' %}</span>
 	</div>
 	<div class="layui-col-md1 layui-col-md-offset5 more">
-		{% trans '更多视频' %}
+		<a href="{% url 'pc_front:bahaomi' %}">{% trans '更多视频' %}</a>
 	</div>
 </div>
 
 <div class="layui-row sub_ul_row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="sub_ul">
+		{% for article in bahaomi_article %}
 			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
+				<img src="/site_media/{{article.cover}}" />
+				<div class="video_title">{{article.title}}</div>
 			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
-			<li>
-				<video src="#"></video>
-				<div class="video_title">我是标题标题标题</div>
-			</li>
+        {% endfor %}
 		</ul>
 	</div>
 </div>
 
-<div class="layui-row">
+<!--<div class="layui-row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<video src="#"></video>
 	</div>
-</div>
+</div> -->
 {% endblock %}
 
 {% endblock %}

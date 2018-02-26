@@ -13,10 +13,10 @@
 
   <div class="layui-col-md5 layui-col-md-offset1">
     <ul class="pinzhuo_title_ul">
-      <li><a href="{% url 'pc_front:pinzhuodongtai' %}">{% trans '动态' %}</a></li>
-      <li>{% trans '文化' %}</li>
-      <li>{% trans '品牌' %}</li>
-      <li>{% trans '品鉴' %}</li>
+      <li><a href="{% url 'pc_front:pinzhuodongtai' %}?query_code=kafei">{% trans '动态' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuowenhua' %}">{% trans '文化' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuopinpai' %}">{% trans '品牌' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuopinjian' %}">{% trans '品鉴' %}</a></li>
       <li>{% trans '售卖' %}</li>
     </ul>
   </div>
@@ -32,35 +32,60 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
     <div carousel-item>
-      <div class="carousel_div"></div>
-      <div class="carousel_div"></div>
-      <div class="carousel_div"></div>
-      <div class="carousel_div"></div>
+       {% for item in carousel.carouselitem.all %}
+      <a href="{{item.url}}">
+      <div class="carousel_div" style="background: url('/site_media/{{item.img}}');">
+        <div class="carousel_title">
+          <div>{{item.title}}<br />{{item.desc}}</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
     </div>
   </div>
   </div>
 </div>
 
-<div class="layui-row">
-  <div class="layui-col-md8 layui-col-md-offset2 wenhua_sub_title">
-    <span class="wenhua_label">历史</span>我是标题标题
-  </div>
-</div>
 
 <div class="layui-row wenhua_ul_row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="wenhua_ul">
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
-      <li><img src="#"></li>
+    {% for article in articles %}
+      <a href="{% url 'pc_front:article_detail' article.id %}"><li><img src="/site_media/{{article.cover}}"></li></a>
+    {% endfor %}
     </ul>
   </div>
 </div>
+
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuowenhua?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuowenhua?page={{i}}">{{i}}</a>
+            {% endif %}
+            
+            {% endfor %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuowenhua?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
 {% endblock %}
 {% endblock %}
 

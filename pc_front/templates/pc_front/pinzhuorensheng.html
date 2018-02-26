@@ -13,7 +13,7 @@
 
   <div class="layui-col-md5 layui-col-md-offset1">
     <ul class="pinzhuo_title_ul">
-      <li><a href="{% url 'pc_front:pinzhuodongtai' %}">{% trans '动态' %}</a></li>
+      <li><a href="{% url 'pc_front:pinzhuodongtai' %}?query_code=kafei">{% trans '动态' %}</a></li>
       <li><a href="{% url 'pc_front:pinzhuowenhua' %}">{% trans '文化' %}</a></li>
       <li><a href="{% url 'pc_front:pinzhuopinpai' %}">{% trans '品牌' %}</a></li>
       <li><a href="{% url 'pc_front:pinzhuopinjian' %}">{% trans '品鉴' %}</a></li>
@@ -47,39 +47,70 @@
   </div>
 </div>
 
+{% for a in articles %}
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="main_ul">
       <li>
-        <img src="#" class="main_img1" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.0.cover}}" class="main_img1" />
+        <div class="main_title">{{a.0.title}}</div>
+        <div class="main_desc">{{a.0.description}}</div>
 
-        <img src="#" class="main_img3" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.1.cover}}" class="main_img3" />
+        <div class="main_title">{{a.1.title}}</div>
+        <div class="main_desc">{{a.1.description}}</div>
       </li>
       <li>
-        <img src="#" class="main_img2" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.2.cover}}" class="main_img2" />
+        <div class="main_title">{{a.2.title}}</div>
+        <div class="main_desc">{{a.2.description}}</div>
 
-        <img src="#" class="main_img2" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.3.cover}}" class="main_img2" />
+        <div class="main_title">{{a.3.title}}</div>
+        <div class="main_desc">{{a.3.description}}</div>
       </li>
       <li>
-        <img src="#" class="main_img3" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.4.cover}}" class="main_img3" />
+        <div class="main_title">{{a.4.title}}</div>
+        <div class="main_desc">{{a.4.description}}</div>
 
-        <img src="#" class="main_img1" />
-        <div class="main_title">标题</div>
-        <div class="main_desc">导语</div>
+        <img src="/site_media/{{a.5.cover}}" class="main_img1" />
+        <div class="main_title">{{a.5.title}}</div>
+        <div class="main_desc">{{a.5.description}}</div>
       </li>
     </ul>
   </div>
 </div>
+{% endfor %}
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuorensheng?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuorensheng?page={{i}}">{{i}}</a>
+            {% endif %}
+            
+            {% endfor %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/pinzhuorensheng?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
 {% endblock %}
 {% endblock %}
 
