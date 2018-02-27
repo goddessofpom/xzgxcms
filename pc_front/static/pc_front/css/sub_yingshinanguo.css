@@ -84,12 +84,11 @@
 	height: 120px;
 	width: 80%;
 	margin: 0 auto;
-	background-image: url("/static/pc_front/img/banner.png");
 	background-size: cover;
 }
 .xinwang_right{
 	position: absolute;
-	right: 15rem;
+	right: 12rem;
 	top: -1.2rem;
 	width: 29.1rem;
 }
@@ -104,7 +103,6 @@
 .xinwang_carousel_right_ul div{
 	width: 80%;
 	margin: 0 auto;
-	background-image: url("/static/pc_front/img/banner.png");
 	background-size: cover;
 	height: 162px;
 }
@@ -117,7 +115,7 @@
 .xinwang_second_ul li{
 	float: left;
 	padding: 1rem;
-	width: 30%;
+	width: 28%;
 }
 .xinwang_second_ul img{
 	width: 100%;
@@ -144,7 +142,7 @@
 }
 .xkc_right_ul li{
 	float: left;
-	width: 40%;
+	width: 38%;
 	padding: 1rem;
 }
 .xkc_right_ul img{

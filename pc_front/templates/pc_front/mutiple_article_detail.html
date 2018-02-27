@@ -1,0 +1,108 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% trans '文章详情' %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="{% static 'pc_front/css/swiper.min.css' %}">
+  <script type="text/javascript" src="{% static 'pc_front/js/jquery-3.2.1.min.js' %}"></script>
+
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #000;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .swiper-slide {
+      background-size: cover;
+      background-position: center;
+    }
+    .gallery-top {
+      height: 80%;
+      width: 100%;
+    }
+    .gallery-thumbs {
+      height: 20%;
+      box-sizing: border-box;
+      padding: 10px 0;
+    }
+    .gallery-thumbs .swiper-slide {
+      height: 100%;
+      opacity: 0.4;
+    }
+    .gallery-thumbs .swiper-slide-active {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Swiper -->
+  <div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+    {% for image in article.images_set.all %}
+      <div class="swiper-slide" style="background-image:url(/site_media/{{image.img}});position: relative;">
+        <div style="position: absolute;bottom: 50px;left: 30px;">
+          <div style="color: white;text-align: center;font-weight: bold;font-size: 30px;">{{image.title}}</div>
+          <div style="color: white;text-align: center;font-weight: bold;font-size: 18px;">{{image.description}}</div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next swiper-button-white"></div>
+    <div class="swiper-button-prev swiper-button-white"></div>
+  </div>
+  <div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+    {% for image in article.images_set.all %}
+      <div class="swiper-slide" style="background-image:url(/site_media/{{image.img}})"></div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="{% static 'pc_front/js/swiper.js' %}"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var galleryTop = new Swiper('.gallery-top', {
+      spaceBetween: 10,
+      loop:true,
+      loopedSlides: 5, //looped slides should be the same
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      touchRatio: 0.2,
+      loop: true,
+      loopedSlides: 5, //looped slides should be the same
+      slideToClickedSlide: true,
+    });
+    galleryTop.controller.control = galleryThumbs;
+    galleryThumbs.controller.control = galleryTop;
+
+  </script>
+</body>
+</html>

@@ -429,8 +429,30 @@ class YingShiNanGuo(View):
 class XWFM(ListView):
     model = ImgArticle
     template_name = "pc_front/xwfm.html"
-    context_object_name = "article_list"
+    context_object_name = "articles"
     paginate_by = 15
+
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="xwfm")
+        try:
+            hot_rank = MediaArticle.objects.filter(cate__query_code="xwfm",status=1)[:8]
+        except:
+            hot_rank = MediaArticle.objects.filter(cate__query_code="xwfm",status=1)
+
+        try:
+            main_article = MediaArticle.objects.filter(cate__query_code="xwfm",status=1)[:3]
+        except:
+            main_article = MediaArticle.objects.filter(cate__query_code="xwfm",status=1)
+
+        kwargs['hot_rank'] = hot_rank
+        kwargs['carousel'] = carousel
+        kwargs['main_article'] = main_article
+        
+        return super(XWFM,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        articles = MediaArticle.objects.filter(status=1,cate__query_code="xwfm")
+        return articles
 
 class XKC(ListView):
     model = ImgArticle
@@ -438,12 +460,57 @@ class XKC(ListView):
     context_object_name = "article_list"
     paginate_by = 15
 
+    def get_context_data(self,**kwargs):
+        #carousel = Carousel.objects.select_related().get(query_code="bhm")
+        try:
+            juchang1 = MediaArticle.objects.filter(cate__query_code="xkc",status=1)[:4]
+        except:
+            juchang1 = MediaArticle.objects.filter(cate__query_code="xkc",status=1)
+
+        try:
+            juchang2 = MediaArticle.objects.filter(cate__query_code="xkc",status=1)[:4]
+        except:
+            juchang2 = MediaArticle.objects.filter(cate__query_code="xkc",status=1)
+
+        kwargs['juchang1'] = juchang1
+        #kwargs['carousel'] = carousel
+        kwargs['juchang2'] = juchang2
+        
+        return super(XKC,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        articles = MediaArticle.objects.filter(status=1,cate__query_code="xkc")
+        return articles
+
+
 
 class BHM(ListView):
     model = ImgArticle
     template_name = "pc_front/bhm.html"
-    context_object_name = "article_list"
+    context_object_name = "articles"
     paginate_by = 15
+
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="bhm")
+        try:
+            hot_rank = MediaArticle.objects.filter(cate__query_code="bhm",status=1)[:8]
+        except:
+            hot_rank = MediaArticle.objects.filter(cate__query_code="bhm",status=1)
+
+        try:
+            main_article = MediaArticle.objects.filter(cate__query_code="bhm",status=1)[:3]
+        except:
+            main_article = MediaArticle.objects.filter(cate__query_code="bhm",status=1)
+
+        kwargs['hot_rank'] = hot_rank
+        kwargs['carousel'] = carousel
+        kwargs['main_article'] = main_article
+        
+        return super(BHM,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        articles = MediaArticle.objects.filter(status=1,cate__query_code="bhm")
+        return articles
 
 
 class PZDT(ListView):
@@ -539,11 +606,16 @@ class SMWJ(ListView):
 
 
 class ArticleDetail(View):
-    template_name = "pc_front/article_detail.html"
     extra_context = {}
 
     def get(self,request,article_id):
         article = ImgArticle.objects.get(pk=article_id)
+
+        if article.display_mode == 0:
+            self.template_name = "pc_front/article_detail.html"
+        else:
+            self.template_name = "pc_front/mutiple_article_detail.html"
+
 
         self.extra_context['article'] = article
         return render(request,self.template_name,self.extra_context)
