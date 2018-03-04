@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*- 
 from django.shortcuts import render
-from models import Cate,ImgArticle, MediaArticle
+from models import Cate,ImgArticle, MediaArticle,Famous
 from backend.models import Carousel
 from django.views.generic import ListView, View
 from django.db.models import Q
@@ -582,8 +582,25 @@ class ShuiMoDanQing(View):
     extra_context = {}
     def get(self,request):
         carousel = Carousel.objects.select_related().get(query_code="smdq")
+        try:
+            famous = Famous.objects.all()[:8]
+        except:
+            famous = Famous.objects.all()
+
+        try:
+            yixun = ImgArticle.objects.filter(cate__query_code="smyx",status=1)[:3]
+        except:
+            yixun = ImgArticle.objects.filter(cate__query_code="smyx",status=1)
+
+        try:
+            wujie = ImgArticle.objects.filter(cate__query_code="smwj",status=1)[:2]
+        except:
+            wujie = ImgArticle.objects.filter(cate__query_code="smwj",status=1)
 
         self.extra_context['carousel'] = carousel
+        self.extra_context['famous'] = famous
+        self.extra_context['yixun'] = yixun
+        self.extra_context['wujie'] = wujie
         return render(request,self.template_name,self.extra_context)
 
 class MRT(ListView):
@@ -636,10 +653,40 @@ class QYDH(View):
     extra_context = {}
 
     def get(self,request):
-        qykb = ImgArticle.objects.filter(cate__query_code="qykb")
+        qykb = ImgArticle.objects.filter(cate__query_code="qykb",status=1)
+        try:
+            renwen_article = ImgArticle.objects.filter(cate__query_code="rwdl",status=1)[:8]
+        except:
+            renwen_article = ImgArticle.objects.filter(cate__query_code="rwdl",status=1)
+
+        try:
+            tese_article = ImgArticle.objects.filter(cate__query_code="tssc",status=1)[:8]
+        except:
+            tese_article = ImgArticle.objects.filter(cate__query_code="tssc",status=1)
 
         self.extra_context['qykb'] = qykb
+        self.extra_context['tese_article'] = tese_article
+        self.extra_context['renwen_article'] = renwen_article
         return render(request,self.template_name,self.extra_context) 
+
+class HZZX(ListView):
+    model = ImgArticle
+    template_name = "pc_front/hzzx.html"
+    context_object_name = "articles"
+    paginate_by = 9
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(status=1,cate__query_code="hzzx")
+        return articles
+    
+    def get_context_data(self,**kwargs):
+        try:
+            tongzhi = ImgArticle.objects.filter(cate__query_code="hztz",status=1)[:4]
+        except:
+            tongzhi = ImgArticle.objects.filter(cate__query_code="hztz",status=1)
+        self.kwargs['tongzhi'] = tongzhi
+        
+        return super(HZZX,self).get_context_data(**kwargs)
 
 
 

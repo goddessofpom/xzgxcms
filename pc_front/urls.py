@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY,\
 SYTD,JXTJ,XunChengJi,LYDL,CSWD,MFMS,SCFZ,FengShangGuangXi,FMGS,FSWH,JZNR,FSNS,LXSH, PinZhuoRenSheng,\
 HuiZhanFuWu,HZCH,HYFW,YingShiNanGuo,XWFM,XKC,BHM,PZDT,PZWH,PZPP,PZPJ,ShuiMoDanQing,MRT,SMYX,SMWJ,ArticleDetail,\
-MediaDetail,QYDH,RWDL,TSSC
+MediaDetail,QYDH,RWDL,TSSC,HZZX
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -51,4 +51,5 @@ urlpatterns = [
     url(r'^quyudaohang/$',QYDH.as_view(),name="quyudaohang"),
     url(r'^renwendili/$',RWDL.as_view(),name="renwendili"),
     url(r'^teseshengchan/$',TSSC.as_view(),name="teseshengchan"),
+    url(r'^huizhanzixun/$',HZZX.as_view(),name="huizhanzixun"),
 ]

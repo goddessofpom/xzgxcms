@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group,Permission
-from pc_front.models import Cate,ImgArticle,Images,MediaArticle,City,Area
+from pc_front.models import Cate,ImgArticle,Images,MediaArticle,City,Area,Famous
 from models import Carousel,CarouselItem, OperationLog,Topic,TopicArticle
 from utils import handle_img,decode_base64_file,create_log
 import traceback
@@ -174,6 +174,7 @@ class AddArticle(LoginRequiredMixin,View):
         article_id = request.GET.get("article_id")
 
         area = Area.objects.all()
+        famous = Famous.objects.all()
 
         if article_id:
             article = ImgArticle.objects.get(pk=article_id)
@@ -183,6 +184,7 @@ class AddArticle(LoginRequiredMixin,View):
         self.extra_context['cates'] = cates
         self.extra_context['article'] = article
         self.extra_context['area'] = area
+        self.extra_context['famous'] = famous
         return render(request,self.template_name,self.extra_context)
 
     def post(self,request):
@@ -200,6 +202,12 @@ class AddArticle(LoginRequiredMixin,View):
         label = request.POST.get("label")
         mode = int(request.POST.get("mode"))
         area_id = request.POST.get("area_id")
+        famous_id = request.POST.get("famous_id")
+
+        if famous_id:
+            famous = Famous.objects.get(pk=famous_id)
+        else:
+            famous = None
         if area_id:
             area = Area.objects.get(pk=area_id)
         else:
@@ -218,6 +226,7 @@ class AddArticle(LoginRequiredMixin,View):
             article.label = label
             article.display_mode = mode
             article.area = area
+            article.famous = famous
 
             if img_src:
                 cover = decode_base64_file(img_src)
@@ -232,7 +241,7 @@ class AddArticle(LoginRequiredMixin,View):
 
             cover = decode_base64_file(img_src)
 
-            article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode,cover=cover,area=area)
+            article = ImgArticle.objects.create(cate=cate,title=title,description=description,author=author,label=label,content="",display_mode=mode,cover=cover,area=area,famous=famous)
 
         content = "添加/修改了文章配置%s"%(title.encode("utf8"),)
         create_log(request.user.username,content)

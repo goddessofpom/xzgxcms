@@ -14,15 +14,15 @@
 </div>
 
 <div class="layui-row">
-  <div class="layui-col-md4 layui-col-md-offset2">
+  <div class="layui-col-md3 layui-col-md-offset2">
   	<img src="#" />
-  	<p>
-  		简介简介简介简介
+  	<p style="margin-top: 30px;">
+  		{% trans '   桂林山水是对桂林旅游资源的总称。国家AAAAA级旅游景区，中国十大风景名胜之一，桂林山水是中国山水的代表，典型的喀斯特地形构成了别具一格的桂林山水，桂林山水所指的范围很广，项目繁多。桂林山水“山青、水秀、洞奇、石美"，包括山、水、喀斯特岩洞、石刻等等，其境内的山水风光举世闻名，千百年来享有“桂林山水甲天下”的美誉。' %}
   	</p>
   </div>
 
-  <div class="layui-col-md4">
-  	<h3> {% trans '区域快报' %}</h3>
+  <div class="layui-col-md4 layui-col-md-offset1">
+  	<h3 class="quyu_title"> {% trans '区域快报' %}</h3>
   	<ul>
   		{% for article in qykb %}
   		<li><a href="{% url 'article_detail' article.id %}">{{article.title}}</a><span>{{article.created_time|date:'Y-m-d'}}</span></li>
@@ -42,21 +42,42 @@
     <!-- Swiper -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
-      <div class="swiper-slide">Slide 10</div>
+    {% for article in renwen_article %}
+      <div class="swiper-slide"><a href="{% url 'pc_front:article_detail' article.id %}"><img src="/site_media/{{article.cover}}" style="height: 180px;" /></a></div>
+      {% endfor %}
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
   </div>
   </div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2 quyu_title">
+		{% trans '特色生产' %}
+	</div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+    {% for article in tese_article %}
+      <div class="swiper-slide"><a href="{% url 'pc_front:article_detail' article.id %}"><img src="/site_media/{{article.cover}}" style="height: 180px;" /></a></div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  </div>
+</div>
+
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2 quyu_title">
+		{% trans '相关专题' %}
+	</div>
 </div>
 {% endblock %}
 {% endblock %}
