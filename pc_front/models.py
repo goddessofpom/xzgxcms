@@ -30,6 +30,13 @@ class Area(models.Model):
     name = models.CharField(max_length=20)
     city = models.ForeignKey(City,on_delete=models.CASCADE)
 
+class Famous(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200,blank=True,null=True)
+    cover = models.ImageField(upload_to="article_img",blank=True,null=True)
+    created_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
 
 class ImgArticle(models.Model):
     title = models.CharField(max_length=200,help_text="文章标题")
@@ -45,6 +52,7 @@ class ImgArticle(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     area = models.ForeignKey(Area,blank=True,null=True,on_delete=models.SET_NULL)
+    famous = models.ForeignKey(Famous,blank=True,null=True,on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.title

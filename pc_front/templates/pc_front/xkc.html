@@ -16,7 +16,7 @@
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="cate_list">
 		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
-			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:quyudaohang' %}">{% trans '区域导航' %}</a></li>
 			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
 			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
 			<li><a href="{% url 'pc_front:xunchengji' %}">{% trans '寻城记' %}</a></li>
@@ -53,10 +53,9 @@
 
 	<div class="layui-col-md2">
 		<ul class="xkc_right_ul">
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
+		{% for article in juchang1 %}
+			<a href="{% url 'pc_front:media_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /><div>{{article.title}}</div></li></a>
+		{% endfor %}
 		</ul>
 	</div>
 </div>
@@ -65,21 +64,17 @@
 <div class="layui-row xinwang_second_row">
 	<div class="layui-col-md6 layui-col-md-offset2">
 		<ul class="xinwang_second_ul">
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+		{% for article in articles %}
+			<a href="{% url 'pc_front:media_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /><div class="xinwang_second_title">{{article.title}}</div><div class="xinwang_second_desc">{{article.description}}</div></li></a>
+		{% endfor %}
 		</ul>
 	</div>
 
 	<div class="layui-col-md2">
 		<ul class="xkc_right_ul">
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
-			<li><img src="#" /><div>我是标题</div></li>
+		{% for article in juchang2 %}
+			<a href="{% url 'pc_front:media_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /><div>{{article.title}}</div></li></a>
+		{% endfor %}
 		</ul>
 	</div>
 </div>

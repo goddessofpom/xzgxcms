@@ -5,6 +5,7 @@
 {% block content %}
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/qydh.css' %}">
+<link rel="stylesheet" href="{% static 'pc_front/css/swiper.min.css' %}">
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
@@ -13,15 +14,15 @@
 </div>
 
 <div class="layui-row">
-  <div class="layui-col-md4 layui-col-md-offset2">
+  <div class="layui-col-md3 layui-col-md-offset2">
   	<img src="#" />
-  	<p>
-  		简介简介简介简介
+  	<p style="margin-top: 30px;">
+  		{% trans '   桂林山水是对桂林旅游资源的总称。国家AAAAA级旅游景区，中国十大风景名胜之一，桂林山水是中国山水的代表，典型的喀斯特地形构成了别具一格的桂林山水，桂林山水所指的范围很广，项目繁多。桂林山水“山青、水秀、洞奇、石美"，包括山、水、喀斯特岩洞、石刻等等，其境内的山水风光举世闻名，千百年来享有“桂林山水甲天下”的美誉。' %}
   	</p>
   </div>
 
-  <div class="layui-col-md4">
-  	<h3> {% trans '区域快报' %}</h3>
+  <div class="layui-col-md4 layui-col-md-offset1">
+  	<h3 class="quyu_title"> {% trans '区域快报' %}</h3>
   	<ul>
   		{% for article in qykb %}
   		<li><a href="{% url 'article_detail' article.id %}">{{article.title}}</a><span>{{article.created_time|date:'Y-m-d'}}</span></li>
@@ -31,9 +32,93 @@
 </div>
 
 <div class="layui-row">
-	<div class="layui-col-md8 layui-col-md-offset2">
+	<div class="layui-col-md8 layui-col-md-offset2 quyu_title">
 		{% trans '人文地理' %}
 	</div>
 </div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+    {% for article in renwen_article %}
+      <div class="swiper-slide"><a href="{% url 'pc_front:article_detail' article.id %}"><img src="/site_media/{{article.cover}}" style="height: 180px;" /></a></div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  </div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2 quyu_title">
+		{% trans '特色生产' %}
+	</div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+    {% for article in tese_article %}
+      <div class="swiper-slide"><a href="{% url 'pc_front:article_detail' article.id %}"><img src="/site_media/{{article.cover}}" style="height: 180px;" /></a></div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  </div>
+</div>
+
+
+<div class="layui-row">
+	<div class="layui-col-md8 layui-col-md-offset2 quyu_title">
+		{% trans '相关专题' %}
+	</div>
+</div>
 {% endblock %}
+{% endblock %}
+
+{% block script %}
+<style type="text/css">
+.swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+.swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+}
+</style>
+<script src="{% static 'pc_front/js/swiper.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+  });
+})
+</script>
 {% endblock %}

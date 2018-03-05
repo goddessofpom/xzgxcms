@@ -5,6 +5,7 @@
 {% block content %}
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_yingshinanguo.css' %}">
+<link rel="stylesheet" href="{% static 'pc_front/css/swiper.min.css' %}">
 
 <div class="layui-row main_title">
 	<div class="layui-col-md4 layui-col-md-offset4">
@@ -16,7 +17,7 @@
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="cate_list">
 		    <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
-			<li><a href="#">{% trans '区域导航' %}</a></li>
+			<li><a href="{% url 'pc_front:quyudaohang' %}">{% trans '区域导航' %}</a></li>
 			<li><a href="{% url 'pc_front:beautiful_gx' %}">{% trans '最美广西' %}</a></li>
 			<li><a href="{% url 'pc_front:zhiguantianxia' %}">{% trans '直观天下' %}</a></li>
 			<li><a href="{% url 'pc_front:xunchengji' %}">{% trans '寻城记' %}</a></li>
@@ -48,7 +49,32 @@
 <div class="layui-row xinwang_main_row">
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<div class="layui-row">
-			<div class="layui-col-md6">
+			<div class="layui-col-md6" style="height: 425px;">
+			<div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+          {% for item in carousel.carouselitem_set.all %}
+      <div class="swiper-slide" style="background-image:url(/site_media/{{item.img}});position: relative;">
+      <a href="{{item.url}}">
+        <div style="position: absolute;bottom: 50px;left: 30px;">
+          <div style="color: white;text-align: center;font-weight: bold;font-size: 30px;">{{item.title}}</div>
+          <div style="color: white;text-align: center;font-weight: bold;font-size: 18px;">{{item.desc}}</div>
+        </div>
+      </a>
+      </div>
+    {% endfor %}
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next swiper-button-white"></div>
+    <div class="swiper-button-prev swiper-button-white"></div>
+  </div>
+  <div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+    {% for item in carousel.carouselitem_set.all %}
+      <div class="swiper-slide" style="background-image:url(/site_media/{{item.img}})"></div>
+    {% endfor %}
+    </div>
+  </div>
+			<!--
 				<div class="layui-carousel" id="carousel" >
 		          <div carousel-item>
 			        <div class="carousel_div">
@@ -71,47 +97,31 @@
 			            </div></div>
 		              </div>
 	            </div>
+	          -->
 			</div>
 			<div class="layui-col-md3">
 				<ul class="xinwang_carousel_left_ul">
+				{% for article in main_article %}
+				  <a href="{% url 'pc_front:media_detail' article.id %}">
 					<li>
-					  <div></div>
+					  <div style="background-image: url('/site_media/{{article.cover}}');"></div>
 					</li>
-					<li>
-					  <div></div>
-					</li>
-					<li>
-					  <div></div>
-					</li>
+				  </a>
+				{% endfor %}
 				</ul>
 			</div>
 		</div>
         
         <div>
-			<div class="layui-col-md6">
-				<ul class="xinwang_carousel_sub_ul">
-					<li><img src="#"></li>
-					<li><img src="#"></li>
-					<li><img src="#"></li>
-					<li><img src="#"></li>
-					<li><img src="#"></li>
-					<li><img src="#"></li>
-				</ul>
-			</div>
 		</div>
 
 	</div>
 
 	<div class="xinwang_right" ">
 			<ul class="xinwang_carousel_right_ul">
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
-				<li><div></div></li>
+			   {% for rank in hot_rank %}
+				<a href="{% url 'pc_front:media_detail' rank.id %}"><li><div style="background-image: url('/site_media/{{rank.cover}}');"></div></li></a>
+			   {% endfor %}
 			</ul>
 </div>
 </div>
@@ -119,15 +129,41 @@
 <div class="layui-row xinwang_second_row">
 	<div class="layui-col-md6 layui-col-md-offset2">
 		<ul class="xinwang_second_ul">
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
-			<li><img src="#" /><div class="xinwang_second_title">我是标题</div><div class="xinwang_second_desc">我是简介</div></li>
+		{% for article in articles %}
+			<a href="{% url 'pc_front:media_detail' article.id %}"><li><img src="/site_media/{{article.cover}}" /><div class="xinwang_second_title">{{article.title}}</div><div class="xinwang_second_desc">{{article.description}}</div></li></a>
+		{% endfor %}
 		</ul>
 	</div>
 </div>
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/xinwangfm?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/xinwangfm?page={{i}}">{{i}}</a>
+            {% endif %}
+            
+            {% endfor %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/xinwangfm?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
 
 
 
@@ -135,6 +171,35 @@
 {% endblock %}
 
 {% block script %}
+<style type="text/css">
+.swiper-container {
+      width: 100%;
+      height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .swiper-slide {
+      background-size: cover;
+      background-position: center;
+    }
+    .gallery-top {
+      height: 80%;
+      width: 100%;
+    }
+    .gallery-thumbs {
+      height: 20%;
+      box-sizing: border-box;
+      padding: 10px 0;
+    }
+    .gallery-thumbs .swiper-slide {
+      height: 100%;
+      opacity: 0.4;
+    }
+    .gallery-thumbs .swiper-slide-active {
+      opacity: 1;
+    }
+</style>
+<script src="{% static 'pc_front/js/swiper.js' %}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		layui.use('carousel',function(){
@@ -148,6 +213,28 @@
 				indicator:"none"
 			})
 		})
+
+
+	var galleryTop = new Swiper('.gallery-top', {
+      spaceBetween: 10,
+      loop:true,
+      loopedSlides: 5, //looped slides should be the same
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      touchRatio: 0.2,
+      loop: true,
+      loopedSlides: 5, //looped slides should be the same
+      slideToClickedSlide: true,
+    });
+    galleryTop.controller.control = galleryThumbs;
+    galleryThumbs.controller.control = galleryTop;
+    
 	})
 </script>
 {% endblock %}

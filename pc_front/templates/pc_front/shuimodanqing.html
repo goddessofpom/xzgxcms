@@ -6,6 +6,7 @@
 
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/shuimodanqing.css' %}">
+<link rel="stylesheet" href="{% static 'pc_front/css/swiper.min.css' %}">
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
@@ -58,37 +59,15 @@
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
-  <div class="layui-carousel" id="carousel2" >
-		<div carousel-item>
-			<div>
-			  <ul class="carousel_ul">
-			    <li>
-			      <img src="#" />
-			      <div class="carousel_ul_title">标题</div>
-			      <div class="carousel_ul_desc">简介</div>
-			    </li>
-			    <li>
-			      <img src="#" />
-			      <div class="carousel_ul_title">标题</div>
-			      <div class="carousel_ul_desc">简介</div>
-			    </li>
-			    <li>
-			      <img src="#" />
-			      <div class="carousel_ul_title">标题</div>
-			      <div class="carousel_ul_desc">简介</div>
-			    </li>
-			    <li>
-			      <img src="#" />
-			      <div class="carousel_ul_title">标题</div>
-			      <div class="carousel_ul_desc">简介</div>
-			    </li>
-			  </ul>
-			</div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+    {% for article in famous %}
+      <div class="swiper-slide"><a href="{% url 'pc_front:article_detail' article.id %}"><img src="/site_media/{{article.cover}}" style="height: 180px;" /></a></div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
   </div>
 </div>
 
@@ -114,16 +93,16 @@
   <div class="layui-col-md4">
     <ul class="shuimo_yixun_right_ul">
       <li>{% trans '热门艺讯' %}</li>
-      <li>讲堂</li>
-      <li>讲堂</li>
-      <li>讲堂</li>
+      {% for article in yixun %}
+      <li><a href="{% url 'pc_front:article_detail' article.id %}">{{article.title}}</a></li>
+      {% endfor %}
     </ul>
   </div>
 </div>
 
 <div class="layui-row">
   <div class="layui-col-md1 layui-col-md-offset9 shuimo_more">
-  {% trans 'More' %}
+  <a href="{% url 'pc_front:shuimoyixun' %}">{% trans 'More' %}</a>
   </div>
 </div>
 
@@ -137,20 +116,24 @@
 
 <div class="layui-row shuimo_wujie_row">
   <div class="layui-col-md4 layui-col-md-offset2">
-    <div class="shuimo_wujie_left_img">
+  <a href="{% url 'pc_front:article_detail' wujie.0.id %}">
+    <div class="shuimo_wujie_left_img" style="background-image: url('/site_media/{{wujie.0.cover}}');">
     </div>
     <div class="shuimo_wujie_title">
-    线下活动标题：标题标题标题标题标题
+    {{wujie.0.title}}
     </div>
+  </a>
   </div>
 
   <div class="layui-col-md4">
-    <div class="shuimo_wujie_left_img">
+  <a href="{% url 'pc_front:article_detail' wujie.1.id %}">
+    <div class="shuimo_wujie_left_img" style="background-image: url('/site_media/{{wujie.1.cover}}');">
     </div>
     <div class="shuimo_wujie_title">
-    线下活动标题：标题标题标题标题标题
+    {{wujie.1.title}}
     </div>
   </div>
+  </a>
 </div>
 
 <div class="layui-row">
@@ -163,6 +146,32 @@
 
 
 {% block script %}
+<style type="text/css">
+.swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+.swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+}
+</style>
+<script src="{% static 'pc_front/js/swiper.js' %}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		layui.use('carousel',function(){
@@ -187,6 +196,38 @@
 				indicator:"none",
 			})
 		})
+
+
+    var galleryTop = new Swiper('.gallery-top', {
+      spaceBetween: 10,
+      loop:true,
+      loopedSlides: 5, //looped slides should be the same
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      touchRatio: 0.2,
+      loop: true,
+      loopedSlides: 5, //looped slides should be the same
+      slideToClickedSlide: true,
+    });
+    galleryTop.controller.control = galleryThumbs;
+    galleryThumbs.controller.control = galleryTop;
+
+
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+  });
+    
 	})
 </script>
 {% endblock %}

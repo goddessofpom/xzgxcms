@@ -40,6 +40,18 @@
     </div>
   </div>
 
+  <div class="layui-form-item" style="width: 600px;">
+    <label class="layui-form-label">名人作品(可不填)：</label>
+    <div class="layui-input-block">
+      <select name="famous_id" lay-verify="required" lay-filter="item">
+        <option value=""></option>
+        {% for a in famous %}
+        <option value="{{a.id}}" {% if article.famous.id == a.id %}selected{% endif %}>{{a.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
   <div class="layui-form-item">
     <label class="layui-form-label">文章作者：</label>
     <div class="layui-input-block">
