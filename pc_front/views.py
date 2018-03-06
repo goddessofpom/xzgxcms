@@ -12,7 +12,10 @@ class IndexList(ListView):
     template_name = "pc_front/index.html"
 
     def get_context_data(self,**kwargs):
-        kwargs['cate_list'] = Cate.objects.filter(parent=None)[:9]
+        #kwargs['cate_list'] = Cate.objects.filter(parent=None)[:9]
+        carousel = Carousel.objects.select_related().get(query_code="sylb")
+        kwargs['carousel'] = carousel
+
         return super(IndexList,self).get_context_data(**kwargs)
 
 class BeautifulGx(ListView):
