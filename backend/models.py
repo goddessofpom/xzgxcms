@@ -46,7 +46,10 @@ class FriendLink(models.Model):
 
 class Topic(models.Model):
     name = models.CharField(max_length=20)
+    cover = models.ImageField(upload_to="carousel_img",blank=True,null=True)
 
 class TopicArticle(models.Model):
     topic = models.ForeignKey(Topic,on_delete=models.CASCADE)
     article = models.ForeignKey(ImgArticle,on_delete=models.CASCADE)
+
+

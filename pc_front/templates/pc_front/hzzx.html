@@ -1,0 +1,93 @@
+{% extends 'pc_front/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans '会展资讯' %}{% endblock %}
+{% block content %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_hzfw.css?v=123' %}">
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2 huizhan_title">
+  <p>{% trans '会展资讯' %}</p>
+  <p class="huizhan_sub_title">{% trans 'Exhibition planning' %}</p>
+  </div>
+</div>
+
+<div class="layui-row">
+  <div class="layui-col-md8 layui-col-md-offset2">
+    <ul class="huizhan_nav">
+    <a href="{% url 'pc_front:huizhancehua' %}"><li>{% trans '灵渠论坛(服务)' %}</li></a>
+      <a href="{% url 'pc_front:huiyifuwu' %}"><li>{% trans '会议服务' %}</li></a>
+      <a href="{% url 'pc_front:huizhanzixun' %}"><li>{% trans '会展资讯' %}</li></a>
+      <a href="#"><li>{% trans '展览展示' %}</li></a>
+      <a href="#"><li>{% trans '会展案例' %}</li></a>
+      <a href="#"><li>{% trans '合作伙伴' %}</li></a>
+    </ul>
+  </div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md2 layui-col-md-offset2 huizhanzixun_title">{% trans '资讯动态    news' %}</div>
+	<div class="layui-col-md2 layui-col-md-offset5 huizhanzixun_title">{% trans '展会通知    news' %}</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md5 layui-col-md-offset2">
+		<ul>
+		{% for article in articles %}
+			<li>
+			<a href="{% url 'pc_front:article_detail' article.id %}">
+				<div class="zixun_title">{{article.title}}</div>
+				<div class="layui-row">
+					<div class="layui-col-md5 zixun_left_img"><img src="{% static 'pc_front/img/banner.png' %}" /></div>
+					<div class="layui-col-md4 layui-col-md-offset1">{{article.description}}</div>
+				</div>
+			</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+
+	<div class="layui-col-md2 layui-col-md-offset2">
+	{% for article in tongzhi %}
+		<div class="zixun_right_img">
+		  <a href="{% url 'pc_front:article_detail' article.id %}">
+		    <img src="/site_media/{{article.cover}}" />
+            <div class="zixun_right_desc">{{ article.description }}</div>
+          </a>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+
+
+
+{% if is_paginated %}
+<div class="layui-row"> 
+<div class="layui-col-md12" style="text-align: center;"> 
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/huizhanzixun?page={{ page_obj.previous_page_number }}">上一页</a>  
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+                <span style="padding: 25px;vertical-align: middle;">{{i}}</span>
+            {% else %}
+                <a class="layui-btn layui-btn-primary" href="/pc_front/huizhanzixun?page={{i}}">{{i}}</a>
+            {% endif %}
+            
+            {% endfor %}
+            {% if page_obj.has_next %}  
+                <a class="layui-btn layui-btn-primary" href="/pc_front/huizhanzixun?page={{ page_obj.next_page_number }}">下一页</a>  
+            {% endif %}  
+           <!-- <span class="page-current">  
+                第{{ page_obj.number }}页 ，共{{ page_obj.paginator.num_pages }}页。  
+            </span>  -->
+        </span>  
+    </div>  
+</div>
+</div>
+{%endif%} 
+{% endblock %}
+{% endblock %}

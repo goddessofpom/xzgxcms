@@ -19,7 +19,7 @@
     <ul class="huizhan_list">
       <a href="{% url 'pc_front:huizhancehua' %}"><li>{% trans '灵渠论坛(服务)' %}</li></a>
       <a href="{% url 'pc_front:huiyifuwu' %}"><li>{% trans '会议服务' %}</li></a>
-      <a href="#"><li>{% trans '会展资讯' %}</li></a>
+      <a href="{% url 'pc_front:huizhanzixun' %}"><li>{% trans '会展资讯' %}</li></a>
       <a href="#"><li>{% trans '展览展示' %}</li></a>
       <a href="#"><li>{% trans '会展案例' %}</li></a>
       <a href="#"><li>{% trans '合作伙伴' %}</li></a>
@@ -43,7 +43,7 @@
     {% trans '专业化论坛服务' %}
     </div>
     <div class="lingqu_more">
-    {% trans '了解更多' %}
+    <a href="{% url 'pc_front:huizhancehua' %}">{% trans '了解更多' %}</a>
     </div>
   </div>
 
