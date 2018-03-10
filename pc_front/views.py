@@ -214,6 +214,7 @@ class XunChengJi(View):
 
         content = City.objects.select_related().all()
         count = 0
+        articles = []
         result = []
         for c in content:
             if count == 4:
@@ -224,7 +225,7 @@ class XunChengJi(View):
                 count = count + 1
                 result.append(c)
         self.extra_context['topic'] = topic
-        self.extra_context['city'] = result
+        self.extra_context['city'] = articles
         return render(request,self.template_name,self.extra_context)
 
 class LYDL(ListView):
