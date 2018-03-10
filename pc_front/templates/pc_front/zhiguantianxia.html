@@ -83,7 +83,7 @@
 
 <div class="layui-row lvyou_row">
   {% for article in quanyu_list %}
-  <div class="layui-col-md4 {% if forloop.counter in 024 %}layui-col-md-offset2{% endif %}">
+  <div class="layui-col-md4 {% if forloop.counter in 135 %}layui-col-md-offset2{% endif %}">
     <a href="{% url 'pc_front:article_detail' article.id %}">
     <div class="layui-col-md6">
       <img src="/site_media/{{article.cover}}"/>
@@ -105,7 +105,7 @@
 
 <div class="layui-row jingxuan_row">
   {% for article in jingxuan_list %}
-  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+  <div class="layui-col-md2 {% if forloop.counter == 1 %}layui-col-md-offset2{% endif %}">
     <a href="{% url 'pc_front:article_detail' article.id %}">
     <img src="/site_media/{{article.cover}}" />
     <div class="jingxuan_title">{{article.title}}</div>
@@ -123,7 +123,7 @@
 <div class="layui-row shiyou_row">
   {% for article in shiyou_list %}
   <a href="{% url 'pc_front:article_detail' article.id %}">
-  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+  <div class="layui-col-md2 {% if forloop.counter == 1 %}layui-col-md-offset2{% endif %}">
     <img src="/site_media/{{article.cover}}" />
   </div>
   </a>
@@ -138,7 +138,7 @@
 <div class="layui-row shiyou_row">
   {% for article in lvtu_list %}
   <a href="{% url 'pc_front:article_detail' article.id %}">
-  <div class="layui-col-md2 {% if forloop.counter == 0 %}layui-col-md-offset2{% endif %}">
+  <div class="layui-col-md2 {% if forloop.counter == 1 %}layui-col-md-offset2{% endif %}">
     <img src="/site_media/{{article.cover}}" />
   </div>
   </a>
