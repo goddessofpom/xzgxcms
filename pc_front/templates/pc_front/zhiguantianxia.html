@@ -83,7 +83,7 @@
 
 <div class="layui-row lvyou_row">
   {% for article in quanyu_list %}
-  <div class="layui-col-md4 {% if forloop.counter in 135 %}layui-col-md-offset2{% endif %}">
+  <div class="layui-col-md4 {% if forloop.counter ==1 %}layui-col-md-offset2{% endif %}">
     <a href="{% url 'pc_front:article_detail' article.id %}">
     <div class="layui-col-md6">
       <img src="/site_media/{{article.cover}}"/>
