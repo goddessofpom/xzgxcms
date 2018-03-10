@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from views import IndexList,BeautifulGx,DCMZ,BGDD,RWYS,YDYL,WHJS,ZhiGuanTianXia,ZGZX,QYLY,LTGY,\
 SYTD,JXTJ,XunChengJi,LYDL,CSWD,MFMS,SCFZ,FengShangGuangXi,FMGS,FSWH,JZNR,FSNS,LXSH, PinZhuoRenSheng,\
 HuiZhanFuWu,HZCH,HYFW,YingShiNanGuo,XWFM,XKC,BHM,PZDT,PZWH,PZPP,PZPJ,ShuiMoDanQing,MRT,SMYX,SMWJ,ArticleDetail,\
-MediaDetail,QYDH,RWDL,TSSC,HZZX
+MediaDetail,QYDH,RWDL,TSSC,HZZX, TopicArticleList, AreaArticleList
 from models import ImgArticle,Cate
 
 urlpatterns = [
@@ -52,4 +52,6 @@ urlpatterns = [
     url(r'^renwendili/$',RWDL.as_view(),name="renwendili"),
     url(r'^teseshengchan/$',TSSC.as_view(),name="teseshengchan"),
     url(r'^huizhanzixun/$',HZZX.as_view(),name="huizhanzixun"),
+    url(r'^topic_article_list/$',TopicArticleList.as_view(),name="topic_article_list"),
+    url(r'^area_article_list/$',AreaArticleList.as_view(),name="area_article_list"),
 ]

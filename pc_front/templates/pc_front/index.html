@@ -33,7 +33,7 @@
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
 		<div carousel-item>
-      {% for item in carousel.carouselitem.all %}
+      {% for item in carousel.carouselitem_set.all %}
       <a href="{{item.url}}">
 			<div class="carousel_div" style="background-image: url('/site_media/{{item.img}}');">
 			</div>

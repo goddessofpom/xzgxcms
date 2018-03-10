@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*- 
 from django.shortcuts import render
-from models import Cate,ImgArticle, MediaArticle,Famous
-from backend.models import Carousel
+from models import Cate,ImgArticle, MediaArticle,Famous,City
+from backend.models import Carousel,Topic,TopicArticle
 from django.views.generic import ListView, View
 from django.db.models import Q
 import traceback
@@ -15,6 +15,7 @@ class IndexList(ListView):
         #kwargs['cate_list'] = Cate.objects.filter(parent=None)[:9]
         carousel = Carousel.objects.select_related().get(query_code="sylb")
         kwargs['carousel'] = carousel
+        print carousel.carouselitem_set.all()[0]
 
         return super(IndexList,self).get_context_data(**kwargs)
 
@@ -209,6 +210,21 @@ class XunChengJi(View):
     template_name = "pc_front/xunchengji.html"
     extra_context = {}
     def get(self,request):
+        topic = Topic.objects.all()
+
+        content = City.objects.select_related().all()
+        count = 0
+        result = []
+        for c in content:
+            if count == 4:
+                articles.append(result)
+                count = 0
+                result = []
+            else:
+                count = count + 1
+                result.append(c)
+        self.extra_context['topic'] = topic
+        self.extra_context['city'] = result
         return render(request,self.template_name,self.extra_context)
 
 class LYDL(ListView):
@@ -368,7 +384,7 @@ class PinZhuoRenSheng(ListView):
         articles = []
         content = ImgArticle.objects.filter(Q(cate__query_code="pzwh")|Q(cate__query_code="pzpp")|Q(cate__query_code="pzpj")).filter(status=1)
         count = 0
-        esult = []
+        result = []
         for c in content:
             if count == 3:
                 articles.append(result)
@@ -607,10 +623,14 @@ class ShuiMoDanQing(View):
         return render(request,self.template_name,self.extra_context)
 
 class MRT(ListView):
-    model = ImgArticle
+    model = Famous
     template_name = "pc_front/mrt.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "famous"
+    paginate_by = 16
+
+    def get_queryset(self):
+        famous = Famous.objects.select_related().all()
+        return famous
 
 class SMYX(ListView):
     model = ImgArticle
@@ -621,8 +641,13 @@ class SMYX(ListView):
 class SMWJ(ListView):
     model = ImgArticle
     template_name = "pc_front/smwj.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+    context_object_name = "articles"
+    paginate_by = 8
+
+    def get_queryset(self):
+        articles = ImgArticle.objects.filter(status=1,cate__query_code="smwj")
+        return articles
+
 
 
 class ArticleDetail(View):
@@ -691,6 +716,29 @@ class HZZX(ListView):
         
         return super(HZZX,self).get_context_data(**kwargs)
 
+
+class TopicArticleList(ListView):
+    model = TopicArticle
+    template_name = 'pc_front/topic_article_list.html'
+    context_object_name = "articles"
+    paginate_by = 15
+
+    def get_queryset(self):
+        topic_id = self.request.GET.get("topic_id")
+        articles = TopicArticle.objects.select_related().filter(topic__id=topic_id)
+        return articles
+
+
+class AreaArticleList(ListView):
+    model = ImgArticle
+    template_name = "pc_front/area_article_list.html"
+    context_object_name = "articles"
+    paginate_by = 15
+
+    def get_queryset(self):
+        area_id = self.request.GET.get("area_id")
+        articles = ImgArticle.objects.filter(area__id=area_id,status=1)
+        return articles
 
 
 

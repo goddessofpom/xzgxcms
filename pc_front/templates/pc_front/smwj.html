@@ -41,22 +41,12 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="wujie_list">
-      <li>
-        <div class="wujie_img"></div>
-        <div class="wujie_title">标题</div>
-      </li>
-      <li>
-        <div class="wujie_img"></div>
-        <div class="wujie_title">标题</div>
-      </li>
-      <li>
-        <div class="wujie_img"></div>
-        <div class="wujie_title">标题</div>
-      </li>
-      <li>
-        <div class="wujie_img"></div>
-        <div class="wujie_title">标题</div>
-      </li>
+    {% for article in articles %}
+      <a href="{% url 'pc_front:article_detail' article.id %}"><li>
+        <div class="wujie_img" style="background-image: url('/site_media/{{article.cover}}')"></div>
+        <div class="wujie_title">{{article.title}}</div>
+      </li></a>
+    {% endfor %}
     </ul>
   </div>
 </div>

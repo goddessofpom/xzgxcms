@@ -42,53 +42,13 @@
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="mingrentang_list">
+    {% for f in famous %}
       <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
+        <img src="/site_media/{{f.cover}}" class="mingrentang_img" />
+        <div class="mingrentang_list_title">{{f.name}}</div>
+        <div class="mingrentang_desc">{{f.description}}</div>
       </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
-
-      <li>
-        <img src="#" class="mingrentang_img" />
-        <div class="mingrentang_list_title">莫奈</div>
-        <div class="mingrentang_desc">这里是简介简介简介</div>
-      </li>
+    {% endfor %}
     </ul>
   </div>
 </div>
