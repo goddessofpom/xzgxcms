@@ -57,10 +57,9 @@
 <div class="layui-row">
   <div class="layui-col-md5 layui-col-md-offset2">
   <ul class="difang_list">
-    <li><img src="#" /></li>
-    <li><img src="#" /></li>
-    <li><img src="#" /></li>
-    <li><img src="#" /></li>
+  {% for tp in topic %}
+    <a href="{% url 'pc_front:topic_article_list' %}?topic_id={{tp.id}}"><li><img src="/site_media/{{tp.cover}}" /></li></a>
+  {% endfor %}
   </ul>
   </div>
 
@@ -69,69 +68,21 @@
 		<div carousel-item>
 			<div class="carousel_div">
 			  <ul class="difang_carousel_list">
+			  {% for c in city %}
+			    {% for detail in c %}
 			    <li>
-			      <div class="carousel_list_title">标题</div>
-			      <img src="#" />
+			      <div class="carousel_list_title">{{detail.title}}</div>
+			      <img src="/site_media/{{detail.cover}}" />
 			      <ul class="difang_sub_list">
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
+			        {% for area in detail.area_set.all %}
+			        <a href="{% url 'pc_front:area_article_list' %}?area_id={{area.id}}"><li>{{area.title}}</li></a>
+			        {% endfor %}
 			      </ul>
 			    </li>
-
-			    <li>
-			      <div class="carousel_list_title">标题</div>
-			      <img src="#" />
-			      <ul class="difang_sub_list">
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			      </ul>
-			    </li>
-
-			    <li>
-			      <div class="carousel_list_title">标题</div>
-			      <img src="#" />
-			      <ul class="difang_sub_list">
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			      </ul>
-			    </li>
-
-			    <li>
-			      <div class="carousel_list_title">标题</div>
-			      <img src="#" />
-			      <ul class="difang_sub_list">
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			        <li>sadsa</li>
-			      </ul>
-			    </li>
+			    {% endfor %}
 			  </ul>
 			</div>
-			<div class="carousel_div">
-			</div>
-			<div class="carousel_div">
-			</div>
-			<div class="carousel_div">
-			</div>
+			{% endfor %}
 		</div>
 	</div>
   </div>
