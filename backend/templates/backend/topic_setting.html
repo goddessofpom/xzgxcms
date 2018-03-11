@@ -1,6 +1,6 @@
 {% extends 'backend/base.html' %}
 {% load static %}
-{% block title %}城市设置{% endblock %}
+{% block title %}专题设置{% endblock %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'backend/css/cate_setting.css' %}">
 <div class="layui-row">
@@ -19,7 +19,7 @@
 	<div class="layui-col-md1 layui-col-md-offset1">{{forloop.counter}}</div>
 	<div class="layui-col-md1">{{t.name}}</div>
 	<div class="layui-col-md3">
-	<a href="javascript:;" class="layui-btn add_article" data="{{t.id}}">添加文章</a><a href="javascript:;" class="layui-btn delete_article" data="{{t.id}}">删除文章</a>  <a href="javascript:;" class="layui-btn add_cover" data="{{t.id}}"></a>
+	<a href="javascript:;" class="layui-btn add_article" data="{{t.id}}">添加文章</a><a href="javascript:;" class="layui-btn delete_article" data="{{t.id}}">删除文章</a>  <a href="javascript:;" class="layui-btn add_cover" lay-data="{url:'{% url 'backend:add_topic_cover' t.id %}'}">修改封面</a>
 	</div>
 </div>
 {% endfor %}
@@ -55,6 +55,20 @@
 		})
 
 
+		})
+
+
+		layui.use('upload',function(){
+			var upload = layui.upload;
+
+			var uploadInst = upload.render({
+				elem:'.add_cover',
+				field:"cover",
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+				done:function(res){
+                    alert("上传成功")
+				}
+			})
 		})
 	})
 </script>
