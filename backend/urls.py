@@ -3,7 +3,7 @@ from views import LoginView, SettingView, Register,CateSetting,AddCate,IndexView
 UploadImg,CarouselSetting,AddCarouselItem,ModifyCarouselItem,DeleteCarouselItem,DeleteArticle,ConfirmArticle,AddArticleImg,\
 ModifyArticleImg,DeleteArticleImg,YingShiNanGuo,AddMediaArticle,DeleteMediaArticle,ConfirmMediaArticle,AuthGroupSetting,\
 AddGroup,OperationLog,DeleteGroup,GroupSetting,CitySetting,AddCity,AddArea,DeleteArea,DeleteCity,TopicSetting,AddTopicArticle,\
-DeleteTopicArticle
+DeleteTopicArticle, AddTopicCover
 from django.contrib.auth.models import User
 
 
@@ -44,4 +44,5 @@ urlpatterns = [
     url(r'^topic_setting/$',TopicSetting.as_view(),name="topic_setting"),
     url(r'^add_topic_article/$',AddTopicArticle.as_view(),name="add_topic_article"),
     url(r'^delete_topic_article/$',DeleteTopicArticle.as_view(),name="delete_topic_article"),
+    url(r'add_topic_cover/(?P<topic_id>\w+)/$',AddTopicCover.as_view(),name="add_topic_cover"),
 ]

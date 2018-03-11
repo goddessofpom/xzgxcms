@@ -943,6 +943,14 @@ class DeleteTopicArticle(LoginRequiredMixin,View):
         return HttpResponseRedirect(reverse("backend:topic_setting")) 
 
 
+class AddTopicCover(LoginRequiredMixin,View):
+    def post(self,request,topic_id):
+        topic = Topic.objects.get(pk=topic_id)
 
+        cover = request.FILES.get("cover")
+
+        topic.cover = cover
+        topic.save()
+        return HttpResponse(json.dumps({'code':0}),content_type="application/json")
 
 
