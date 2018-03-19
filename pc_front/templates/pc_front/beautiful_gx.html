@@ -36,7 +36,7 @@
 	<div class="layui-col-md8 layui-col-md-offset2">
 		<ul class="article_list">
 			{% for atc in article_list %}
-			<li><img src="/site_media/{{atc.cover}}"></li>
+			<a href="{% url 'pc_front:article_detail' atc.id %}"><li><img src="/site_media/{{atc.cover}}"></li></a>
 			{% endfor %}
 		</ul>
 	</div>

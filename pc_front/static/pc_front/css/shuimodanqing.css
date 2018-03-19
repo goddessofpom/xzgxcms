@@ -25,43 +25,51 @@
 }
 .shuimo{
 	position: absolute;
-	width: 588px;
+	width: 658px;
 	height: 268px;
-	border: 1px solid #ccc;
     left: 0;
     top: 0;
+    background: url("/static/pc_front/img/sm.jpg");
+    background-size: cover;
 }
 .shufa{
 	position: absolute;
 	right: 0;
 	top: 0;
-	border: 1px solid #ccc;
 	width: 318px;
 	height: 418px;
+	background: url("/static/pc_front/img/sf.jpg");
+	background-size: cover;
 }
 .qita{
 	position: absolute;
 	left: 0;
 	top:290px;
-	border: 1px solid #ccc;
 	width: 318px;
 	height: 418px;
+	background: url("/static/pc_front/img/qt.jpg");
+	background-size: cover;
 }
 .youhua{
 	position: absolute;
 	right: 0;
 	top: 440px;
-	border: 1px solid #ccc;
-	width: 588px;
+	width: 658px;
 	height: 268px;
+	background: url("/static/pc_front/img/yh.jpg");
+	background-size: cover;
 }
 .yilang{
 	position: absolute;
-	border: 1px solid #ccc;
-	width: 118px;
+	width: 258px;
 	height: 118px;
-	left: 460px;
+	left: 370px;
 	top: 290px;
+	text-align: center;
+	line-height: 118px;
+	font-size: 28px;
+	color:#767676;
+	font-weight: bold;
 }
 .shuimo_more{
 	font-size: 18px;

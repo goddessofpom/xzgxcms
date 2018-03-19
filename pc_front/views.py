@@ -407,6 +407,8 @@ class HuiZhanFuWu(View):
     template_name = "pc_front/huizhanfuwu.html"
     extra_context = {}
     def get(self,request):
+        carousel = Carousel.objects.select_related().get(query_code="hzfw")
+        self.extra_context['carousel'] = carousel
         return render(request,self.template_name,self.extra_context)
 
 class HZCH(View):
@@ -581,7 +583,7 @@ class PZPP(ListView):
         carousel = Carousel.objects.select_related().get(query_code="pzpp")
         kwargs['carousel'] = carousel
         
-        return super(PZWH,self).get_context_data(**kwargs)
+        return super(PZPP,self).get_context_data(**kwargs)
 
     def get_queryset(self):
         articles = ImgArticle.objects.filter(status=1,cate__query_code="pzpp")
@@ -633,11 +635,22 @@ class MRT(ListView):
         famous = Famous.objects.select_related().all()
         return famous
 
-class SMYX(ListView):
-    model = ImgArticle
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="mrt")
+        self.kwargs['carousel'] = carousel
+        
+        return super(MRT,self).get_context_data(**kwargs)
+
+class SMYX(View):
+    extra_context = {}
     template_name = "pc_front/smyx.html"
-    context_object_name = "article_list"
-    paginate_by = 15
+
+    def get(self,request):
+        carousel = Carousel.objects.select_related().get(query_code="smyx")
+        self.extra_context['carousel'] = carousel
+        return render(request,self.template_name,self.extra_context)
+
+
 
 class SMWJ(ListView):
     model = ImgArticle
@@ -648,6 +661,34 @@ class SMWJ(ListView):
     def get_queryset(self):
         articles = ImgArticle.objects.filter(status=1,cate__query_code="smwj")
         return articles
+
+    def get_context_data(self,**kwargs):
+        carousel = Carousel.objects.select_related().get(query_code="smwj")
+        self.kwargs['carousel'] = carousel
+        
+        return super(SMWJ,self).get_context_data(**kwargs)
+
+
+class SMYL(View):
+    template_name = "pc_front/smyl.html"
+    extra_context = {}
+
+    def get(self,request):
+        start = request.GET.get("start")
+        end = request.GET.get("end")
+        query_code = request.GET.get("query_code")
+        
+        carousel = Carousel.objects.select_related().get(query_code="smyl")
+        self.extra_context['carousel'] = carousel
+
+        if request.is_ajax():
+            try:
+                articles = ImgArticle.objects.filter(cate__query_code=query_code,status=1)[start:end]
+            except:
+                articles = ImgArticle.objects.filter(cate__query_code=query_code,status=1)[start:]
+            return articles
+
+        return render(request,self.template_name,self.extra_context)
 
 
 

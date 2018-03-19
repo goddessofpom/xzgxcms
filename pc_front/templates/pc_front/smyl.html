@@ -1,17 +1,18 @@
 {% extends 'pc_front/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block title %}{% trans '名人堂' %}{% endblock %}
+{% block title %}{% trans '艺廊' %}{% endblock %}
 {% block content %}
 
 {% block header %}
 <link rel="stylesheet" type="text/css" href="{% static 'pc_front/css/sub_shuimodanqing.css' %}">
+<script type="text/javascript" src="{% static 'pc_front/js/masonry.min.js' %}" ></script>
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
   <div class="layui-carousel" id="carousel" >
-		<div carousel-item>
-			{% for item in carousel.carouselitem_set.all %}
+	<div carousel-item>
+	  {% for item in carousel.carouselitem_set.all %}
       <div class="carousel_div" style="background-image: url('/site_media/{{item.img}}');"></div>
       {% endfor %}
 		</div>
@@ -31,24 +32,33 @@
   </div>
 </div>
 
-<div class="layui-row mingrentang_title">
-  <div class="layui-col-md3 layui-col-md-offset2">
-    {% trans '名人堂   Hall of fame' %}
+<div class="layui-row">
+  <div class="layui-col-md2 layui-col-md-offset2 yilang_title">
+  {% trans '艺廊 Gallery' %}
   </div>
 </div>
 
+<div class="layui-row yilang_label">
+  <div class="layui-col-md1 layui-col-md-offset2">
+  {% trans '书法' %}
+  </div>
+  <div class="layui-col-md1">
+  {% trans '水墨' %}
+  </div>
+  <div class="layui-col-md1">
+  {% trans '油画' %}
+  </div>
+  <div class="layui-col-md1">
+  {% trans '其它' %}
+  </div>
+</div>
 
 <div class="layui-row">
   <div class="layui-col-md8 layui-col-md-offset2">
-    <ul class="mingrentang_list">
-    {% for f in famous %}
-      <li>
-        <img src="/site_media/{{f.cover}}" class="mingrentang_img" />
-        <div class="mingrentang_list_title">{{f.name}}</div>
-        <div class="mingrentang_desc">{{f.description}}</div>
-      </li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+      <ul id="masonry">
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -79,6 +89,11 @@
         indicator:"none",
       })
     })
+
+
+    // masorny
+    var $container = $("#masorny")
+    $container.
   })
 </script>
 {% endblock %}
