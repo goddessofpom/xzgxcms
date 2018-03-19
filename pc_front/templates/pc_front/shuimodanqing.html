@@ -24,7 +24,7 @@
   <div class="layui-col-md8 layui-col-md-offset2">
     <ul class="shuimo_list">
       <li><a href="{% url 'pc_front:index' %}">{% trans '首页' %}</a></li>
-      <li><a href="#">{% trans '艺廊' %}</a></li>
+      <li><a href="{% url 'pc_front:shuimoyilang' %}">{% trans '艺廊' %}</a></li>
       <li><a href="{% url 'pc_front:mingrentang' %}">{% trans '名人堂' %}</a></li>
       <li><a href="{% url 'pc_front:shuimoyixun' %}">{% trans '艺讯' %}</a></li>
       <li><a href="{% url 'pc_front:shuimowujie' %}">{% trans '无界' %}</a></li>
@@ -37,7 +37,10 @@
     <div class="shuimo_main">
       <div class="shuimo"></div>
       <div class="shufa"></div>
-      <div class="yilang"></div>
+      <div class="yilang">
+      {% trans '艺廊' %}
+      <div style="margin-top: -80px;">Gallery</div>
+      </div>
       <div class="qita"></div>
       <div class="youhua"></div>
     </div>
